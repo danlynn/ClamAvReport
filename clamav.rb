@@ -103,23 +103,23 @@ rescue ActiveRecord::StatementInvalid => e
     logger.info("Initializing db schema")
     ActiveRecord::Schema.define do
       create_table :scans, :force => true do |t|
-        t.datetime :start
-        t.datetime :complete
-        t.integer :infections_count
-        t.integer :dirs_scanned
-        t.integer :files_scanned
-        t.integer :data_scanned
-        t.integer :data_read
-        t.integer :known_viruses
-        t.integer :engine_version
+        t.datetime  :start
+        t.datetime  :complete
+        t.integer   :infections_count
+        t.integer   :dirs_scanned
+        t.integer   :files_scanned
+        t.integer   :data_scanned
+        t.integer   :data_read
+        t.integer   :known_viruses
+        t.integer   :engine_version
       end
       create_table :infections, :force => true do |t|
-        t.text :file
-        t.text :infection
+        t.text      :file
+        t.text      :infection
       end
       create_table :infections_scans, :force => true do |t|
-        t.integer :scan_id
-        t.integer :infection_id
+        t.integer   :scan_id
+        t.integer   :infection_id
       end
     end
   end
