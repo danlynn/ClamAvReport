@@ -39,22 +39,29 @@ class Scan < ActiveRecord::Base
   def self.create_from_log(start, complete, log)
     summary_log = Pathname(log).dirname + "summary_#{Pathname(log).basename}"
     `cat "#{log}" | egrep -v "#{IGNORES.join('|')}" > "#{summary_log}"`
+    scan = Scan.new({:start => start, :complete => complete})
     summary = IO.read(summary_log)
     summary =~ /Infected files: (\d+)$/
-    puts "infections_count = #{$1}"
+    scan.infections_count = $1
     summary =~ /Scanned directories: (\d+)$/
-    puts "dirs_scanned = #{$1}"
+    scan.dirs_scanned = $1
     summary =~ /Scanned files: (\d+)$/
-    puts "files_scanned = #{$1}"
+    scan.files_scanned = $1
     summary =~ /Data scanned: ((?:\d|\.)+?) /
-    puts "data_scanned = #{$1}"
+    scan.data_scanned = $1
     summary =~ /Data read: ((?:\d|\.)+?) /
-    puts "data_read = #{$1}"
+    scan.data_read = $1
     summary =~ /Known viruses: (\d+)$/
-    puts "known_viruses = #{$1}"
+    scan.known_viruses = $1
     summary =~ /Engine version: ((?:\d|\.)+?)$/
-    puts "engine_version = #{$1}"
-    #if infections_count > 0 then parse infections_list
+    scan.engine_version = $1
+    if scan.infections_count > 0
+      summary.scan(/^(.*): (.*) FOUND$/) do |match|
+        puts "file=#{$1}\ninfection=#{$2}\n\n"
+        scan.infections << (Infection.find_by_file_and_infection($1, $2) || Infection.new({:file => $1, :infection => $2}))
+      end
+    end
+    scan.save
     # delete temp file
   end
 end
@@ -110,7 +117,7 @@ rescue ActiveRecord::StatementInvalid => e
         t.column :file,             :text
         t.column :infection,        :text
       end
-      create_table :scans_infections, :force => true do |t|
+      create_table :infections_scans, :force => true do |t|
         t.column :scan_id,          :integer
         t.column :infection_id,     :integer
       end
