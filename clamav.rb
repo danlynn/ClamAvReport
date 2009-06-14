@@ -117,7 +117,7 @@ rescue ActiveRecord::StatementInvalid => e
         t.text      :file
         t.text      :infection
       end
-      create_table :infections_scans, :force => true do |t|
+      create_table :infections_scans, :id => false, :force => true do |t|
         t.integer   :scan_id
         t.integer   :infection_id
       end
