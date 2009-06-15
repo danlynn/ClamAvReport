@@ -62,7 +62,8 @@ class Scan < ActiveRecord::Base
       end
     end
     scan.save
-    # delete temp file
+    return scan
+    # delete temp file?
   end
 end
 
@@ -84,11 +85,11 @@ class CustomLogger < Logger
     "#{timestamp.to_formatted_s(:db)} #{sprintf("%-6s", severity)} #{msg}\n"
   end
 end
-logger = ActiveRecord::Base.logger = CustomLogger.new(RUN_LOG, 5, 10*1024)  # rotate > 10k keeping last 5
+@logger = ActiveRecord::Base.logger = CustomLogger.new(RUN_LOG, 5, 10*1024)  # rotate > 10k keeping last 5
 ActiveRecord::Base.colorize_logging = false # prevents weird strings like "[4;36;1m" in log
 
 
-logger.info("========== clamav.rb: start ==========")
+@logger.info("========== clamav.rb: start ==========")
 
 
 # establish connection to database
@@ -96,49 +97,69 @@ ActiveRecord::Base.establish_connection(CONNECTION)
 
 
 # create schema if none exists
-begin
-  logger.info("Database contains #{Scan.count} scans.")
-rescue ActiveRecord::StatementInvalid => e
-  if e.message["Could not find table 'scans'"]  # if no table found
-    logger.info("Initializing db schema")
-    ActiveRecord::Schema.define do
-      create_table :scans, :force => true do |t|
-        t.datetime  :start
-        t.datetime  :complete
-        t.integer   :infections_count
-        t.integer   :dirs_scanned
-        t.integer   :files_scanned
-        t.integer   :data_scanned
-        t.integer   :data_read
-        t.integer   :known_viruses
-        t.integer   :engine_version
-      end
-      create_table :infections, :force => true do |t|
-        t.text      :file
-        t.text      :infection
-      end
-      create_table :infections_scans, :id => false, :force => true do |t|
-        t.integer   :scan_id
-        t.integer   :infection_id
+def ensure_schema_exits
+  begin
+    @logger.info("Database contains #{Scan.count} scans.")
+  rescue ActiveRecord::StatementInvalid => e
+    if e.message["Could not find table 'scans'"]  # if no table found
+      @logger.info("Initializing db schema")
+      ActiveRecord::Schema.define do
+        create_table :scans, :force => true do |t|
+          t.datetime  :start
+          t.datetime  :complete
+          t.integer   :infections_count
+          t.integer   :dirs_scanned
+          t.integer   :files_scanned
+          t.integer   :data_scanned
+          t.integer   :data_read
+          t.integer   :known_viruses
+          t.integer   :engine_version
+        end
+        create_table :infections, :force => true do |t|
+          t.text      :file
+          t.text      :infection
+        end
+        create_table :infections_scans, :id => false, :force => true do |t|
+          t.integer   :scan_id
+          t.integer   :infection_id
+        end
       end
     end
   end
 end
 
 
-def generate_scan_report(scan)
-
+# gets the previous (chronologically by complete time) Scan instance to the
+# specified 'scan'
+def get_prev_scan(scan)
+  scan_ids = Scan.find(:all, :order => "complete", :select => "id")
+  index = scan_ids.index(scan)
+  Scan.find(scan_ids[index - 1])
 end
 
 
-logger.info("clamscan: start")
-start = Time.now
-`#{CLAMSCAN} -r --quiet --log="#{CLAMSCAN_LOG}" --exclude="\.(#{EXCLUDES.join('|')})$" "#{SCAN_DIR}"`
-complete = Time.now
-logger.info("clamscan: complete")
+# read clamav.html.erb file and generate the clamav.html file using the
+# specified 'scan'.
+def generate_scan_report(scan)
+  p scan
+  p prev_scan = get_prev_scan(scan)
+end
 
 
-Scan.create_from_log(start, complete, CLAMSCAN_LOG)
+def perform_and_log_scan
+  @logger.info("clamscan: start")
+  start = Time.now
+  `#{CLAMSCAN} -r --quiet --log="#{CLAMSCAN_LOG}" --exclude="\.(#{EXCLUDES.join('|')})$" "#{SCAN_DIR}"`
+  complete = Time.now
+  @logger.info("clamscan: complete")
+  scan = Scan.create_from_log(start, complete, CLAMSCAN_LOG)
+  #scan = Scan.find(:last)
+end
 
 
-logger.info("========== clamav.rb: complete ==========")
+ensure_schema_exits
+scan = perform_and_log_scan
+html = generate_scan_report(scan)
+
+
+@logger.info("========== clamav.rb: complete ==========")
