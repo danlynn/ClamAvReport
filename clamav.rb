@@ -27,11 +27,7 @@ EXCLUDES = config["excludes"]
 IGNORES = config["ignores"]
 
 
-# insure that database dir exists so that a new db can be created if necessary
-if CONNECTION["adapter"] == "sqlite3"
-  FileUtils.mkpath(File.dirname(CONNECTION["database"]))
-end
-
+# ===== models ================================================================
 
 # define active record model
 class Scan < ActiveRecord::Base
@@ -73,11 +69,7 @@ class Infection < ActiveRecord::Base
 end
 
 
-# ensure that log dirs exists and last CLAMSCAN_LOG is cleared before use
-FileUtils.mkpath(File.dirname(RUN_LOG))
-FileUtils.mkpath(File.dirname(CLAMSCAN_LOG))
-FileUtils.rm(CLAMSCAN_LOG, :force => true)
-
+# ===== custom logger =========================================================
 
 # setup logger (with custom format)
 class CustomLogger < Logger
@@ -85,15 +77,21 @@ class CustomLogger < Logger
     "#{timestamp.to_formatted_s(:db)} #{sprintf("%-6s", severity)} #{msg}\n"
   end
 end
-@logger = ActiveRecord::Base.logger = CustomLogger.new(RUN_LOG, 5, 10*1024)  # rotate > 10k keeping last 5
-ActiveRecord::Base.colorize_logging = false # prevents weird strings like "[4;36;1m" in log
 
 
-@logger.info("========== clamav.rb: start ==========")
+# ===== utility methods =======================================================
 
-
-# establish connection to database
-ActiveRecord::Base.establish_connection(CONNECTION)
+# create missing dirs and clear previous log file
+def setup_and_clean_dir_structure
+  # insure that database dir exists so that a new db can be created if necessary
+  if CONNECTION["adapter"] == "sqlite3"
+    FileUtils.mkpath(File.dirname(CONNECTION["database"]))
+  end
+  # ensure that log dirs exists and last CLAMSCAN_LOG is cleared before use
+  FileUtils.mkpath(File.dirname(RUN_LOG))
+  FileUtils.mkpath(File.dirname(CLAMSCAN_LOG))
+  FileUtils.rm(CLAMSCAN_LOG, :force => true)
+end
 
 
 # create schema if none exists
@@ -130,7 +128,7 @@ end
 
 
 # gets the previous (chronologically by complete time) Scan instance to the
-# specified 'scan'
+# specified 'scan'.  Returns nil if no prev scan.
 def get_prev_scan(scan)
   scan_ids = Scan.find(:all, :order => "complete", :select => "id")
   index = scan_ids.index(scan)
@@ -159,9 +157,14 @@ def perform_and_log_scan
 end
 
 
+# ===== main program ==========================================================
+
+setup_and_clean_dir_structure
+@logger = ActiveRecord::Base.logger = CustomLogger.new(RUN_LOG, 5, 10*1024)  # rotate > 10k keeping last 5
+ActiveRecord::Base.colorize_logging = false # prevents weird strings like "[4;36;1m" in log
+@logger.info("========== clamav.rb: start ==========")
+ActiveRecord::Base.establish_connection(CONNECTION)
 ensure_schema_exits
 scan = perform_and_log_scan
 html = generate_scan_report(scan)
-
-
 @logger.info("========== clamav.rb: complete ==========")
