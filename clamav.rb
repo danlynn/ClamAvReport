@@ -12,21 +12,6 @@ require 'active_record'
 require 'pathname'
 
 
-# change current dir to that of this ruby script in order to enable relative paths in config
-FileUtils.cd(File.dirname(__FILE__))
-
-
-# load clamav.yml config file into config hash and setup constants
-config = YAML.load_file("config/clamav.yml")
-CONNECTION = config["database"]
-SCAN_DIR = config["scan_dir"]
-CLAMSCAN = config["clamscan"]
-CLAMSCAN_LOG = config["clamscan_log"]
-RUN_LOG = config["run_log"]
-EXCLUDES = config["excludes"]
-IGNORES = config["ignores"]
-
-
 # ===== models ================================================================
 
 # define active record model
@@ -34,7 +19,7 @@ class Scan < ActiveRecord::Base
   has_and_belongs_to_many :infections
   def self.create_from_log(start, complete, log)
     summary_log = Pathname(log).dirname + "summary_#{Pathname(log).basename}"
-    `cat "#{log}" | egrep -v "#{IGNORES.join('|')}" > "#{summary_log}"`
+    `cat "#{log}" | egrep -v "#{$config["ignores"].join('|')}" > "#{summary_log}"`
     scan = Scan.new({:start => start, :complete => complete})
     summary = IO.read(summary_log)
     summary =~ /Infected files: (\d+)$/
@@ -81,26 +66,26 @@ end
 
 # ===== utility methods =======================================================
 
-# create missing dirs and clear previous log file
+# create missing dirs and delete previous log file
 def setup_and_clean_dir_structure
   # insure that database dir exists so that a new db can be created if necessary
-  if CONNECTION["adapter"] == "sqlite3"
-    FileUtils.mkpath(File.dirname(CONNECTION["database"]))
+  if $config["database"]["adapter"] == "sqlite3"
+    FileUtils.mkpath(File.dirname($config["database"]["database"]))
   end
-  # ensure that log dirs exists and last CLAMSCAN_LOG is cleared before use
-  FileUtils.mkpath(File.dirname(RUN_LOG))
-  FileUtils.mkpath(File.dirname(CLAMSCAN_LOG))
-  FileUtils.rm(CLAMSCAN_LOG, :force => true)
+  # ensure that log dirs exists and last $config["clamscan_log"] is cleared before use
+  FileUtils.mkpath(File.dirname($config["run_log"]))
+  FileUtils.mkpath(File.dirname($config["clamscan_log"]))
+  FileUtils.rm($config["clamscan_log"], :force => true)
 end
 
 
 # create schema if none exists
 def ensure_schema_exits
   begin
-    @logger.info("Database contains #{Scan.count} scans.")
+    $logger.info("Database contains #{Scan.count} scans.")
   rescue ActiveRecord::StatementInvalid => e
     if e.message["Could not find table 'scans'"]  # if no table found
-      @logger.info("Initializing db schema")
+      $logger.info("Initializing db schema")
       ActiveRecord::Schema.define do
         create_table :scans, :force => true do |t|
           t.datetime  :start
@@ -145,26 +130,29 @@ def generate_scan_report(scan)
 end
 
 
-def perform_and_log_scan
-  @logger.info("clamscan: start")
+def perform_scan
+  $logger.info("clamscan: start")
   start = Time.now
   # TODO capture clamscan sysout / syserr output - possibly look for engine update warnings
-  `#{CLAMSCAN} -r --quiet --log="#{CLAMSCAN_LOG}" --exclude="\.(#{EXCLUDES.join('|')})$" "#{SCAN_DIR}"`
+  `#{$config["clamscan"]} -r --quiet --log="#{$config["clamscan_log"]}" --exclude="\.(#{$config["excludes"].join('|')})$" "#{$config["scan_dir"]}"`
   complete = Time.now
-  @logger.info("clamscan: complete")
-  scan = Scan.create_from_log(start, complete, CLAMSCAN_LOG)
-  #scan = Scan.find(:last)
+  $logger.info("clamscan: complete")
+  Scan.create_from_log(start, complete, $config["clamscan_log"])
 end
 
 
 # ===== main program ==========================================================
 
+FileUtils.cd(File.dirname(__FILE__))  # enable relative paths in config
+
+$config = YAML.load_file("config/clamav.yml")
 setup_and_clean_dir_structure
-@logger = ActiveRecord::Base.logger = CustomLogger.new(RUN_LOG, 5, 10*1024)  # rotate > 10k keeping last 5
+$logger = ActiveRecord::Base.logger = CustomLogger.new($config["run_log"], 5, 10*1024)  # rotate > 10k keeping last 5
 ActiveRecord::Base.colorize_logging = false # prevents weird strings like "[4;36;1m" in log
-@logger.info("========== clamav.rb: start ==========")
-ActiveRecord::Base.establish_connection(CONNECTION)
+$logger.info("========== clamav.rb: start ==========")
+ActiveRecord::Base.establish_connection($config["database"])
 ensure_schema_exits
-scan = perform_and_log_scan
+scan = perform_scan
+#scan = Scan.find(:last)
 html = generate_scan_report(scan)
-@logger.info("========== clamav.rb: complete ==========")
+$logger.info("========== clamav.rb: complete ==========")
