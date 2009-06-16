@@ -110,10 +110,10 @@ def ensure_schema_exits
           t.integer   :infections_count
           t.integer   :dirs_scanned
           t.integer   :files_scanned
-          t.integer   :data_scanned
-          t.integer   :data_read
+          t.float     :data_scanned
+          t.float     :data_read
           t.integer   :known_viruses
-          t.integer   :engine_version
+          t.string    :engine_version
         end
         create_table :infections, :force => true do |t|
           t.text      :file
@@ -134,6 +134,7 @@ end
 def get_prev_scan(scan)
   scan_ids = Scan.find(:all, :order => "complete", :select => "id")
   index = scan_ids.index(scan)
+  return nil if index == 0
   Scan.find(scan_ids[index - 1])
 end
 
@@ -149,6 +150,7 @@ end
 def perform_and_log_scan
   @logger.info("clamscan: start")
   start = Time.now
+  # TODO capture clamscan sysout / syserr output - possibly look for engine update warnings
   `#{CLAMSCAN} -r --quiet --log="#{CLAMSCAN_LOG}" --exclude="\.(#{EXCLUDES.join('|')})$" "#{SCAN_DIR}"`
   complete = Time.now
   @logger.info("clamscan: complete")
