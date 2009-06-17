@@ -1,0 +1,57 @@
+html {
+	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+}
+
+h1 {
+	text-align: center;
+	margin-bottom: 0;
+}
+
+div.heading_date {
+	text-align: center;
+	margin-bottom: 30px;
+	font-size: 18px;
+	color: #666;
+}
+
+div.line {
+	margin-top: 15px;
+}
+
+div.label {
+	color: #666;
+	display: inline-block;
+	font-size: 16px;
+	text-align: right;
+	width: 150px;
+}
+
+div.field {
+	display: inline;
+	margin-left: 10px;
+	margin-right: 10px;
+	font-size: 18px;
+}
+
+div.comment {
+	display: inline;
+	font-size: 10px;
+	color: gray;
+}
+
+div.log {
+	padding: 4px;
+	border: 1px dotted gray;
+	font: 12px "Courier New", Courier, mono;
+	overflow-x: auto;
+	margin: 5px 30px 15px 110px;
+}
+
+div.stdout {
+	white-space: pre;
+}
+
+div.stderr {
+	color: #f00;
+	white-space: pre;
+}

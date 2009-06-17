@@ -10,6 +10,11 @@ require 'yaml'
 require 'fileutils'
 require 'active_record'
 require 'pathname'
+require 'erb'
+require 'action_view' # for DateHelper
+
+include ActionView::Helpers::DateHelper # to use distance_of_time_in_words
+
 
 
 # ===== models ================================================================
@@ -17,10 +22,10 @@ require 'pathname'
 # define active record model
 class Scan < ActiveRecord::Base
   has_and_belongs_to_many :infections
-  def self.create_from_log(start, complete, log)
+  def self.create_from_log(start, complete, dir, log)
     summary_log = Pathname(log).dirname + "summary_#{Pathname(log).basename}"
     `cat "#{log}" | egrep -v "#{$config["ignores"].join('|')}" > "#{summary_log}"`
-    scan = Scan.new({:start => start, :complete => complete})
+    scan = Scan.new({:start => start, :complete => complete, :dir => dir})
     summary = IO.read(summary_log)
     summary =~ /Infected files: (\d+)$/
     scan.infections_count = $1
@@ -76,6 +81,8 @@ def setup_and_clean_dir_structure
   FileUtils.mkpath(File.dirname($config["run_log"]))
   FileUtils.mkpath(File.dirname($config["clamscan_log"]))
   FileUtils.rm($config["clamscan_log"], :force => true)
+  FileUtils.rm($config["clamscan_stderr"], :force => true)
+  FileUtils.rm($config["freshclam_stderr"], :force => true)
 end
 
 
@@ -91,6 +98,7 @@ def ensure_schema_exits
           t.datetime  :start
           t.datetime  :complete
           t.integer   :infections_count
+          t.string    :dir
           t.integer   :dirs_scanned
           t.integer   :files_scanned
           t.float     :data_scanned
@@ -125,8 +133,20 @@ end
 # read clamav.html.erb file and generate the clamav.html file using the
 # specified 'scan'.
 def generate_scan_report(scan)
-  p scan
-  p prev_scan = get_prev_scan(scan)
+  prev_scan = get_prev_scan(scan)
+  freshclam_stderr = IO.read($config["freshclam_stderr"])
+  freshclam_stdout = @freshclam_stdout
+  template = IO.read("views/clamav.html.erb")
+  output = ERB.new(template).result(binding)
+  File.open("log/clamav.html", "w") {|file| file.write(output)}
+end
+
+
+def update_virus_definitions
+  $logger.info("freshclam: update virus definitions: start")
+  @freshclam_stdout = `/usr/local/clamXav/bin/freshclam 2>#{$config["freshclam_stderr"]}`
+  @freshclam_stdout = @freshclam_stdout.gsub(/Downloading .*\[\d{1,3}%\] {0,1}/, "\n").gsub(/(DON'T PANIC!.*?faq {0,1})/, "").gsub("\n\n", "\n")
+  $logger.info("freshclam: update virus definitions: complete")
 end
 
 
@@ -134,10 +154,10 @@ def perform_scan
   $logger.info("clamscan: start")
   start = Time.now
   # TODO capture clamscan sysout / syserr output - possibly look for engine update warnings
-  `#{$config["clamscan"]} -r --quiet --log="#{$config["clamscan_log"]}" --exclude="\.(#{$config["excludes"].join('|')})$" "#{$config["scan_dir"]}"`
+  `#{$config["clamscan"]} -r --quiet --log="#{$config["clamscan_log"]}" --exclude="\.(#{$config["excludes"].join('|')})$" "#{$config["scan_dir"]}" 2>#{$config["clamscan_stderr"]}`
   complete = Time.now
   $logger.info("clamscan: complete")
-  Scan.create_from_log(start, complete, $config["clamscan_log"])
+  Scan.create_from_log(start, complete, $config["scan_dir"], $config["clamscan_log"])
 end
 
 
@@ -152,7 +172,9 @@ ActiveRecord::Base.colorize_logging = false # prevents weird strings like "[4;36
 $logger.info("========== clamav.rb: start ==========")
 ActiveRecord::Base.establish_connection($config["database"])
 ensure_schema_exits
+update_virus_definitions
 scan = perform_scan
 #scan = Scan.find(:last)
-html = generate_scan_report(scan)
+generate_scan_report(scan)
+`open "log/clamav.html"`
 $logger.info("========== clamav.rb: complete ==========")

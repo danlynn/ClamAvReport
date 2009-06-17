@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>ClamAV Scan Report</title>
+	<meta name="generator" content="clamav.rb">
+	<meta name="author" content="Dan Lynn">
+	<link rel="stylesheet" href="../views/clamav.css" type="text/css" media="screen" charset="utf-8">
+</head>
+<body>
+    <h1>ClamAV Scan Report</h1>
+	<div class="heading_date"><%= scan.complete.strftime("%a, %B %d %Y") %></div>
+	
+	<div class="line">
+		<div class="label">scan directory:</div><div class="field"><%= scan.dir %></div>
+	</div>
+	<div class="line">
+		<div class="label">duration:</div><div class="field"><%= distance_of_time_in_words(scan.start, scan.complete) %></div><div class="comment">(<%= scan.start.strftime("%I:%M %p") %> ... <%= scan.complete.strftime("%I:%M %p") %>)</div>
+	</div>
+	<div class="line">
+		<div class="label">engine version:</div><div class="field"><%= scan.engine_version %></div>
+<% if freshclam_stdout.size > 0 || freshclam_stderr.size > 0 %>
+		<div class="log">
+			<div class="stderr"><%= freshclam_stderr %></div>
+			<div class="stdout"><%= freshclam_stdout %></div>
+		</div>
+<% end %>
+	</div>
+	<br/>
+</body>
+</html>

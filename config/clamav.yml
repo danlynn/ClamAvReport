@@ -15,6 +15,12 @@ clamscan: /usr/local/clamXav/bin/clamscan
 # location to write log from scan (may be relative to clamav.rb dir)
 clamscan_log: log/clamscan.log
 
+# location to write stderr messages from clamscan run
+clamscan_stderr: log/clamscan_stderr.log
+
+# location to write stderr messages from freshclam run (virus def updates)
+freshclam_stderr: log/freshclam_stderr.log
+
 # location to write log from ruby script (db info, debug, errors, etc.)
 run_log: log/run.log
 
