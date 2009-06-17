@@ -20,6 +20,9 @@
 		<div class="label">duration:</div><div class="field"><%= distance_of_time_in_words(scan.start, scan.complete) %></div><div class="comment">(<%= scan.start.strftime("%I:%M %p") %> ... <%= scan.complete.strftime("%I:%M %p") %>)</div>
 	</div>
 	<div class="line">
+		<div class="label">known viruses:</div><div class="field"><%= number_with_delimiter(scan.known_viruses) %></div>
+	</div>
+	<div class="line">
 		<div class="label">engine version:</div><div class="field"><%= scan.engine_version %></div>
 <% if freshclam_stdout.size > 0 || freshclam_stderr.size > 0 %>
 		<div class="log">

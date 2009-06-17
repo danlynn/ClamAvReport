@@ -11,9 +11,10 @@ require 'fileutils'
 require 'active_record'
 require 'pathname'
 require 'erb'
-require 'action_view' # for DateHelper
+require 'action_view' # for DateHelper, NumberHelper
 
-include ActionView::Helpers::DateHelper # to use distance_of_time_in_words
+include ActionView::Helpers::DateHelper   # to use distance_of_time_in_words
+include ActionView::Helpers::NumberHelper # to use number_with_delimiter
 
 
 
@@ -59,32 +60,7 @@ class Infection < ActiveRecord::Base
 end
 
 
-# ===== custom logger =========================================================
-
-# setup logger (with custom format)
-class CustomLogger < Logger
-  def format_message(severity, timestamp, progname, msg)
-    "#{timestamp.to_formatted_s(:db)} #{sprintf("%-6s", severity)} #{msg}\n"
-  end
-end
-
-
-# ===== utility methods =======================================================
-
-# create missing dirs and delete previous log file
-def setup_and_clean_dir_structure
-  # insure that database dir exists so that a new db can be created if necessary
-  if $config["database"]["adapter"] == "sqlite3"
-    FileUtils.mkpath(File.dirname($config["database"]["database"]))
-  end
-  # ensure that log dirs exists and last $config["clamscan_log"] is cleared before use
-  FileUtils.mkpath(File.dirname($config["run_log"]))
-  FileUtils.mkpath(File.dirname($config["clamscan_log"]))
-  FileUtils.rm($config["clamscan_log"], :force => true)
-  FileUtils.rm($config["clamscan_stderr"], :force => true)
-  FileUtils.rm($config["freshclam_stderr"], :force => true)
-end
-
+# ===== migration =============================================================
 
 # create schema if none exists
 def ensure_schema_exits
@@ -117,6 +93,33 @@ def ensure_schema_exits
       end
     end
   end
+end
+
+
+# ===== custom logger =========================================================
+
+# setup logger (with custom format)
+class CustomLogger < Logger
+  def format_message(severity, timestamp, progname, msg)
+    "#{timestamp.to_formatted_s(:db)} #{sprintf("%-6s", severity)} #{msg}\n"
+  end
+end
+
+
+# ===== utility methods =======================================================
+
+# create missing dirs and delete previous log file
+def setup_and_clean_dir_structure
+  # insure that database dir exists so that a new db can be created if necessary
+  if $config["database"]["adapter"] == "sqlite3"
+    FileUtils.mkpath(File.dirname($config["database"]["database"]))
+  end
+  # ensure that log dirs exists and last $config["clamscan_log"] is cleared before use
+  FileUtils.mkpath(File.dirname($config["run_log"]))
+  FileUtils.mkpath(File.dirname($config["clamscan_log"]))
+  FileUtils.rm($config["clamscan_log"], :force => true)
+  FileUtils.rm($config["clamscan_stderr"], :force => true)
+  FileUtils.rm($config["freshclam_stderr"], :force => true)
 end
 
 
