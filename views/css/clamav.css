@@ -16,6 +16,10 @@ div.heading_date {
 	color: #666;
 }
 
+div#accordion {
+	margin-top: 30px;
+}
+
 div.line {
 	margin-top: 15px;
 }
