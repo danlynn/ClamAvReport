@@ -34,9 +34,12 @@
 	<div id="accordion">
 		<h3><a href="#">Infections</a></h3>
 		<div>
-			<p>
-			Nothing yet...
-			</p>
+<% for infection in scan.infections %>
+			<div class="infection_file">
+				<a href="file://<%= File.dirname(infection.file) %>"><span class="dirname"><%= File.dirname(infection.file) + File::SEPARATOR %></span><span class="basename"><%= File.basename(infection.file) %></span></a>
+			</div>
+			<div class="infection_desc"><%= infection.infection %></div>
+<% end %>
 		</div>
 		<h3><a href="#">Scan Info</a></h3>
 		<div>

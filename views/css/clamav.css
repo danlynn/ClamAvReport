@@ -61,3 +61,36 @@ div.stderr {
 	color: #f00;
 	white-space: pre;
 }
+
+div.infection_file {
+	margin-top: 2px;
+}
+
+div.infection_file a {
+	text-decoration: none;
+}
+
+div.infection_file a:hover {
+	border: 1px none #2300ff;
+	border-bottom-style: dotted;
+}
+
+div.infection_file .dirname {
+	font-size: 14px;
+	display: inline;
+	color: #333;
+}
+
+div.infection_file .basename {
+	font-size: 16px;
+	display: inline;
+	font-weight: bold;
+}
+
+div.infection_desc {
+	font-size: 16px;
+	font-weight: bold;
+	padding-left: 100px;
+	color: #b3b3b3;
+	border-bottom: 1px dotted gray;
+}
