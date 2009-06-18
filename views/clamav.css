@@ -1,10 +1,12 @@
 html {
 	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+	background: url(http://www.clamav.net/wp-content/themes/ClamAV/images/header6.png) no-repeat 0 -10px;
 }
 
 h1 {
 	text-align: center;
-	margin-bottom: 0;
+	margin-bottom: 20px;
+	margin-top: 56px;
 }
 
 div.heading_date {
