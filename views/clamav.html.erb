@@ -20,6 +20,23 @@
 		<div class="label">duration:</div><div class="field"><%= distance_of_time_in_words(scan.start, scan.complete) %></div><div class="comment">(<%= scan.start.strftime("%I:%M %p") %> ... <%= scan.complete.strftime("%I:%M %p") %>)</div>
 	</div>
 	<div class="line">
+		<div class="label">infections count:</div><div class="field"><%= scan.infections_count %></div>
+	</div>
+	<hr/>
+	<div class="line">
+		<div class="label">directories scanned:</div><div class="field"><%= scan.dirs_scanned %></div>
+	</div>
+	<div class="line">
+		<div class="label">files scanned:</div><div class="field"><%= scan.files_scanned %></div>
+	</div>
+	<div class="line">
+		<div class="label">data scanned:</div><div class="field"><%= number_to_human_size(scan.data_scanned, :precision => 2) %></div>
+	</div>
+	<div class="line">
+		<div class="label">data read:</div><div class="field"><%= number_to_human_size(scan.data_read, :precision => 2) %></div>
+	</div>
+	<hr/>
+	<div class="line">
 		<div class="label">known viruses:</div><div class="field"><%= number_with_delimiter(scan.known_viruses) %></div>
 	</div>
 	<div class="line">

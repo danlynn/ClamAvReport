@@ -11,10 +11,11 @@ require 'fileutils'
 require 'active_record'
 require 'pathname'
 require 'erb'
-require 'action_view' # for DateHelper, NumberHelper
+require 'action_view' # for DateHelper, NumberHelper, Bytes
 
 include ActionView::Helpers::DateHelper   # to use distance_of_time_in_words
 include ActionView::Helpers::NumberHelper # to use number_with_delimiter
+include ActiveSupport::CoreExtensions::Numeric::Bytes # to use .megabytes
 
 
 
@@ -35,9 +36,9 @@ class Scan < ActiveRecord::Base
     summary =~ /Scanned files: (\d+)$/
     scan.files_scanned = $1
     summary =~ /Data scanned: ((?:\d|\.)+?) /
-    scan.data_scanned = $1
+    scan.data_scanned = $1.to_f.megabytes
     summary =~ /Data read: ((?:\d|\.)+?) /
-    scan.data_read = $1
+    scan.data_read = $1.to_f.megabytes
     summary =~ /Known viruses: (\d+)$/
     scan.known_viruses = $1
     summary =~ /Engine version: ((?:\d|\.)+?)$/
