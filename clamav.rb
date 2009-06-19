@@ -133,25 +133,38 @@ def get_prev_scan(scan)
 end
 
 
+# call-seq:
+#   field(label, attr, options = {}) => string of html rendering the field
+#
+# 'options' hash may contain:
+#     :hilite_changes => false
+#     :view_helper => "number_to_human_size(?, :precision => 2)"
+#     :comment => "(#{scan.start.strftime("%I:%M %p")})"
+#
 # View helper that displays a label and field styled using the div.label,
 # div.field, div.comment, .changed, and .unchanged styles.  If the value
 # has changed since the last scan then the field is hilited with the
 # .changed style and the previous value is displayed in the div.comment
 # style to the right.  Requires the current scan to be stored in
-# Thread.current[:scan] prior to being called.
-# 'options' arg may contain:
-#     :hilite_changes => false
-#     :view_helper => "number_to_human_size(?, :precision => 2)"
-#     :comment => "(#{scan.start.strftime("%I:%M %p")})"
+# Thread.current[:scan] prior to being called.  Note that if the 'attr'
+# arg is NOT a symbol then it is assumed that the value should be displayed
+# directly and no attempt is made to access the scan or previous scan or
+# any change hiliting.
 def field(label, attr, options = {})
   scan = Thread.current[:scan]
-  scan_value = scan.send(attr.to_sym) rescue nil
+  scan_value = nil
   prev_scan_value = nil
-  if options[:hilite_changes] == nil || options[:hilite_changes]
-    Thread.current[:prev_scan] ||= get_prev_scan(scan)
-    prev_scan_value = Thread.current[:prev_scan].send(attr.to_sym) rescue nil
+  changed = false
+  if attr.instance_of?(Symbol)
+    scan_value = scan.send(attr) rescue nil
+    if options[:hilite_changes] == nil || options[:hilite_changes]
+      Thread.current[:prev_scan] ||= get_prev_scan(scan)
+      prev_scan_value = Thread.current[:prev_scan].send(attr.to_sym) rescue nil
+      changed = scan_value != prev_scan_value
+    end
+  else
+    scan_value = attr # assume attr is ACTUAL value if not a symbol
   end
-  changed = scan_value != prev_scan_value && !options[:hilite_changes]
   if options[:view_helper]
     scan_value = eval(options[:view_helper].sub("?", "scan_value"))
     prev_scan_value = eval(options[:view_helper].sub("?", "prev_scan_value")) if changed

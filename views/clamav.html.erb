@@ -22,7 +22,7 @@
 	<div class="heading_date"><%= scan.complete.strftime("%a, %B %d %Y") %></div>
 	
 	<%= field("scan directory", :dir) %>
-	<%= field("duration", nil, :view_helper => "distance_of_time_in_words(scan.start, scan.complete)", :comment => "(#{scan.start.strftime("%I:%M %p")} ... #{scan.complete.strftime("%I:%M %p")})") %>
+	<%= field("duration", distance_of_time_in_words(scan.start, scan.complete), :comment => "(#{scan.start.strftime("%I:%M %p")} ... #{scan.complete.strftime("%I:%M %p")})") %>
 	<%= field("infections count", :infections_count) %>
 
 	<div id="accordion">
@@ -41,6 +41,7 @@
 			<%= field("files scanned", :files_scanned) %>
 			<%= field("data scanned", :data_scanned, :view_helper => "number_to_human_size(?, :precision => 2)") %>
 			<%= field("data read", :data_read, :view_helper => "number_to_human_size(?, :precision => 2)") %>
+			<%= field("Excluded files", $config["excludes"].join(', ')) %>
 		</div>
 		<h3><a href="#">Virus Definitions</a></h3>
 		<div>
@@ -53,6 +54,6 @@
 			</div>
 <% end %>
 		</div>
-	</div>
+ 	</div>
 </body>
 </html>
