@@ -169,12 +169,12 @@ def field(label, attr, options = {})
     scan_value = eval(options[:view_helper].sub("?", "scan_value"))
     prev_scan_value = eval(options[:view_helper].sub("?", "prev_scan_value")) if changed
   end
-  html = "<div class='line'><div class='label'>#{label}:</div>"
+  html = "<table class='line'><tr><td><div class='label'>#{label}:</div></td><td>"
   html += "<span class='changed'>" if changed
   html += "<div class='field'>#{scan_value}</div>"
   html += "</span><div class='comment'>&nbsp;&nbsp;(prev #{prev_scan_value})</div>" if changed
-  html += "<div class='comment'>#{options[:comment] if options[:comment]}</div>"
-  html += "</div>"
+  html += "<div class='comment'>#{options[:comment]}</div>" if options[:comment]
+  html += "</td></tr></table>"
 end
 
 
