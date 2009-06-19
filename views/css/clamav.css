@@ -8,6 +8,7 @@ h1 {
 	margin-bottom: 20px;
 	margin-top: 56px;
 	color: #fff;
+	font-size: 28px;
 }
 
 div.heading_date {
@@ -19,6 +20,10 @@ div.heading_date {
 
 div#accordion {
 	margin-top: 30px;
+}
+
+div#accordion h3 {
+	font-weight: bold;
 }
 
 table.line {
