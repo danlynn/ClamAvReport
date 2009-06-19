@@ -45,7 +45,6 @@ class Scan < ActiveRecord::Base
     scan.engine_version = $1
     if scan.infections_count > 0
       summary.scan(/^(.*): (.*) FOUND$/) do |match|
-        puts "file=#{$1}\ninfection=#{$2}\n\n"
         scan.infections << (Infection.find_by_file_and_infection($1, $2) || Infection.new({:file => $1, :infection => $2}))
       end
     end
@@ -134,10 +133,42 @@ def get_prev_scan(scan)
 end
 
 
+# View helper that displays a label and field styled using the div.label,
+# div.field, div.comment, .changed, and .unchanged styles.  If the value
+# has changed since the last scan then the field is hilited with the
+# .changed style and the previous value is displayed in the div.comment
+# style to the right.  Requires the current scan to be stored in
+# Thread.current[:scan] prior to being called.
+# 'options' arg may contain:
+#     :hilite_changes => false
+#     :view_helper => "number_to_human_size(?, :precision => 2)"
+#     :comment => "(#{scan.start.strftime("%I:%M %p")})"
+def field(label, attr, options = {})
+  scan = Thread.current[:scan]
+  scan_value = scan.send(attr.to_sym) rescue nil
+  prev_scan_value = nil
+  if options[:hilite_changes] == nil || options[:hilite_changes]
+    Thread.current[:prev_scan] ||= get_prev_scan(scan)
+    prev_scan_value = Thread.current[:prev_scan].send(attr.to_sym) rescue nil
+  end
+  changed = scan_value != prev_scan_value && !options[:hilite_changes]
+  if options[:view_helper]
+    scan_value = eval(options[:view_helper].sub("?", "scan_value"))
+    prev_scan_value = eval(options[:view_helper].sub("?", "prev_scan_value")) if changed
+  end
+  html = "<div class='line'><div class='label'>#{label}:</div>"
+  html += "<span class='changed'>" if changed
+  html += "<div class='field'>#{scan_value}</div>"
+  html += "</span><div class='comment'>&nbsp;&nbsp;(prev #{prev_scan_value})</div>" if changed
+  html += "<div class='comment'>#{options[:comment] if options[:comment]}</div>"
+  html += "</div>"
+end
+
+
 # read clamav.html.erb file and generate the clamav.html file using the
 # specified 'scan'.
 def generate_scan_report(scan)
-  prev_scan = get_prev_scan(scan)
+  Thread.current[:scan] = scan
   freshclam_stderr = IO.read($config["freshclam_stderr"])
   freshclam_stdout = @freshclam_stdout
   template = IO.read("views/clamav.html.erb")
@@ -146,6 +177,8 @@ def generate_scan_report(scan)
 end
 
 
+# updates the virus definitions by running freshclam and captures stdout and 
+# stderr as for later display in the report
 def update_virus_definitions
   $logger.info("freshclam: update virus definitions: start")
   @freshclam_stdout = `/usr/local/clamXav/bin/freshclam 2>#{$config["freshclam_stderr"]}`
@@ -154,6 +187,7 @@ def update_virus_definitions
 end
 
 
+# execute clamscan and pass the data to Scan.create_from_log to store in db
 def perform_scan
   $logger.info("clamscan: start")
   start = Time.now
@@ -177,8 +211,8 @@ $logger.info("========== clamav.rb: start ==========")
 ActiveRecord::Base.establish_connection($config["database"])
 ensure_schema_exits
 update_virus_definitions
-scan = perform_scan
-#scan = Scan.find(:last)
+#scan = perform_scan
+scan = Scan.find(:last)
 generate_scan_report(scan)
 `open "log/clamav.html"`
 $logger.info("========== clamav.rb: complete ==========")

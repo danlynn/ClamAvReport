@@ -21,15 +21,9 @@
     <h1>Scan Report</h1>
 	<div class="heading_date"><%= scan.complete.strftime("%a, %B %d %Y") %></div>
 	
-	<div class="line">
-		<div class="label">scan directory:</div><div class="field"><%= scan.dir %></div>
-	</div>
-	<div class="line">
-		<div class="label">duration:</div><div class="field"><%= distance_of_time_in_words(scan.start, scan.complete) %></div><div class="comment">(<%= scan.start.strftime("%I:%M %p") %> ... <%= scan.complete.strftime("%I:%M %p") %>)</div>
-	</div>
-	<div class="line">
-		<div class="label">infections count:</div><div class="field"><%= scan.infections_count %></div>
-	</div>
+	<%= field("scan directory", :dir) %>
+	<%= field("duration", nil, :view_helper => "distance_of_time_in_words(scan.start, scan.complete)", :comment => "(#{scan.start.strftime("%I:%M %p")} ... #{scan.complete.strftime("%I:%M %p")})") %>
+	<%= field("infections count", :infections_count) %>
 
 	<div id="accordion">
 		<h3><a href="#">Infections</a></h3>
@@ -43,33 +37,21 @@
 		</div>
 		<h3><a href="#">Scan Info</a></h3>
 		<div>
-			<div class="line">
-				<div class="label">directories scanned:</div><div class="field"><%= scan.dirs_scanned %></div>
-			</div>
-			<div class="line">
-				<div class="label">files scanned:</div><div class="field"><%= scan.files_scanned %></div>
-			</div>
-			<div class="line">
-				<div class="label">data scanned:</div><div class="field"><%= number_to_human_size(scan.data_scanned, :precision => 2) %></div>
-			</div>
-			<div class="line">
-				<div class="label">data read:</div><div class="field"><%= number_to_human_size(scan.data_read, :precision => 2) %></div>
-			</div>
+			<%= field("directories scanned", :dirs_scanned) %>
+			<%= field("files scanned", :files_scanned) %>
+			<%= field("data scanned", :data_scanned, :view_helper => "number_to_human_size(?, :precision => 2)") %>
+			<%= field("data read", :data_read, :view_helper => "number_to_human_size(?, :precision => 2)") %>
 		</div>
 		<h3><a href="#">Virus Definitions</a></h3>
 		<div>
-			<div class="line">
-				<div class="label">known viruses:</div><div class="field"><%= number_with_delimiter(scan.known_viruses) %></div>
-			</div>
-			<div class="line">
-				<div class="label">engine version:</div><div class="field"><%= scan.engine_version %></div>
+			<%= field("known viruses", :known_viruses, :view_helper => "number_with_delimiter(?)") %>
+			<%= field("engine version", :engine_version) %>
 <% if freshclam_stdout.size > 0 || freshclam_stderr.size > 0 %>
-				<div class="log">
-					<div class="stderr"><%= freshclam_stderr %></div>
-					<div class="stdout"><%= freshclam_stdout %></div>
-				</div>
-<% end %>
+			<div class="log">
+				<div class="stderr"><%= freshclam_stderr %></div>
+				<div class="stdout"><%= freshclam_stdout %></div>
 			</div>
+<% end %>
 		</div>
 	</div>
 </body>
