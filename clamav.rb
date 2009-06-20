@@ -190,7 +190,7 @@ def field(label, attr, options = {})
   html = "<table class='line'><tr><td><div class='label'>#{label}:</div></td><td>"
   html += "<span class='changed'>" if changed
   html += "<div class='field'>#{scan_value}</div>"
-  html += "</span><div class='comment'>&nbsp;&nbsp;(prev #{prev_scan_value})</div>" if changed
+  html += "<div class='comment'>&nbsp;&nbsp;(prev #{prev_scan_value})</div></span>" if changed
   html += "<div class='comment'>#{options[:comment]}</div>" if options[:comment]
   html += "</td></tr></table>"
 end
@@ -221,7 +221,7 @@ end
 def update_virus_definitions
   $logger.info("freshclam: update virus definitions: start")
   @freshclam_stdout = `/usr/local/clamXav/bin/freshclam 2>#{$config["freshclam_stderr"]}`
-  @freshclam_stdout = @freshclam_stdout.gsub(/Downloading .*\[\d{1,3}%\] {0,1}/, "\n").gsub(/(DON'T PANIC!.*?faq {0,1})/, "").gsub("\n\n", "\n")
+  @freshclam_stdout = @freshclam_stdout.gsub(/Downloading .*\[\d{1,3}%\] ?/, "\n").gsub(/(DON'T PANIC!.*?faq {0,1})/, "").gsub("\n\n", "\n")
   $logger.info("freshclam: update virus definitions: complete")
 end
 

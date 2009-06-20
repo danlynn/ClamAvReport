@@ -1,21 +1,29 @@
 html {
 	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
-	background: url(http://www.clamav.net/wp-content/themes/ClamAV/images/header6.png) no-repeat 0 -10px;
+	background: url(../images/banner.gif) no-repeat;
+}
+
+body {
+	margin: 7px;
 }
 
 h1 {
 	text-align: center;
-	margin-bottom: 20px;
-	margin-top: 56px;
+	margin-bottom: 7px;
 	color: #fff;
-	font-size: 28px;
+	font-size: 36px;
+	margin-top: 0;
+}
+
+img#logo {
+	float: right;
 }
 
 div.heading_date {
 	text-align: center;
 	margin-bottom: 30px;
 	font-size: 18px;
-	color: #666;
+	color: #d1ffd1;
 }
 
 div#accordionContainer {
@@ -55,7 +63,7 @@ div.field {
 }
 
 .changed {
-	background-color: #ffcbcc;
+	background-color: #c8fcbc;
 }
 
 div.comment {
@@ -90,7 +98,7 @@ div.infection_file a {
 }
 
 div.infection_file a:hover {
-	border: 1px none #2300ff;
+	border: 1px none #00cb00;
 	border-bottom-style: dotted;
 }
 

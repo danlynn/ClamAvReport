@@ -28,48 +28,49 @@
 	</script>
 </head>
 <body>
-    <h1>Scan Report</h1>
+	<img id="logo" src="../views/images/ClamAV.png">
+    <h1>ClamAV Scan Report</h1>
 	<div class="heading_date"><%= scan.complete.strftime("%a, %B %d %Y") %></div>
 	
 	<%= field("scan directory", :dir) %>
 	<%= field("duration", distance_of_time_in_words(scan.start, scan.complete), :comment => "(#{scan.start.strftime("%I:%M %p")} ... #{scan.complete.strftime("%I:%M %p")})") %>
 	<%= field("infections count", :infections_count) %>
 
-<div id="accordionContainer">
-	<div id="accordion">
-		<h3><a href="#">Infections</a></h3>
-		<div>
-<% for infection in scan.infections %>
-			<div class="infection_file">
-				<a href="file://<%= File.dirname(infection.file) %>" class="<%= hilite_new_infections(infection.file) %>"><span class="dirname"><%= File.dirname(infection.file) + File::SEPARATOR %></span><span class="basename"><%= File.basename(infection.file) %></span></a>
+	<div id="accordionContainer">
+		<div id="accordion">
+			<h3><a href="#">Infections</a></h3>
+			<div>
+	<% for infection in scan.infections %>
+				<div class="infection_file">
+					<a href="file://<%= File.dirname(infection.file) %>" class="<%= hilite_new_infections(infection.file) %>"><span class="dirname"><%= File.dirname(infection.file) + File::SEPARATOR %></span><span class="basename"><%= File.basename(infection.file) %></span></a>
+				</div>
+				<div class="infection_desc"><%= infection.infection %></div>
+	<% end %>
 			</div>
-			<div class="infection_desc"><%= infection.infection %></div>
-<% end %>
-		</div>
-		<h3><a href="#">Scan Info</a></h3>
-		<div>
-			<%= field("directories scanned", :dirs_scanned) %>
-			<%= field("files scanned", :files_scanned) %>
-			<%= field("data scanned", :data_scanned, :view_helper => "number_to_human_size(?, :precision => 2)") %>
-			<%= field("data read", :data_read, :view_helper => "number_to_human_size(?, :precision => 2)") %>
-			<%= field("Excluded files", $config["excludes"].join(', ')) %>
-		</div>
-		<h3><a href="#">Virus Definitions</a></h3>
-		<div>
-			<%= field("known viruses", :known_viruses, :view_helper => "number_with_delimiter(?)") %>
-			<%= field("engine version", :engine_version) %>
-<% if freshclam_stdout.size > 0 || freshclam_stderr.size > 0 %>
-			<div class="field_log">
-				<div class="stderr"><%= freshclam_stderr %></div>
-				<div class="stdout"><%= freshclam_stdout %></div>
+			<h3><a href="#">Scan Info</a></h3>
+			<div>
+				<%= field("directories scanned", :dirs_scanned) %>
+				<%= field("files scanned", :files_scanned) %>
+				<%= field("data scanned", :data_scanned, :view_helper => "number_to_human_size(?, :precision => 2)") %>
+				<%= field("data read", :data_read, :view_helper => "number_to_human_size(?, :precision => 2)") %>
+				<%= field("Excluded files", $config["excludes"].join(', ')) %>
 			</div>
-<% end %>
-		</div>
-		<h3><a href="#">Clamscan Log</a></h3>
-		<div>
-<pre class="log"><%= read_clamscan_logs_as_html %></pre>
-		</div>
- 	</div>
-</div>
+			<h3><a href="#">Virus Definitions</a></h3>
+			<div>
+				<%= field("known viruses", :known_viruses, :view_helper => "number_with_delimiter(?)") %>
+				<%= field("engine version", :engine_version) %>
+	<% if freshclam_stdout.size > 0 || freshclam_stderr.size > 0 %>
+				<div class="field_log">
+					<div class="stderr"><%= freshclam_stderr %></div>
+					<div class="stdout"><%= freshclam_stdout %></div>
+				</div>
+	<% end %>
+			</div>
+			<h3><a href="#">Clamscan Log</a></h3>
+			<div>
+	<pre class="log"><%= read_clamscan_logs_as_html %></pre>
+			</div>
+	 	</div>
+	</div>
 </body>
 </html>
