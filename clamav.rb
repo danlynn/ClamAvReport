@@ -11,10 +11,11 @@ require 'fileutils'
 require 'active_record'
 require 'pathname'
 require 'erb'
-require 'action_view' # for DateHelper, NumberHelper, Bytes
+require 'action_view' # for DateHelper, NumberHelper, SanitizeHelper, Bytes
 
-include ActionView::Helpers::DateHelper   # to use distance_of_time_in_words
-include ActionView::Helpers::NumberHelper # to use number_with_delimiter
+include ActionView::Helpers::DateHelper     # to use distance_of_time_in_words
+include ActionView::Helpers::NumberHelper   # to use number_with_delimiter
+include ActionView::Helpers::SanitizeHelper # to use sanitize on logs
 include ActiveSupport::CoreExtensions::Numeric::Bytes # to use .megabytes
 
 
@@ -117,8 +118,8 @@ def setup_and_clean_dir_structure
   # ensure that log dirs exists and last $config["clamscan_log"] is cleared before use
   FileUtils.mkpath(File.dirname($config["run_log"]))
   FileUtils.mkpath(File.dirname($config["clamscan_log"]))
-  FileUtils.rm($config["clamscan_log"], :force => true)
-  FileUtils.rm($config["clamscan_stderr"], :force => true)
+  #FileUtils.rm($config["clamscan_log"], :force => true)
+  #FileUtils.rm($config["clamscan_stderr"], :force => true)
   FileUtils.rm($config["freshclam_stderr"], :force => true)
 end
 
@@ -192,6 +193,14 @@ def field(label, attr, options = {})
   html += "</span><div class='comment'>&nbsp;&nbsp;(prev #{prev_scan_value})</div>" if changed
   html += "<div class='comment'>#{options[:comment]}</div>" if options[:comment]
   html += "</td></tr></table>"
+end
+
+
+def read_clamscan_logs_as_html
+  clamscan_log = "<span class='log_red'>#{IO.read($config["clamscan_stderr"])}</span>"
+  clamscan_log += IO.read($config["clamscan_log"])
+  clamscan_log.gsub!(Regexp.new("(" + $config["ignores"].join('|') + ")"), '<span class="log_ignore">\1</span>')
+  clamscan_log.gsub!(/(^.*: )(.*)( FOUND)$/, '\1<span class="log_red">\2</span>\3')
 end
 
 

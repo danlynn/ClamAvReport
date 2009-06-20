@@ -48,11 +48,15 @@
 			<%= field("known viruses", :known_viruses, :view_helper => "number_with_delimiter(?)") %>
 			<%= field("engine version", :engine_version) %>
 <% if freshclam_stdout.size > 0 || freshclam_stderr.size > 0 %>
-			<div class="log">
+			<div class="field_log">
 				<div class="stderr"><%= freshclam_stderr %></div>
 				<div class="stdout"><%= freshclam_stdout %></div>
 			</div>
 <% end %>
+		</div>
+		<h3><a href="#">Clamscan Log</a></h3>
+		<div>
+<pre class="log"><%= read_clamscan_logs_as_html %></pre>
 		</div>
  	</div>
 </body>

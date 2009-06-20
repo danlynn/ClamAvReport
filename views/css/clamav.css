@@ -60,7 +60,7 @@ div.comment {
 	color: gray;
 }
 
-div.log {
+div.field_log {
 	padding: 4px;
 	border: 1px dotted gray;
 	font: 12px "Courier New", Courier, mono;
@@ -108,4 +108,16 @@ div.infection_desc {
 	padding-left: 100px;
 	color: #b3b3b3;
 	border-bottom: 1px dotted gray;
+}
+
+.log {
+	font: 12px "Courier New", Courier, mono;
+}
+
+.log_ignore {
+	color: silver;
+}
+
+.log_red {
+	color: red;
 }
