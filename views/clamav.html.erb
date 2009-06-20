@@ -30,7 +30,7 @@
 		<div>
 <% for infection in scan.infections %>
 			<div class="infection_file">
-				<a href="file://<%= File.dirname(infection.file) %>"><span class="dirname"><%= File.dirname(infection.file) + File::SEPARATOR %></span><span class="basename"><%= File.basename(infection.file) %></span></a>
+				<a href="file://<%= File.dirname(infection.file) %>" class="<%= hilite_new_infections(infection.file) %>"><span class="dirname"><%= File.dirname(infection.file) + File::SEPARATOR %></span><span class="basename"><%= File.basename(infection.file) %></span></a>
 			</div>
 			<div class="infection_desc"><%= infection.infection %></div>
 <% end %>

@@ -134,6 +134,23 @@ end
 
 
 # call-seq:
+#   hilite_new_infections(file) => "changed" or "unchanged"
+#
+# Determines whether or not 'file' appeared in the previous scan's infections
+# list and returns "unchanged" if it does - otherwise, "changed".  This is
+# intended to be used to specify the style surrounding each infection listed
+# in the report.  Requires the current scan to be stored in
+# Thread.current[:scan] prior to being called.
+def hilite_new_infections(file)
+  scan = Thread.current[:scan]
+  prev_scan = (Thread.current[:prev_scan] ||= get_prev_scan(scan))
+  return "unchanged" if prev_scan.nil? || prev_scan.infections == scan.infections
+  Thread.current[:prev_infections] ||= prev_scan.infections.collect{|infection| infection.file}
+  return (Thread.current[:prev_infections].include?(file) ? "unchanged" : "changed")
+end
+
+
+# call-seq:
 #   field(label, attr, options = {}) => string of html rendering the field
 #
 # 'options' hash may contain:
