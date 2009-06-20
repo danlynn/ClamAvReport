@@ -13,7 +13,17 @@
 	<script type="text/javascript" src="../views/js/jquery-ui-1.7.2.custom.min.js"></script>
 	<script type="text/javascript">
 	$(function() {
-		$("#accordion").accordion();
+		$("#accordion").accordion({
+			fillSpace: true
+		});
+	});
+	$(function() {
+		$("#accordionResizer").resizable({
+			resize: function() {
+				$("#accordion").accordion("resize");
+			},
+			minHeight: 140
+		});
 	});
 	</script>
 </head>
@@ -25,6 +35,7 @@
 	<%= field("duration", distance_of_time_in_words(scan.start, scan.complete), :comment => "(#{scan.start.strftime("%I:%M %p")} ... #{scan.complete.strftime("%I:%M %p")})") %>
 	<%= field("infections count", :infections_count) %>
 
+<div id="accordionContainer">
 	<div id="accordion">
 		<h3><a href="#">Infections</a></h3>
 		<div>
@@ -59,5 +70,6 @@
 <pre class="log"><%= read_clamscan_logs_as_html %></pre>
 		</div>
  	</div>
+</div>
 </body>
 </html>
