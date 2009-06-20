@@ -212,7 +212,7 @@ def generate_scan_report(scan)
   freshclam_stdout = @freshclam_stdout
   template = IO.read("views/clamav.html.erb")
   output = ERB.new(template).result(binding)
-  File.open("log/clamav.html", "w") {|file| file.write(output)}
+  File.open("clamav.html", "w") {|file| file.write(output)}
 end
 
 
@@ -253,5 +253,5 @@ update_virus_definitions
 #scan = perform_scan
 scan = Scan.find(:last)
 generate_scan_report(scan)
-`open "log/clamav.html"`
+`open "clamav.html"`
 $logger.info("========== clamav.rb: complete ==========")
