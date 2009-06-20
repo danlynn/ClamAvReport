@@ -98,7 +98,7 @@ end
 
 # ===== custom logger =========================================================
 
-# setup logger (with custom format)
+# define custom logger (custom format) for use in the run log
 class CustomLogger < Logger
   def format_message(severity, timestamp, progname, msg)
     "#{timestamp.to_formatted_s(:db)} #{sprintf("%-6s", severity)} #{msg}\n"
