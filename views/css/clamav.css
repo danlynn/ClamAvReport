@@ -118,6 +118,10 @@ div.infection_desc {
 	border-bottom: 1px dotted gray;
 }
 
+pre.log {
+    overflow-x: auto;
+}
+
 .log {
 	font: 12px "Courier New", Courier, mono;
 }

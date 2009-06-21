@@ -6,7 +6,7 @@ database:
     database: db/clamav.sqlite3
     timeout: 5000
 
-# directory to be recursively scanned
+# directory to be recursively scanned by clamav
 scan_dir: /Users/danlynn/Documents/temp/delete/iTuner
 
 # location of clamscan executable
@@ -47,7 +47,8 @@ excludes:
 
 # List of regular expressions identifying lines in the clamscan log
 # that should be ignored when building the list of infected files.
-# This list probably should not be changed.
+# This list probably should not be changed.  This list is also used
+# to determine which lines are grayed-out in the clamscan_log.
 ignores:
     - ^.*Excluded$
     - ^.*Empty file$
