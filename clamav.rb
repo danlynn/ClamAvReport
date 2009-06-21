@@ -208,6 +208,7 @@ end
 # specified 'scan'.
 def generate_scan_report(scan)
   Thread.current[:scan] = scan
+  prev_scan = (Thread.current[:prev_scan] ||= get_prev_scan(scan))
   freshclam_stderr = IO.read($config["freshclam_stderr"])
   freshclam_stdout = @freshclam_stdout
   template = IO.read("views/clamav.html.erb")

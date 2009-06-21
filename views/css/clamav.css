@@ -21,21 +21,13 @@ img#logo {
 
 div.heading_date {
 	text-align: center;
-	margin-bottom: 30px;
+	margin-bottom: 38px;
 	font-size: 18px;
 	color: #d1ffd1;
 }
 
-div#accordionContainer {
-	height: 450px;
-}
-
-div#accordion {
+div#tabs {
 	margin-top: 30px;
-}
-
-div#accordion h3 {
-	font-weight: bold;
 }
 
 table.line {
@@ -64,6 +56,10 @@ div.field {
 
 .changed {
 	background-color: #c8fcbc;
+}
+
+.changed div.comment {
+	color: #66a160;
 }
 
 div.comment {
@@ -132,4 +128,11 @@ div.infection_desc {
 
 .log_red {
 	color: red;
+}
+
+div#prev_date {
+	text-align: right;
+	font-size: 10px;
+	margin: 5px;
+	color: #66a160;
 }
