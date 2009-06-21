@@ -245,7 +245,7 @@ FileUtils.cd(File.dirname(__FILE__))  # enable relative paths in config
 
 $config = YAML.load_file("config/clamav.yml")
 setup_and_clean_dir_structure
-$logger = ActiveRecord::Base.logger = CustomLogger.new($config["run_log"], 5, 10*1024)  # rotate > 10k keeping last 5
+$logger = ActiveRecord::Base.logger = CustomLogger.new($config["run_log"], 3, 100*1024)  # rotate > 10k keeping last 5
 ActiveRecord::Base.colorize_logging = false # prevents weird strings like "[4;36;1m" in log
 $logger.info("========== clamav.rb: start ==========")
 ActiveRecord::Base.establish_connection($config["database"])
