@@ -11,11 +11,6 @@ a {
 	text-decoration: none;
 }
 
-a:hover {
-	border: 1px none #00cb00;
-	border-bottom-style: dotted;
-}
-
 h1 {
 	text-align: center;
 	margin-bottom: 7px;
@@ -98,6 +93,11 @@ div.infection_file {
 	margin-top: 2px;
 }
 
+div.infection_file a:hover {
+	border: 1px none #00cb00;
+	border-bottom-style: dotted;
+}
+
 div.infection_file .dirname {
 	font-size: 14px;
 	display: inline;
@@ -143,6 +143,11 @@ div#credit {
 
 div#credit a {
 	color: #66a160;
+}
+
+div#credit a:hover {
+	border: 1px none #00cb00;
+	border-bottom-style: dotted;
 }
 
 div#prev_date {
