@@ -3,7 +3,8 @@
 # This script will execute clamscan using the properties found in
 # config/clamav.yml and then store the results in a database which can then
 # be referred back to for statistics and diffs.  At the end of each scan
-# an HTML report is generated and opened in the default browser.
+# an HTML report is generated and opened in the default browser.  Before
+# each scan, the ClamAV virus definitions are updated.
 
 require 'rubygems'
 require 'yaml'
@@ -34,32 +35,7 @@ class CustomLogger < Logger
 end
 
 
-# ===== utility methods =======================================================
-
-# create missing dirs and delete previous log file
-def setup_and_clean_dir_structure
-  # insure that database dir exists so that a new db can be created if necessary
-  if $config["database"]["adapter"] == "sqlite3"
-    FileUtils.mkpath(File.dirname($config["database"]["database"]))
-  end
-  # ensure that log dirs exists and last $config["clamscan_log"] is cleared before use
-  FileUtils.mkpath(File.dirname($config["run_log"]))
-  FileUtils.mkpath(File.dirname($config["clamscan_log"]))
-  #FileUtils.rm($config["clamscan_log"], :force => true)
-  #FileUtils.rm($config["clamscan_stderr"], :force => true)
-  FileUtils.rm($config["freshclam_stderr"], :force => true)
-end
-
-
-# gets the previous (chronologically by complete time) Scan instance to the
-# specified 'scan'.  Returns nil if no prev scan.
-def get_prev_scan(scan)
-  scan_ids = Scan.find(:all, :conditions => ["dir = ?", scan.dir], :order => "complete", :select => "id")
-  index = scan_ids.index(scan)
-  return nil if index == 0
-  Scan.find(scan_ids[index - 1])
-end
-
+# ===== view helpers ==========================================================
 
 # call-seq:
 #   hilite_new_infections(file) => "changed" or "unchanged"
@@ -123,11 +99,42 @@ def field(label, attr, options = {})
 end
 
 
+# call-seq:
+#   read_clamscan_logs_as_html => string of html
+#
+# reads the clamscan log and applies html styles to colorize it
 def read_clamscan_logs_as_html
   clamscan_log = "<span class='log_red'>#{IO.read($config["clamscan_stderr"])}</span>"
   clamscan_log += IO.read($config["clamscan_log"])
   clamscan_log.gsub!(Regexp.new("(" + $config["ignores"].join('|') + ")"), '<span class="log_ignore">\1</span>')
   clamscan_log.gsub!(/(^.*: )(.*)( FOUND)$/, '\1<span class="log_red">\2</span>\3')
+end
+
+
+# ===== utility methods =======================================================
+
+# create missing dirs and delete previous log file
+def setup_and_clean_dir_structure
+  # insure that database dir exists so that a new db can be created if necessary
+  if $config["database"]["adapter"] == "sqlite3"
+    FileUtils.mkpath(File.dirname($config["database"]["database"]))
+  end
+  # ensure that log dirs exists and last $config["clamscan_log"] is cleared before use
+  FileUtils.mkpath(File.dirname($config["run_log"]))
+  FileUtils.mkpath(File.dirname($config["clamscan_log"]))
+  #FileUtils.rm($config["clamscan_log"], :force => true)
+  #FileUtils.rm($config["clamscan_stderr"], :force => true)
+  FileUtils.rm($config["freshclam_stderr"], :force => true)
+end
+
+
+# gets the previous (chronologically by complete time) Scan instance to the
+# specified 'scan'.  Returns nil if no prev scan.
+def get_prev_scan(scan)
+  scan_ids = Scan.find(:all, :conditions => ["dir = ?", scan.dir], :order => "complete", :select => "id")
+  index = scan_ids.index(scan)
+  return nil if index == 0
+  Scan.find(scan_ids[index - 1])
 end
 
 
@@ -169,7 +176,6 @@ end
 # ===== main program ==========================================================
 
 FileUtils.cd(File.dirname(__FILE__))  # enable relative paths in config
-
 $config = YAML.load_file("config/clamav.yml")
 setup_and_clean_dir_structure
 $logger = ActiveRecord::Base.logger = CustomLogger.new($config["run_log"], 3, 100*1024)  # rotate > 10k keeping last 5

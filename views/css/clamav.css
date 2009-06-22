@@ -7,6 +7,15 @@ body {
 	margin: 7px;
 }
 
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	border: 1px none #00cb00;
+	border-bottom-style: dotted;
+}
+
 h1 {
 	text-align: center;
 	margin-bottom: 7px;
@@ -89,15 +98,6 @@ div.infection_file {
 	margin-top: 2px;
 }
 
-div.infection_file a {
-	text-decoration: none;
-}
-
-div.infection_file a:hover {
-	border: 1px none #00cb00;
-	border-bottom-style: dotted;
-}
-
 div.infection_file .dirname {
 	font-size: 14px;
 	display: inline;
@@ -134,9 +134,21 @@ pre.log {
 	color: red;
 }
 
-div#prev_date {
-	text-align: right;
+div#credit {
 	font-size: 10px;
 	margin: 5px;
 	color: #66a160;
+	display: inline;
+}
+
+div#credit a {
+	color: #66a160;
+}
+
+div#prev_date {
+	font-size: 10px;
+	margin: 5px;
+	color: #66a160;
+	display: inline;
+	float: right;
 }
