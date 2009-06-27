@@ -111,12 +111,14 @@ def read_clamscan_logs_as_html
 end
 
 
+# ===== chart data helpers ====================================================
+
 # get list of infection counts for the scans that were performed in the month
 # prior to 'scan' as a json array of [javascript time, infections count] tupples
 def infections_count_changes_as_json(scan)
-  rows = Scan.find(:all, :conditions => ["complete > ?", scan.complete - 1.month], :select => "complete, infections_count")
+  Thread.current[:chart][scan] ||= Scan.find(:all, :conditions => ["complete > ?", scan.complete - 1.month], :select => "complete, infections_count")
   last_count = nil
-  rows.collect do |row|
+  Thread.current[:chart][scan].collect do |row|
     diff = row.infections_count - last_count rescue 0;
     last_count = row.infections_count;
     [row.complete.to_i * 1000, diff]
@@ -189,6 +191,7 @@ end
 # ===== main program ==========================================================
 
 FileUtils.cd(File.dirname(__FILE__))  # enable relative paths in config
+Thread.current[:chart] = {} # stores memoized rows used for chart data
 $config = YAML.load_file("config/clamav.yml")
 setup_and_clean_dir_structure
 $logger = ActiveRecord::Base.logger = CustomLogger.new($config["run_log"], 3, 100*1024)  # rotate > 10k keeping last 5
