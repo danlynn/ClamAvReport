@@ -111,6 +111,19 @@ def read_clamscan_logs_as_html
 end
 
 
+# get list of infection counts for the scans that were performed in the month
+# prior to 'scan' as a json array of [javascript time, infections count] tupples
+def infections_count_changes_as_json(scan)
+  rows = Scan.find(:all, :conditions => ["complete > ?", scan.complete - 1.month], :select => "complete, infections_count")
+  last_count = nil
+  rows.collect do |row|
+    diff = row.infections_count - last_count rescue 0;
+    last_count = row.infections_count;
+    [row.complete.to_i * 1000, diff]
+  end.to_json
+end
+
+
 # ===== utility methods =======================================================
 
 # create missing dirs and delete previous log file
@@ -189,3 +202,6 @@ scan = Scan.find(:last)
 generate_scan_report(scan)
 `open "clamav.html"`
 $logger.info("========== clamav.rb: complete ==========")
+
+require 'pp'
+puts infections_count_changes_as_json(scan)

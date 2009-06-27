@@ -11,7 +11,45 @@
 	<link type="text/css" href="views/css/smoothness/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
 	<script type="text/javascript" src="views/js/jquery-1.3.2.min.js"></script>
 	<script type="text/javascript" src="views/js/jquery-ui-1.7.2.custom.min.js"></script>
+    <!--[if IE]><script type="text/javascript" src="views/js/excanvas.pack.js"></script><![endif]-->
+    <script type="text/javascript" src="views/js/jquery.flot.js"></script>
 	<script type="text/javascript">
+		$(function () {
+			// var d3 = [
+			// 	[new Date("2009/06/19").getTime(), 0], 
+			// 	[new Date("2009/06/20").getTime(), 0], 
+			// 	[new Date("2009/06/21").getTime(), 0], 
+			// 	[new Date("2009/06/22").getTime(), 0], 
+			// 	[new Date("2009/06/23").getTime(), 0], 
+			// 	[new Date("2009/06/24").getTime(), 0], 
+			// 	[new Date("2009/06/25").getTime(), 1]
+			// ];
+			// var d4 = [
+			// 	[new Date("2009/06/19").getTime(), 0], 
+			// 	[new Date("2009/06/20").getTime(), 2], 
+			// 	[new Date("2009/06/21").getTime(), 5], 
+			// 	[new Date("2009/06/22").getTime(), 5], 
+			// 	[new Date("2009/06/23").getTime(), 0], 
+			// 	[new Date("2009/06/24").getTime(), 2], 
+			// 	[new Date("2009/06/25").getTime(), 1]
+			// ];
+		    $.plot($("#placeholder"), [
+					{
+						data: <%= infections_count_changes_as_json(scan) %>,
+						lines: { show: true, fill: true }
+					},
+					// {
+					//     data: d4,
+					//     bars: { barWidth: 43200000, align: "center", show: true },
+					// 	yaxis: 2
+					// }
+				], {
+				xaxis: {
+		            mode: "time",
+		            // minTickSize: [1, "day"],
+				},
+			});
+		});
 		$(function() {
 			$("#tabs").tabs();
 		});
@@ -32,6 +70,7 @@
 			<li><a href="#tabs-2">Scan Info</a></li>
 			<li><a href="#tabs-3">Virus Definitions</a></li>
 			<li><a href="#tabs-4">Clamscan Log</a></li>
+			<li><a href="#tabs-5">Charts</a></li>
 		</ul>
 		<div id="tabs-1">
 <% for infection in scan.infections %>
@@ -60,6 +99,9 @@
 		</div>
 		<div id="tabs-4">
 			<pre class="log"><%= read_clamscan_logs_as_html %></pre>
+		</div>
+		<div id="tabs-5">
+			<div id="placeholder" style="width:600px;height:300px"></div>
 		</div>
 	</div>
 	<div id="credit">by <a href="http://danlynn.org">Dan Lynn</a></div>
