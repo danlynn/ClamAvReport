@@ -112,14 +112,40 @@ end
 
 
 # ===== chart data helpers ====================================================
+# Calculate the default chart bar width by finding the oldest completion time
+# for the records in the month prior to 'scan' then finding the number of
+# seconds between that time and the completion time of the current scan.
+# Divide those seconds by the number of scans and then multiply by 1000 to
+# convert into JavaScript time.
+def chart_bar_width(scan)
+  oldest = scan.complete
+  rows = scan.get_scans_for_last(1.month)
+  rows.each{|row| oldest = row.complete if row.complete < oldest}
+  (scan.complete - oldest) / rows.size * 1000
+end
+
+
 # get list of infection counts for the scans that were performed in the month
-# prior to 'scan' as a json array of [javascript time, infections count] tupples
+# prior to 'scan' as an array of [javascript_time, infections_count] tupples
 def infections_count_changes(scan)
   rows = scan.get_scans_for_last(30.days)
   last_count = nil
   rows.collect do |row|
     diff = row.infections_count - last_count rescue 0;
     last_count = row.infections_count;
+    [row.complete.to_i * 1000, diff]
+  end
+end
+
+
+# get list of known viruses counts for the scans that were performed in the month
+# prior to 'scan' as an array of [javascript_time, known_viruses_count] tupples
+def known_viruses_count_changes(scan)
+  rows = scan.get_scans_for_last(30.days)
+  last_count = nil
+  rows.collect do |row|
+    diff = row.known_viruses - last_count rescue 0;
+    last_count = row.known_viruses;
     [row.complete.to_i * 1000, diff]
   end
 end
@@ -205,6 +231,4 @@ generate_scan_report(scan)
 `open "clamav.html"`
 $logger.info("========== clamav.rb: complete ==========")
 
-require 'pp'
-#puts Thread.current[:chart][scan].size
-#puts scan.get_scans_for_last(1.month).size
+#require 'pp'

@@ -24,25 +24,17 @@
 			// 	[new Date("2009/06/24").getTime(), 0], 
 			// 	[new Date("2009/06/25").getTime(), 1]
 			// ];
-			// var d4 = [
-			// 	[new Date("2009/06/19").getTime(), 0], 
-			// 	[new Date("2009/06/20").getTime(), 2], 
-			// 	[new Date("2009/06/21").getTime(), 5], 
-			// 	[new Date("2009/06/22").getTime(), 5], 
-			// 	[new Date("2009/06/23").getTime(), 0], 
-			// 	[new Date("2009/06/24").getTime(), 2], 
-			// 	[new Date("2009/06/25").getTime(), 1]
-			// ];
 		    $.plot($("#placeholder"), [
 					{
 						data: <%= infections_count_changes(scan).to_json %>,
 						lines: { show: true, fill: true }
 					},
-					// {
-					//     data: d4,
-					//     bars: { barWidth: 43200000, align: "center", show: true },
-					// 	yaxis: 2
-					// }
+					{
+						data: <%= known_viruses_count_changes(scan).to_json %>,
+						// bars: { barWidth: 43200000, align: "center", show: true },
+						bars: { barWidth: <%= chart_bar_width(scan) %>, align: "center", show: true },
+						yaxis: 2
+					}
 				], {
 				xaxis: {
 		            mode: "time",
