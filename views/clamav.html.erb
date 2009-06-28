@@ -97,6 +97,8 @@
 		</div>
 	</div>
 	<div id="credit">by <a href="http://danlynn.org">Dan Lynn</a></div>
+<% if prev_scan %>
 	<div id="prev_date">previous scan <%= prev_scan.complete.strftime("%m/%d/%y at %I:%M %p") %></div>
+<% end %>
 </body>
 </html>
