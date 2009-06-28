@@ -1,4 +1,4 @@
 .idea
 log
-db
+db/*.sqlite3
 clamav.html
