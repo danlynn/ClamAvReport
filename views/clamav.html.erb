@@ -35,7 +35,7 @@
 			// ];
 		    $.plot($("#placeholder"), [
 					{
-						data: <%= infections_count_changes_as_json(scan) %>,
+						data: <%= infections_count_changes(scan).to_json %>,
 						lines: { show: true, fill: true }
 					},
 					// {

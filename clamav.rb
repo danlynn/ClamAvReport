@@ -112,17 +112,16 @@ end
 
 
 # ===== chart data helpers ====================================================
-
 # get list of infection counts for the scans that were performed in the month
 # prior to 'scan' as a json array of [javascript time, infections count] tupples
-def infections_count_changes_as_json(scan)
-  Thread.current[:chart][scan] ||= Scan.find(:all, :conditions => ["complete > ?", scan.complete - 1.month], :select => "complete, infections_count")
+def infections_count_changes(scan)
+  rows = scan.get_scans_for_last(30.days)
   last_count = nil
-  Thread.current[:chart][scan].collect do |row|
+  rows.collect do |row|
     diff = row.infections_count - last_count rescue 0;
     last_count = row.infections_count;
     [row.complete.to_i * 1000, diff]
-  end.to_json
+  end
 end
 
 
@@ -207,4 +206,5 @@ generate_scan_report(scan)
 $logger.info("========== clamav.rb: complete ==========")
 
 require 'pp'
-puts infections_count_changes_as_json(scan)
+#puts Thread.current[:chart][scan].size
+#puts scan.get_scans_for_last(1.month).size
