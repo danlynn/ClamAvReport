@@ -21,6 +21,8 @@ root_dir = Pathname(__FILE__).parent
 def clean(root_dir)
 	# delete log dir
 	FileUtils.rm_r((root_dir + "log").to_s) rescue # ignore error when already deleted
+    # delete pkg dir (from rake package)
+    FileUtils.rm_r((root_dir + "pkg").to_s) rescue # ignore error when already deleted
 	# delete all files in db dir
 	(root_dir + "db").children.each{|f| puts "=== #{f.basename} : #{f.file?}"}
 	(root_dir + "db").children.each{|f| f.delete if f.file?}
