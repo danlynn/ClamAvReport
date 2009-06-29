@@ -8,9 +8,10 @@ database:
 
 # directory to be recursively scanned by clamav
 scan_dir: /Users/danlynn/Documents/temp/delete/iTuner
+#scan_dir: <%= Etc.getpwuid.dir %>
 
-# location of clamscan executable
-clamscan: /usr/local/clamXav/bin/clamscan
+# parent dir of clamscan & freshclam executables
+clam_bin_dir: /usr/local/clamXav/bin
 
 # location to write log from scan (may be relative to clamav.rb dir)
 clamscan_log: log/clamscan.log

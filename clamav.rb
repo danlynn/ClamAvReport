@@ -195,7 +195,7 @@ end
 # stderr as for later display in the report
 def update_virus_definitions
   $logger.info("freshclam: update virus definitions: start")
-  @freshclam_stdout = `/usr/local/clamXav/bin/freshclam 2>#{$config["freshclam_stderr"]}`
+  @freshclam_stdout = `#{Pathname($config["clam_bin_dir"]) + "freshclam"} 2>#{$config["freshclam_stderr"]}`
   @freshclam_stdout = @freshclam_stdout.gsub(/Downloading .*\[\d{1,3}%\] ?/, "\n").gsub(/(DON'T PANIC!.*?faq {0,1})/, "").gsub("\n\n", "\n")
   $logger.info("freshclam: update virus definitions: complete")
 end
@@ -206,7 +206,7 @@ def perform_scan
   $logger.info("clamscan: start")
   start = Time.now
   # TODO capture clamscan sysout / syserr output - possibly look for engine update warnings
-  `#{$config["clamscan"]} -r --quiet --log="#{$config["clamscan_log"]}" --exclude="\.(#{$config["excludes"].join('|')})$" "#{$config["scan_dir"]}" 2>#{$config["clamscan_stderr"]}`
+  `#{Pathname($config["clam_bin_dir"]) + "clamscan"} -r --quiet --log="#{$config["clamscan_log"]}" --exclude="\.(#{$config["excludes"].join('|')})$" "#{$config["scan_dir"]}" 2>#{$config["clamscan_stderr"]}`
   complete = Time.now
   $logger.info("clamscan: complete")
   Scan.create_from_log(start, complete, $config["scan_dir"], $config["clamscan_log"])
@@ -216,8 +216,7 @@ end
 # ===== main program ==========================================================
 
 FileUtils.cd(File.dirname(__FILE__))  # enable relative paths in config
-Thread.current[:chart] = {} # stores memoized rows used for chart data
-$config = YAML.load_file("config/clamav.yml")
+$config = YAML.load(ERB.new(IO.read("config/clamav.yml")).result(binding))
 setup_and_clean_dir_structure
 $logger = ActiveRecord::Base.logger = CustomLogger.new($config["run_log"], 3, 100*1024)  # rotate > 10k keeping last 5
 ActiveRecord::Base.colorize_logging = false # prevents weird strings like "[4;36;1m" in log
