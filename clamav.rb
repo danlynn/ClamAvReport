@@ -221,7 +221,7 @@ end
 # Look for -i, -u, and -h options on command line to configure LaunchAgent 
 # (like cron).  Otherwise, simply execute script normally.
 def parse_command_line_options
-  root_dir = FileUtils.cd(File.dirname(__FILE__))
+  root_dir = File.dirname(__FILE__)
   launch_agent_path = Pathname(Etc.getpwuid.dir) + "Library/LaunchAgents/org.danlynn.clamav.plist"
   opts = OptionParser.new
   opts.on('-i', '--install [TIME]', Time, "Install LaunchAgent to run clamav.rb every day at specified time {'2:30pm' or '1:30am'} - requires REBOOT") do |time|
@@ -247,7 +247,7 @@ end
 # sudo /bin/launchctl load file.plist
 # TODO: Add labels and legend to chart
 
-FileUtils.cd(FileUtils.cd(File.dirname(__FILE__)))  # enable relative paths in config
+FileUtils.cd(File.dirname(__FILE__))  # enable relative paths in config
 $config = YAML.load(ERB.new(IO.read("config/clamav.yml")).result(binding))
 parse_command_line_options
 setup_and_clean_dir_structure
