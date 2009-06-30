@@ -14,9 +14,6 @@ require 'rake/packagetask'
 require 'pathname'
 
 
-root_dir = Pathname(__FILE__).parent
-
-
 # Deletes log dir, files in db dir, and clamav.html file
 def clean(root_dir)
 	# delete log dir
@@ -38,7 +35,7 @@ end
 
 
 # Creates a zip of project suitable for execution - but not development
-Rake::PackageTask.new("clamav_report", "1.0.0") do |p|
+Rake::PackageTask.new("ClamAV-Scan_Report", "1.0.0") do |p|
 	p.need_zip = true
 	p.package_files.include("config/clamav.yml")
 	p.package_files.include("db/migrate/*")
