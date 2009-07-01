@@ -16,10 +16,11 @@ require 'pathname'
 
 # Deletes log dir, files in db dir, and clamav.html file
 def clean(root_dir)
-	# delete log dir
+	# delete and re-create log dir
 	FileUtils.rm_r((root_dir + "log").to_s) rescue # ignore error when already deleted
-    # delete pkg dir (from rake package)
-    FileUtils.rm_r((root_dir + "pkg").to_s) rescue # ignore error when already deleted
+	FileUtils.mkpath((root_dir + "log").to_s)
+	# delete pkg dir (from rake package)
+	FileUtils.rm_r((root_dir + "pkg").to_s) rescue # ignore error when already deleted
 	# delete all files in db dir
 	(root_dir + "db").children.each{|f| puts "=== #{f.basename} : #{f.file?}"}
 	(root_dir + "db").children.each{|f| f.delete if f.file?}
@@ -38,6 +39,7 @@ end
 Rake::PackageTask.new("ClamAV-Scan_Report", "1.0.0") do |p|
 	p.need_zip = true
 	p.package_files.include("config/clamav.yml")
+	p.package_files.include("config/org.danlynn.clamav.plist.erb")
 	p.package_files.include("db/migrate/*")
 	p.package_files.include("models/*.rb")
 	p.package_files.include("views/**/*")
