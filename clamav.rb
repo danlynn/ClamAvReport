@@ -10,8 +10,6 @@
 
 require 'fileutils'
 require 'pathname'
-FileUtils.cd(Pathname(__FILE__).parent.realpath)  # enable relative paths (even in require)
-
 require 'rubygems'
 require 'yaml'					# for reading config file
 require 'erb'						# for rendering templates
@@ -21,6 +19,8 @@ require 'optparse/time'
 require 'active_record'	# for database access
 require 'action_view'		# for DateHelper, NumberHelper, SanitizeHelper, Bytes
 
+FileUtils.cd(Pathname(__FILE__).parent.realpath)  # enable relative paths (even in require)
+
 require 'models/scan'
 require 'models/infection'
 require 'db/migrate/create_tables'
@@ -29,7 +29,6 @@ include ActionView::Helpers::DateHelper     # to use distance_of_time_in_words
 include ActionView::Helpers::NumberHelper   # to use number_with_delimiter
 include ActionView::Helpers::SanitizeHelper # to use sanitize on logs
 include ActiveSupport::CoreExtensions::Numeric::Bytes # to use .megabytes
-
 
 
 # ===== custom logger =========================================================
@@ -160,6 +159,39 @@ end
 
 # ===== utility methods =======================================================
 
+# Look for -i, -u, -c, and -h options on command line to configure LaunchAgent
+# (like cron) and specify config file to use.  Otherwise, simply execute script
+# normally.
+def parse_command_line_options
+  root_dir = Pathname(__FILE__).parent.realpath
+  launch_agent_path = Pathname(Etc.getpwuid.dir) + "Library/LaunchAgents/org.danlynn.clamav.plist"
+  opts = OptionParser.new
+  opts.on('-c', '--config [FILE]',
+          "Specify config file other than default ",
+          "'config/clamav.yml' - use relative path") do |file|
+    @config_path = file
+  end
+  opts.on('-i', '--install [TIME]', Time,
+          "Install LaunchAgent to run clamav.rb every",
+          "day at specified time {eg: 2:30pm}",
+          "Try using with --config [FILE]",
+          "Requires RELOGIN") do |time|
+    template_path = "config/org.danlynn.clamav.plist.erb"
+    config_path = @config_path  # make available to template as local var
+    doc = ERB.new(IO.read(template_path)).result(binding)
+    File.open(launch_agent_path, 'w') {|f| f.write(doc) }
+    puts "*** REMEMBER: The new LaunchAgent which executes clamav.rb on an interval WON'T activate until you logout then log back into this account!"
+    exit 0
+  end
+  opts.on('-u', '--uninstall', "Uninstall LaunchAgent - requires RELOGIN") do |time|
+    launch_agent_path.delete
+    exit 0
+  end
+  opts.on_tail("-h", "--help", "Show this message") {puts opts; exit 0}
+  opts.parse!(ARGV)
+end
+
+
 # create missing dirs and delete previous log file
 def setup_and_clean_dir_structure
   # insure that database dir exists so that a new db can be created if necessary
@@ -220,38 +252,13 @@ def perform_scan
 end
 
 
-# Look for -i, -u, and -h options on command line to configure LaunchAgent 
-# (like cron).  Otherwise, simply execute script normally.
-def parse_command_line_options
-  root_dir = Pathname(__FILE__).parent.realpath
-  launch_agent_path = Pathname(Etc.getpwuid.dir) + "Library/LaunchAgents/org.danlynn.clamav.plist"
-  opts = OptionParser.new
-  opts.on('-i', '--install [TIME]', Time, "Install LaunchAgent to run clamav.rb every day at specified time {'2:30pm' or '1:30am'} - requires REBOOT") do |time|
-    template_path = "config/org.danlynn.clamav.plist"
-    doc = ERB.new(IO.read(template_path)).result(binding)
-    File.open(launch_agent_path, 'w') {|f| f.write(doc) }
-    puts "*** REMEMBER: The new LaunchAgent which executes clamav.rb on an interval WON'T activate until you restart your computer!"
-    exit 0
-  end
-  opts.on('-u', '--uninstall', "Uninstall LaunchAgent - requires REBOOT") do |time|
-    launch_agent_path.delete
-    exit 0
-  end
-  opts.on_tail("-h", "--help", "Show this message") {puts opts; exit 0}
-  opts.parse!(ARGV)
-end
-
-
 # ===== main program ==========================================================
 
-# TODO: Add command line install command that generates a launchd script and saves it to ~/Library/LaunchAgents
-# sudo /bin/launchctl unload file.plist
-# sudo /bin/launchctl load file.plist
 # TODO: Add labels and legend to chart
-# TODO: Add --config [FILE] to install command so that unique configs can be used in multiple LaunchAgent scripts.  Would also need to change name of LaunchAgent by possible including the config file name?
 
-$config = YAML.load(ERB.new(IO.read("config/clamav.yml")).result(binding))
+@config_path = "config/clamav.yml"
 parse_command_line_options
+$config = YAML.load(ERB.new(IO.read(@config_path)).result(binding))
 setup_and_clean_dir_structure
 $logger = ActiveRecord::Base.logger = CustomLogger.new($config["run_log"], 3, 100*1024)  # rotate > 10k keeping last 5
 ActiveRecord::Base.colorize_logging = false # prevents weird strings like "[4;36;1m" in log
@@ -264,5 +271,3 @@ scan = Scan.find(:last)
 generate_scan_report(scan)
 `open "clamav.html"`
 $logger.info("========== clamav.rb: complete ==========")
-
-#require 'pp'
