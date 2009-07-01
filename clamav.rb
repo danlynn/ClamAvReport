@@ -163,32 +163,29 @@ end
 # (like cron) and specify config file to use.  Otherwise, simply execute script
 # normally.
 def parse_command_line_options
-  root_dir = Pathname(__FILE__).parent.realpath
-  launch_agent_path = Pathname(Etc.getpwuid.dir) + "Library/LaunchAgents/org.danlynn.clamav.plist"
+  options = {}
   opts = OptionParser.new
-  opts.on('-c', '--config [FILE]',
+  # define options
+  opts.banner = "Usage: clamav.rb [options]"
+  opts.on('-c', '--config FILE', 
           "Specify config file other than default ",
           "'config/clamav.yml' - use relative path") do |file|
-    @config_path = file
+    options[:config] = file
   end
-  opts.on('-i', '--install [TIME]', Time,
+  opts.on('-i', '--install TIME', Time,
           "Install LaunchAgent to run clamav.rb every",
           "day at specified time {eg: 2:30pm}",
-          "Try using with --config [FILE]",
+          "Try using with --config FILE",
           "Requires RELOGIN") do |time|
-    template_path = "config/org.danlynn.clamav.plist.erb"
-    config_path = @config_path  # make available to template as local var
-    doc = ERB.new(IO.read(template_path)).result(binding)
-    File.open(launch_agent_path, 'w') {|f| f.write(doc) }
-    puts "*** REMEMBER: The new LaunchAgent which executes clamav.rb on an interval WON'T activate until you logout then log back into this account!"
-    exit 0
+    options[:install] = time
   end
   opts.on('-u', '--uninstall', "Uninstall LaunchAgent - requires RELOGIN") do |time|
-    launch_agent_path.delete
-    exit 0
+    options[:uninstall] = true
   end
   opts.on_tail("-h", "--help", "Show this message") {puts opts; exit 0}
+  # parse options
   opts.parse!(ARGV)
+  options
 end
 
 
@@ -257,7 +254,25 @@ end
 # TODO: Add labels and legend to chart
 
 @config_path = "config/clamav.yml"
-parse_command_line_options
+options = parse_command_line_options
+launch_agent_path = Pathname(Etc.getpwuid.dir) + "Library/LaunchAgents/org.danlynn.clamav.plist"
+if options[:uninstall]
+  launch_agent_path.delete
+  puts "*** REMEMBER: The LaunchAgent which executes clamav.rb on an interval WILL REMAIN ACTIVE until you logout then log back into this account!"
+  exit 0
+end
+config_path = @config_path
+if options[:config]
+  config_path = @config_path = options[:config]
+end
+if options[:install]
+  root_dir = Pathname(__FILE__).parent.realpath
+  time = options[:install]
+  doc = ERB.new(IO.read("config/org.danlynn.clamav.plist.erb")).result(binding)
+  File.open(launch_agent_path, 'w') {|f| f.write(doc) }
+  puts "*** REMEMBER: The new LaunchAgent which executes clamav.rb on an interval WON'T activate until you logout then log back into this account!"
+  exit 0
+end
 $config = YAML.load(ERB.new(IO.read(@config_path)).result(binding))
 setup_and_clean_dir_structure
 $logger = ActiveRecord::Base.logger = CustomLogger.new($config["run_log"], 3, 100*1024)  # rotate > 10k keeping last 5
