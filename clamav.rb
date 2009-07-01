@@ -8,16 +8,18 @@
 # with "clamav.rb -h" to see the options for installing a LaunchAgent to
 # run the script on a daily interval.
 
-require 'rubygems'
-require 'yaml'
 require 'fileutils'
 require 'pathname'
-require 'erb'
-require 'etc'
-require 'optparse'    # for parsing command line options
+FileUtils.cd(Pathname(__FILE__).parent.realpath)  # enable relative paths (even in require)
+
+require 'rubygems'
+require 'yaml'					# for reading config file
+require 'erb'						# for rendering templates
+require 'etc'						# to obtain home dir of current user
+require 'optparse'  	  # for parsing command line options
 require 'optparse/time'
-require 'active_record'
-require 'action_view' # for DateHelper, NumberHelper, SanitizeHelper, Bytes
+require 'active_record'	# for database access
+require 'action_view'		# for DateHelper, NumberHelper, SanitizeHelper, Bytes
 
 require 'models/scan'
 require 'models/infection'
@@ -246,8 +248,8 @@ end
 # sudo /bin/launchctl unload file.plist
 # sudo /bin/launchctl load file.plist
 # TODO: Add labels and legend to chart
+# TODO: Add --config [FILE] to install command so that unique configs can be used in multiple LaunchAgent scripts.  Would also need to change name of LaunchAgent by possible including the config file name?
 
-FileUtils.cd(Pathname(__FILE__).parent.realpath)  # enable relative paths in config
 $config = YAML.load(ERB.new(IO.read("config/clamav.yml")).result(binding))
 parse_command_line_options
 setup_and_clean_dir_structure

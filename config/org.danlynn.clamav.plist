@@ -14,7 +14,7 @@ of the computer.
 	<string>org.danlynn.clamav</string>
 	<key>ProgramArguments</key>
 	<array>
-		<string>sh</string>
+		<string>ruby</string>
 		<string><%= root_dir %>/clamav.rb</string>
 	</array>
 	<key>QueueDirectories</key>
