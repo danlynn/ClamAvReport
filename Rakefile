@@ -16,16 +16,14 @@ require 'pathname'
 
 # Deletes log dir, files in db dir, and clamav.html file
 def clean(root_dir)
-	# delete and re-create log dir
-	FileUtils.rm_r((root_dir + "log").to_s) rescue # ignore error when already deleted
-	FileUtils.mkpath((root_dir + "log").to_s)
+	# delete all files in log dir
+	(root_dir + "log").children.each{|f| f.delete if f.file?}
 	# delete pkg dir (from rake package)
-	FileUtils.rm_r((root_dir + "pkg").to_s) rescue # ignore error when already deleted
+	FileUtils.rm_r((root_dir + "pkg").to_s) rescue nil	# ignore failures
 	# delete all files in db dir
-	(root_dir + "db").children.each{|f| puts "=== #{f.basename} : #{f.file?}"}
 	(root_dir + "db").children.each{|f| f.delete if f.file?}
 	# delete clamav.html report
-	(root_dir + "clamav.html").delete
+	(root_dir + "clamav.html").delete rescue nil	# ignore failures
 end
 
 
