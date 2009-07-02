@@ -86,8 +86,10 @@ def field(label, attr, options = {})
     scan_value = scan.send(attr) rescue nil
     if options[:hilite_changes] == nil || options[:hilite_changes]
       Thread.current[:prev_scan] ||= get_prev_scan(scan)
-      prev_scan_value = Thread.current[:prev_scan].send(attr.to_sym) rescue nil
-      changed = scan_value != prev_scan_value
+      if Thread.current[:prev_scan]
+        prev_scan_value = Thread.current[:prev_scan].send(attr.to_sym) rescue nil
+        changed = scan_value != prev_scan_value
+      end
     end
   else
     scan_value = attr # assume attr is ACTUAL value if not a symbol
