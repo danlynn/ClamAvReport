@@ -270,6 +270,8 @@ if options[:install]
   time = options[:install]
   doc = ERB.new(IO.read("config/org.danlynn.clamav.plist.erb")).result(binding)
   File.open(launch_agent_path, 'w') {|f| f.write(doc) }
+  `launchctl unload #{launch_agent_path}`
+  `launchctl load #{launch_agent_path}`
   puts "*** REMEMBER: The new LaunchAgent which executes clamav.rb on an interval WON'T activate until you logout then log back into this account!"
   exit 0
 end
