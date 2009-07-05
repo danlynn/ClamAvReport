@@ -129,7 +129,7 @@ def chart_bar_width(scan)
   oldest = scan.complete
   rows = scan.get_scans_for_last(1.month)
   rows.each{|row| oldest = row.complete if row.complete < oldest}
-  (scan.complete - oldest) / rows.size * 1000
+  (scan.complete - oldest) / rows.size / 2 * 1000
 end
 
 
