@@ -168,7 +168,7 @@ def parse_command_line_options
   options = {}
   opts = OptionParser.new
   # define options
-  opts.banner = "Usage: clamav.rb [options]"
+  opts.banner = "Usage: clamav.rb [-u] [-i time]"
   opts.on('-c', '--config FILE', 
           "Specify config file other than default ",
           "'config/clamav.yml' - use relative path") do |file|
@@ -185,6 +185,7 @@ def parse_command_line_options
     options[:uninstall] = true
   end
   opts.on_tail("-h", "--help", "Show this message") {puts opts; exit 0}
+  opts.on_tail("-v", "--version", "Show version") {puts "clamav.rb 1.0.0"; exit 0}
   # parse options
   opts.parse!(ARGV)
   options
