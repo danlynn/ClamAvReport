@@ -201,8 +201,8 @@ def setup_and_clean_dir_structure
   # ensure that log dirs exists and last $config["clamscan_log"] is cleared before use
   FileUtils.mkpath(File.dirname($config["run_log"]))
   FileUtils.mkpath(File.dirname($config["clamscan_log"]))
-  #FileUtils.rm($config["clamscan_log"], :force => true)
-  #FileUtils.rm($config["clamscan_stderr"], :force => true)
+  FileUtils.rm($config["clamscan_log"], :force => true)
+  FileUtils.rm($config["clamscan_stderr"], :force => true)
   FileUtils.rm($config["freshclam_stderr"], :force => true)
 end
 
@@ -286,8 +286,8 @@ $logger.info("========== clamav.rb: start ==========")
 ActiveRecord::Base.establish_connection($config["database"])
 ensure_schema_exists
 update_virus_definitions
-#scan = perform_scan
-scan = Scan.find(:last)
+scan = perform_scan
+# scan = Scan.find(:last)
 generate_scan_report(scan)
 `open "clamav.html"`
 $logger.info("========== clamav.rb: complete ==========")
