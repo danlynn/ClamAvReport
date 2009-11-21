@@ -104,6 +104,7 @@ def field(label, attr, options = {})
   html += "<div class='comment'>&nbsp;&nbsp;(prev #{prev_scan_value})</div></span>" if changed
   html += "<div class='comment'>#{options[:comment]}</div>" if options[:comment]
   html += "</td></tr></table>"
+  return html
 end
 
 
@@ -225,6 +226,15 @@ def generate_scan_report(scan)
   template = IO.read("views/clamav.html.erb")
   output = ERB.new(template).result(binding)
   File.open("clamav.html", "w") {|file| file.write(output)}
+end
+
+
+# get list of infections that have been removed since the previous scan
+def removed_infections(scan)
+  prev_scan = (Thread.current[:prev_scan] ||= get_prev_scan(scan))
+  return [] unless prev_scan
+  current_infections = scan.infections.collect{|infection| infection.file}
+  prev_scan.infections.select{|infection| !current_infections.include?(infection.file)}
 end
 
 

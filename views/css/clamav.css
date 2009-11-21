@@ -58,6 +58,22 @@ div.field {
 	margin-left: 2px;
 }
 
+div.infection_file .removed {
+	background-color: #c8fcbc;
+}
+
+div.infection_file a.changed {
+	background-color: #fed5d6
+}
+
+.removed_comment {
+	font-size: 10px;
+	color: #aff9af;
+	float: right;
+	position: relative;
+	top: 4px;
+}
+
 .changed {
 	background-color: #c8fcbc;
 }

@@ -56,6 +56,13 @@
 			<li><a href="#tabs-5">Charts</a></li>
 		</ul>
 		<div id="tabs-1">
+<% for infection in removed_infections(scan) %>
+			<div class="infection_file">
+				<span class="removed"><span class="dirname"><%= File.dirname(infection.file) + File::SEPARATOR %></span><span class="basename"><%= File.basename(infection.file) %></span></span>
+			</div>
+			<div class="removed_comment">(removed since last scan)</div>
+			<div class="infection_desc"><%= infection.infection %></div>
+<% end %>
 <% for infection in scan.infections %>
 			<div class="infection_file">
 				<a href="file://<%= File.dirname(infection.file) %>" class="<%= hilite_new_infections(infection.file) %>"><span class="dirname"><%= File.dirname(infection.file) + File::SEPARATOR %></span><span class="basename"><%= File.basename(infection.file) %></span></a>
