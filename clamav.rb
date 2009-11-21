@@ -201,8 +201,6 @@ def setup_and_clean_dir_structure
   # ensure that log dirs exists and last $config["clamscan_log"] is cleared before use
   FileUtils.mkpath(File.dirname($config["run_log"]))
   FileUtils.mkpath(File.dirname($config["clamscan_log"]))
-  #FileUtils.rm($config["clamscan_log"], :force => true)
-  #FileUtils.rm($config["clamscan_stderr"], :force => true)
   FileUtils.rm($config["freshclam_stderr"], :force => true)
 end
 
@@ -244,6 +242,8 @@ end
 def perform_scan
   $logger.info("clamscan: start")
   start = Time.now
+  FileUtils.rm($config["clamscan_log"], :force => true)	# only clean previous logs if about to scan
+  FileUtils.rm($config["clamscan_stderr"], :force => true)
   # TODO: capture clamscan sysout / syserr output - possibly look for engine update warnings
   `#{Pathname($config["clam_bin_dir"]) + "clamscan"} -r --quiet --log="#{$config["clamscan_log"]}" --exclude="\.(#{$config["excludes"].join('|')})$" "#{$config["scan_dir"]}" 2>#{$config["clamscan_stderr"]}`
   complete = Time.now
@@ -286,8 +286,14 @@ $logger.info("========== clamav.rb: start ==========")
 ActiveRecord::Base.establish_connection($config["database"])
 ensure_schema_exists
 update_virus_definitions
-#scan = perform_scan
-scan = Scan.find(:last)
+unless $config["scan_dir"]	# if no scan dir specified then simply gen report using previous scan record and logs
+	scan = Scan.find(:last)
+else
+	scan = perform_scan
+end
 generate_scan_report(scan)
 `open "clamav.html"`
 $logger.info("========== clamav.rb: complete ==========")
+
+# TODO: add special message at top indicating that the ClamAV engine is outdated when "This version of the ClamAV engine is outdated." appears in $config["clamscan_stderr"]
+# TODO: extend ActiveSupport::Memoizable and memoize get_prev-scan (and possibly others)

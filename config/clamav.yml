@@ -7,6 +7,7 @@ database:
     timeout: 5000
 
 # directory to be recursively scanned by clamav
+# leave empty to re-gen report using previous scan record and log data (for debug)
 scan_dir: <%= Etc.getpwuid.dir %>
 
 # parent dir of clamscan & freshclam executables
