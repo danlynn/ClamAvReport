@@ -1,0 +1,28 @@
+
+-------------------------------------------------------------------------------
+
+/Users/danlynn/Documents/Colloquy Transcripts/sighup/#sighup 3-19-09.colloquyTranscript: HTML.Phishing.Pay-180 FOUND
+/Users/danlynn/Documents/HTML/CrashIE.html: HTML.Crash FOUND
+/Users/danlynn/Documents/temp/delete/iTuner/1063 copy.emlx: HTML.Phishing.Bank-578 FOUND
+/Users/danlynn/Documents/temp/delete/iTuner/1063.emlx: HTML.Phishing.Bank-578 FOUND
+/Users/danlynn/Documents/temp/delete/iTuner/156.emlx: Phishing.Heuristics.Email.SpoofedDomain FOUND
+/Users/danlynn/Library/Mail/IMAP-dan@danlynn.org@mail.danlynn.org/INBOX.imapmbox/Attachments/49906/2/DHL_Delivery_Label_02bc6fb.zip: Suspect.Bredozip-zippwd-2 FOUND
+/Users/danlynn/Library/Mail/IMAP-dan@danlynn.org@mail.danlynn.org/INBOX.imapmbox/Messages/49906.emlx: Suspect.Bredozip-zippwd-2 FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/50551.emlx: Email.Phishing.Webmail-36 FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/51097.emlx: Email.Phishing.Webmail-36 FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Registrations.mbox/Messages/1063.emlx: HTML.Phishing.Bank-578 FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Sent Messages (danlynn.org).mbox/Messages/5293.emlx: HTML.Crash FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Sent Messages (danlynn.org).mbox/Messages/5294.emlx: HTML.Crash FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Shopping/eBay.mbox/Messages/156.emlx: Phishing.Heuristics.Email.SpoofedDomain FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Shopping/eBay.mbox/Messages/164.emlx: Phishing.Heuristics.Email.SpoofedDomain FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Shopping/eBay.mbox/Messages/188.emlx: Phishing.Heuristics.Email.SpoofedDomain FOUND
+
+----------- SCAN SUMMARY -----------
+Known viruses: 652526
+Engine version: 0.95.1
+Scanned directories: 84596
+Scanned files: 383843
+Infected files: 15
+Data scanned: 31435.91 MB
+Data read: 37777.82 MB (ratio 0.83:1)
+Time: 6789.730 sec (113 m 9 s)

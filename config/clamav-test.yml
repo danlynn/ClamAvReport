@@ -1,0 +1,57 @@
+# Database connection info (same attributes as rails database.yml).
+# If using sqlite3 as adapter then the location may be relative
+# to the clamav.rb dir
+database:
+    adapter: sqlite3
+    database: test/db/clamav.sqlite3
+    timeout: 5000
+
+# directory to be recursively scanned by clamav
+# leave empty to re-gen report using previous scan record and log data (for debug)
+scan_dir:
+
+# parent dir of clamscan & freshclam executables
+clam_bin_dir: /usr/local/clamXav/bin
+
+# location to write log from scan (may be relative to clamav.rb dir)
+clamscan_log: test/log/clamscan.log
+
+# location to write stderr messages from clamscan run
+clamscan_stderr: test/log/clamscan_stderr.log
+
+# location to write stderr messages from freshclam run (virus def updates)
+freshclam_stderr: test/log/freshclam_stderr.log
+
+# location to write log from ruby script (db info, debug, errors, etc.)
+run_log: test/log/run.log
+
+# file extensions to be excluded from the clamav scan
+excludes:
+    - jar
+    - war
+    - ear
+    - sit
+    - sitx
+    - dmg
+    - tgz
+    - gz
+    - m4a
+    - m4b
+    - m4p
+    - m4v
+    - mp3
+    - mp4
+    - avi
+    - vhd
+    - hdd
+    - sav
+
+# List of regular expressions identifying lines in the clamscan log
+# that should be ignored when building the list of infected files.
+# This list probably should not be changed.  This list is also used
+# to determine which lines are grayed-out in the clamscan_log.
+ignores:
+    - ^.*Excluded$
+    - ^.*Empty file$
+    - ^.*Access denied$
+    - ^Scanning.*$
