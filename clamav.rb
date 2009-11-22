@@ -18,6 +18,7 @@ require 'optparse'  	  # for parsing command line options
 require 'optparse/time'
 require 'active_record'	# for database access
 require 'action_view'		# for DateHelper, NumberHelper, SanitizeHelper, Bytes
+require 'active_support'
 
 FileUtils.cd(Pathname(__FILE__).parent.realpath)  # enable relative paths (even in require)
 
