@@ -254,7 +254,6 @@ def perform_scan
   start = Time.now
   FileUtils.rm($config["clamscan_log"], :force => true)	# only clean previous logs if about to scan
   FileUtils.rm($config["clamscan_stderr"], :force => true)
-  # TODO: capture clamscan sysout / syserr output - possibly look for engine update warnings
   `#{Pathname($config["clam_bin_dir"]) + "clamscan"} -r --quiet --log="#{$config["clamscan_log"]}" --exclude="\.(#{$config["excludes"].join('|')})$" "#{$config["scan_dir"]}" 2>#{$config["clamscan_stderr"]}`
   complete = Time.now
   $logger.info("clamscan: complete")
@@ -263,9 +262,6 @@ end
 
 
 # ===== main program ==========================================================
-
-# TODO: Add labels and legend to chart
-
 @config_path = "config/clamav.yml"
 options = parse_command_line_options
 launch_agent_path = Pathname(Etc.getpwuid.dir) + "Library/LaunchAgents/org.danlynn.clamav.plist"
