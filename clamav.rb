@@ -163,11 +163,12 @@ end
 
 # ===== utility methods =======================================================
 
-# Look for -i, -u, -c, and -h options on command line to configure LaunchAgent
-# (like cron) and specify config file to use.  Otherwise, simply execute script
-# normally.
+# Look for -c, -i, -u, -h, and -v options on command line to configure
+# LaunchAgent (like cron) and specify config file to use.  Otherwise, simply
+# execute script normally.
 def parse_command_line_options
   options = {}
+  options[:config] = "config/clamav.yml"  # default
   opts = OptionParser.new
   # define options
   opts.banner = "Usage: clamav.rb [-u] [-i time]"
@@ -291,21 +292,16 @@ end
 extend ActiveSupport::Memoizable
 memoize :get_prev_scan
 
-@config_path = "config/clamav.yml"
 options = parse_command_line_options
 if options[:uninstall]
   launch_agent_path.delete
   puts "*** REMEMBER: The LaunchAgent which executes clamav.rb on an interval WILL REMAIN ACTIVE until you logout then log back into this account!"
   exit 0
 end
-config_path = @config_path
-if options[:config]
-  config_path = @config_path = options[:config]
-end
 if options[:install]
   install_launch_agent(config_path, Pathname(__FILE__).parent.realpath, options[:install])
 end
-$config = YAML.load(ERB.new(IO.read(@config_path)).result(binding))
+$config = YAML.load(ERB.new(IO.read(options[:config])).result(binding))
 setup_dir_structure
 $logger = ActiveRecord::Base.logger = CustomLogger.new($config["run_log"], 3, 100*1024)  # rotate > 10k keeping last 5
 ActiveRecord::Base.colorize_logging = false # prevents weird strings like "[4;36;1m" in log
