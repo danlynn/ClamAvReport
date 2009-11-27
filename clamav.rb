@@ -194,8 +194,22 @@ def parse_command_line_options
 end
 
 
+# install a new OSX launch agent which will execute this script every day at the
+# specified 'time'.  Note that in OSX 10.5, that the user will have to re-login
+# in order to activate the launch agent.
+def install_launch_agent(config_path, root_dir, time)
+  doc = ERB.new(IO.read("config/org.danlynn.clamav.plist.erb")).result(binding)
+  launch_agent_path = Pathname(Etc.getpwuid.dir) + "Library/LaunchAgents/org.danlynn.clamav.plist"
+  File.open(launch_agent_path, 'w') {|f| f.write(doc) }
+  `launchctl unload #{launch_agent_path}`
+  `launchctl load #{launch_agent_path}`
+  puts "*** REMEMBER: The new LaunchAgent which executes clamav.rb on an interval WON'T activate until you logout then log back into this account!"
+  exit 0
+end
+
+
 # create missing dirs and delete previous log file
-def setup_and_clean_dir_structure
+def setup_dir_structure
   # insure that database dir exists so that a new db can be created if necessary
   if $config["database"]["adapter"] == "sqlite3"
     FileUtils.mkpath(File.dirname($config["database"]["database"]))
@@ -203,7 +217,6 @@ def setup_and_clean_dir_structure
   # ensure that log dirs exists and last $config["clamscan_log"] is cleared before use
   FileUtils.mkpath(File.dirname($config["run_log"]))
   FileUtils.mkpath(File.dirname($config["clamscan_log"]))
-  FileUtils.rm($config["freshclam_stderr"], :force => true)
 end
 
 
@@ -224,7 +237,7 @@ def generate_scan_report(scan)
   Thread.current[:scan] = scan
   prev_scan = get_prev_scan(scan)
   freshclam_stderr = IO.read($config["freshclam_stderr"])
-  freshclam_stdout = @freshclam_stdout
+  freshclam_stdout = @freshclam_stdout || ""  # use "" if freshclam skipped
   template = IO.read("views/clamav.html.erb")
   output = ERB.new(template).result(binding)
   File.open("clamav.html", "w") {|file| file.write(output)}
@@ -239,22 +252,28 @@ def removed_infections(scan)
 end
 
 
-# updates the virus definitions by running freshclam and captures stdout and 
-# stderr as for later display in the report
+# Updates the virus definitions by running freshclam and captures stdout and
+# stderr as for later display in the report.  If no clam_bin_dir specified in
+# config yml then simply gen report using previous scan record and logs.
 def update_virus_definitions
+  unless $config["clam_bin_dir"]
+    $logger.info("freshclam: skipped (no clam_bin_dir specified)")
+    return Scan.find(:last)
+  end
   $logger.info("freshclam: update virus definitions: start")
+  FileUtils.rm($config["freshclam_stderr"], :force => true)
   @freshclam_stdout = `#{Pathname($config["clam_bin_dir"]) + "freshclam"} 2>#{$config["freshclam_stderr"]}`
   @freshclam_stdout = @freshclam_stdout.gsub(/Downloading .*\[\d{1,3}%\] ?/, "\n").gsub(/(DON'T PANIC!.*?faq {0,1})/, "").gsub("\n\n", "\n")
   $logger.info("freshclam: update virus definitions: complete")
 end
 
 
-# execute clamscan and pass the data to Scan.create_from_log to store in db.
-# If no scan_dir specified in config yml then simply gen report using previous 
-# scan record and logs.
+# Execute clamscan and pass the data to Scan.create_from_log to store in db.
+# If no clam_bin_dir specified in config yml then simply gen report using
+# previous scan record and logs.
 def perform_scan
-  unless $config["scan_dir"]
-    $logger.info("clamscan: skipped (no scan_dir specified)")
+  unless $config["clam_bin_dir"]
+    $logger.info("clamscan: skipped (no clam_bin_dir specified)")
     return Scan.find(:last)
   end
   $logger.info("clamscan: start")
@@ -265,20 +284,6 @@ def perform_scan
   complete = Time.now
   $logger.info("clamscan: complete")
   Scan.create_from_log(start, complete, $config["scan_dir"], $config["clamscan_log"])
-end
-
-
-# install a new OSX launch agent which will execute this script every day at the
-# specified 'time'.  Note that in OSX 10.5, that the user will have to re-login
-# in order to activate the launch agent.
-def install_launch_agent(config_path, root_dir, time)
-  doc = ERB.new(IO.read("config/org.danlynn.clamav.plist.erb")).result(binding)
-  launch_agent_path = Pathname(Etc.getpwuid.dir) + "Library/LaunchAgents/org.danlynn.clamav.plist"
-  File.open(launch_agent_path, 'w') {|f| f.write(doc) }
-  `launchctl unload #{launch_agent_path}`
-  `launchctl load #{launch_agent_path}`
-  puts "*** REMEMBER: The new LaunchAgent which executes clamav.rb on an interval WON'T activate until you logout then log back into this account!"
-  exit 0
 end
 
 
@@ -301,7 +306,7 @@ if options[:install]
   install_launch_agent(config_path, Pathname(__FILE__).parent.realpath, options[:install])
 end
 $config = YAML.load(ERB.new(IO.read(@config_path)).result(binding))
-setup_and_clean_dir_structure
+setup_dir_structure
 $logger = ActiveRecord::Base.logger = CustomLogger.new($config["run_log"], 3, 100*1024)  # rotate > 10k keeping last 5
 ActiveRecord::Base.colorize_logging = false # prevents weird strings like "[4;36;1m" in log
 $logger.info("========== clamav.rb: start ==========")
