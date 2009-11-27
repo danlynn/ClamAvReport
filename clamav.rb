@@ -268,13 +268,26 @@ def perform_scan
 end
 
 
+# install a new OSX launch agent which will execute this script every day at the
+# specified 'time'.  Note that in OSX 10.5, that the user will have to re-login
+# in order to activate the launch agent.
+def install_launch_agent(config_path, root_dir, time)
+  doc = ERB.new(IO.read("config/org.danlynn.clamav.plist.erb")).result(binding)
+  launch_agent_path = Pathname(Etc.getpwuid.dir) + "Library/LaunchAgents/org.danlynn.clamav.plist"
+  File.open(launch_agent_path, 'w') {|f| f.write(doc) }
+  `launchctl unload #{launch_agent_path}`
+  `launchctl load #{launch_agent_path}`
+  puts "*** REMEMBER: The new LaunchAgent which executes clamav.rb on an interval WON'T activate until you logout then log back into this account!"
+  exit 0
+end
+
+
 # ===== main program ==========================================================
 extend ActiveSupport::Memoizable
 memoize :get_prev_scan
 
 @config_path = "config/clamav.yml"
 options = parse_command_line_options
-launch_agent_path = Pathname(Etc.getpwuid.dir) + "Library/LaunchAgents/org.danlynn.clamav.plist"
 if options[:uninstall]
   launch_agent_path.delete
   puts "*** REMEMBER: The LaunchAgent which executes clamav.rb on an interval WILL REMAIN ACTIVE until you logout then log back into this account!"
@@ -285,14 +298,7 @@ if options[:config]
   config_path = @config_path = options[:config]
 end
 if options[:install]
-  root_dir = Pathname(__FILE__).parent.realpath
-  time = options[:install]
-  doc = ERB.new(IO.read("config/org.danlynn.clamav.plist.erb")).result(binding)
-  File.open(launch_agent_path, 'w') {|f| f.write(doc) }
-  `launchctl unload #{launch_agent_path}`
-  `launchctl load #{launch_agent_path}`
-  puts "*** REMEMBER: The new LaunchAgent which executes clamav.rb on an interval WON'T activate until you logout then log back into this account!"
-  exit 0
+  install_launch_agent(config_path, Pathname(__FILE__).parent.realpath, options[:install])
 end
 $config = YAML.load(ERB.new(IO.read(@config_path)).result(binding))
 setup_and_clean_dir_structure
