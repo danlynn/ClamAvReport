@@ -195,16 +195,26 @@ def parse_command_line_options
 end
 
 
+def launch_agent_path
+  Pathname(Etc.getpwuid.dir) + "Library/LaunchAgents/org.danlynn.clamav.plist"
+end
+
 # install a new OSX launch agent which will execute this script every day at the
 # specified 'time'.  Note that in OSX 10.5, that the user will have to re-login
 # in order to activate the launch agent.
 def install_launch_agent(config_path, root_dir, time)
   doc = ERB.new(IO.read("config/org.danlynn.clamav.plist.erb")).result(binding)
-  launch_agent_path = Pathname(Etc.getpwuid.dir) + "Library/LaunchAgents/org.danlynn.clamav.plist"
   File.open(launch_agent_path, 'w') {|f| f.write(doc) }
   `launchctl unload #{launch_agent_path}`
   `launchctl load #{launch_agent_path}`
   puts "*** REMEMBER: The new LaunchAgent which executes clamav.rb on an interval WON'T activate until you logout then log back into this account!"
+  exit 0
+end
+
+
+def uninstall_launch_agent
+  launch_agent_path.delete
+  puts "*** REMEMBER: The LaunchAgent which executes clamav.rb on an interval WILL REMAIN ACTIVE until you logout then log back into this account!"
   exit 0
 end
 
@@ -289,16 +299,13 @@ end
 
 # ===== main program ==========================================================
 extend ActiveSupport::Memoizable
-memoize :get_prev_scan
+memoize :get_prev_scan, :launch_agent_path
 
 options = parse_command_line_options
-if options[:uninstall]
-  launch_agent_path.delete
-  puts "*** REMEMBER: The LaunchAgent which executes clamav.rb on an interval WILL REMAIN ACTIVE until you logout then log back into this account!"
-  exit 0
-end
 if options[:install]
-  install_launch_agent(config_path, Pathname(__FILE__).parent.realpath, options[:install])
+  install_launch_agent(options[:config], Pathname(__FILE__).parent.realpath, options[:install])
+elsif options[:uninstall]
+  uninstall_launch_agent
 end
 $config = YAML.load(ERB.new(IO.read(options[:config])).result(binding))
 setup_dir_structure
