@@ -224,7 +224,6 @@ end
 # gets the previous (chronologically by complete time) Scan instance to the
 # specified 'scan'.  Returns nil if no prev scan.
 def get_prev_scan(scan)
-  puts "get_prev_scan(<scan:#{scan.id}>)"
   scan_ids = Scan.find(:all, :conditions => ["dir = ?", scan.dir], :order => "complete", :select => "id")
   index = scan_ids.index(scan)
   return nil if index == 0
@@ -314,5 +313,4 @@ generate_scan_report(scan)
 `open "clamav.html"`
 $logger.info("========== clamav.rb: complete ==========")
 
-# TODO: add special message at top indicating that the ClamAV engine is outdated when "This version of the ClamAV engine is outdated." appears in $config["clamscan_stderr"]
-# TODO: extend ActiveSupport::Memoizable and memoize get_prev-scan (and possibly others)
+# TODO: extend ActiveSupport::Memoizable and memoize get_prev_scan (and possibly others)
