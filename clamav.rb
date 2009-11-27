@@ -249,8 +249,14 @@ def update_virus_definitions
 end
 
 
-# execute clamscan and pass the data to Scan.create_from_log to store in db
+# execute clamscan and pass the data to Scan.create_from_log to store in db.
+# If no scan_dir specified in config yml then simply gen report using previous 
+# scan record and logs.
 def perform_scan
+  unless $config["scan_dir"]
+    $logger.info("clamscan: skipped (no scan_dir specified)")
+    return Scan.find(:last)
+  end
   $logger.info("clamscan: start")
   start = Time.now
   FileUtils.rm($config["clamscan_log"], :force => true)	# only clean previous logs if about to scan
@@ -293,11 +299,7 @@ $logger.info("========== clamav.rb: start ==========")
 ActiveRecord::Base.establish_connection($config["database"])
 ensure_schema_exists
 update_virus_definitions
-unless $config["scan_dir"]	# if no scan dir specified then simply gen report using previous scan record and logs
-	scan = Scan.find(:last)
-else
-	scan = perform_scan
-end
+scan = perform_scan
 generate_scan_report(scan)
 `open "clamav.html"`
 $logger.info("========== clamav.rb: complete ==========")
