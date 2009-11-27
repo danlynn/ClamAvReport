@@ -54,7 +54,7 @@ end
 # Thread.current[:scan] prior to being called.
 def hilite_new_infections(file)
   scan = Thread.current[:scan]
-  prev_scan = (Thread.current[:prev_scan] ||= get_prev_scan(scan))
+  prev_scan = get_prev_scan(scan)
   return "unchanged" if prev_scan.nil? || prev_scan.infections == scan.infections
   Thread.current[:prev_infections] ||= prev_scan.infections.collect{|infection| infection.file}
   return (Thread.current[:prev_infections].include?(file) ? "unchanged" : "changed")
@@ -87,8 +87,8 @@ def field(label, attr, options = {})
     scan_value = scan.send(attr) rescue nil
     if options[:hilite_changes] == nil || options[:hilite_changes]
       Thread.current[:prev_scan] ||= get_prev_scan(scan)
-      if Thread.current[:prev_scan]
-        prev_scan_value = Thread.current[:prev_scan].send(attr.to_sym) rescue nil
+      if get_prev_scan(scan)
+        prev_scan_value = get_prev_scan(scan).send(attr.to_sym) rescue nil
         changed = scan_value != prev_scan_value
       end
     end
@@ -210,6 +210,7 @@ end
 # gets the previous (chronologically by complete time) Scan instance to the
 # specified 'scan'.  Returns nil if no prev scan.
 def get_prev_scan(scan)
+  puts "get_prev_scan(<scan:#{scan.id}>)"
   scan_ids = Scan.find(:all, :conditions => ["dir = ?", scan.dir], :order => "complete", :select => "id")
   index = scan_ids.index(scan)
   return nil if index == 0
@@ -221,7 +222,7 @@ end
 # specified 'scan'.
 def generate_scan_report(scan)
   Thread.current[:scan] = scan
-  prev_scan = (Thread.current[:prev_scan] ||= get_prev_scan(scan))
+  prev_scan = get_prev_scan(scan)
   freshclam_stderr = IO.read($config["freshclam_stderr"])
   freshclam_stdout = @freshclam_stdout
   template = IO.read("views/clamav.html.erb")
@@ -232,10 +233,9 @@ end
 
 # get list of infections that have been removed since the previous scan
 def removed_infections(scan)
-  prev_scan = (Thread.current[:prev_scan] ||= get_prev_scan(scan))
-  return [] unless prev_scan
+  return [] unless get_prev_scan(scan)
   current_infections = scan.infections.collect{|infection| infection.file}
-  prev_scan.infections.select{|infection| !current_infections.include?(infection.file)}
+  get_prev_scan(scan).infections.select{|infection| !current_infections.include?(infection.file)}
 end
 
 
@@ -269,6 +269,9 @@ end
 
 
 # ===== main program ==========================================================
+extend ActiveSupport::Memoizable
+memoize :get_prev_scan
+
 @config_path = "config/clamav.yml"
 options = parse_command_line_options
 launch_agent_path = Pathname(Etc.getpwuid.dir) + "Library/LaunchAgents/org.danlynn.clamav.plist"
