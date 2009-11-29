@@ -7,6 +7,10 @@
 # each scan, the ClamAV virus definitions are updated.  Run this script
 # with "clamav.rb -h" to see the options for installing a LaunchAgent to
 # run the script on a daily interval.
+#
+# Note that if this script is used as the basis for a rails controller that the
+# use of log files would need to be updated to be thread-safe (as well as
+# analyzing the instance-level memoization).
 
 require 'fileutils'
 require 'pathname'
@@ -195,6 +199,7 @@ def parse_command_line_options
 end
 
 
+# return Pathname to launch agent script
 def launch_agent_path
   Pathname(Etc.getpwuid.dir) + "Library/LaunchAgents/org.danlynn.clamav.plist"
 end
@@ -212,6 +217,7 @@ def install_launch_agent(config_path, root_dir, time)
 end
 
 
+# uninstall the OSX launch agent previously installed by this script
 def uninstall_launch_agent
   launch_agent_path.delete
   puts "*** REMEMBER: The LaunchAgent which executes clamav.rb on an interval WILL REMAIN ACTIVE until you logout then log back into this account!"
