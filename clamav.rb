@@ -57,8 +57,6 @@ end
 # in the report.  Requires the current scan to be stored in
 # Thread.current[:scan] prior to being called.
 def hilite_new_infections(file)
-  scan = Thread.current[:scan]
-  prev_scan = get_prev_scan(scan)
   return "unchanged" if prev_scan.nil? || prev_scan.infections == scan.infections
   Thread.current[:prev_infections] ||= prev_scan.infections.collect{|infection| infection.file}
   return (Thread.current[:prev_infections].include?(file) ? "unchanged" : "changed")
@@ -83,16 +81,14 @@ end
 # directly and no attempt is made to access the scan or previous scan or
 # any change hiliting.
 def field(label, attr, options = {})
-  scan = Thread.current[:scan]
   scan_value = nil
   prev_scan_value = nil
   changed = false
   if attr.instance_of?(Symbol)
     scan_value = scan.send(attr) rescue nil
     if options[:hilite_changes] == nil || options[:hilite_changes]
-      Thread.current[:prev_scan] ||= get_prev_scan(scan)
-      if get_prev_scan(scan)
-        prev_scan_value = get_prev_scan(scan).send(attr.to_sym) rescue nil
+      if prev_scan
+        prev_scan_value = prev_scan.send(attr.to_sym) rescue nil
         changed = scan_value != prev_scan_value
       end
     end
@@ -176,7 +172,7 @@ def parse_command_line_options
   opts = OptionParser.new
   # define options
   opts.banner = "Usage: clamav.rb [-u] [-i time]"
-  opts.on('-c', '--config FILE', 
+  opts.on('-c', '--config FILE',
           "Specify config file other than default ",
           "'config/clamav.yml' - use relative path") do |file|
     options[:config] = file
@@ -203,6 +199,7 @@ end
 def launch_agent_path
   Pathname(Etc.getpwuid.dir) + "Library/LaunchAgents/org.danlynn.clamav.plist"
 end
+
 
 # install a new OSX launch agent which will execute this script every day at the
 # specified 'time'.  Note that in OSX 10.5, that the user will have to re-login
@@ -239,7 +236,7 @@ end
 
 # gets the previous (chronologically by complete time) Scan instance to the
 # specified 'scan'.  Returns nil if no prev scan.
-def get_prev_scan(scan)
+def prev_scan
   scan_ids = Scan.find(:all, :conditions => ["dir = ?", scan.dir], :order => "complete", :select => "id")
   index = scan_ids.index(scan)
   return nil if index == 0
@@ -248,12 +245,10 @@ end
 
 
 # read clamav.html.erb file and generate the clamav.html file using the
-# specified 'scan'.
-def generate_scan_report(scan)
-  Thread.current[:scan] = scan
-  prev_scan = get_prev_scan(scan)
+# results of the scan method.
+def generate_scan_report
   freshclam_stderr = IO.read($config["freshclam_stderr"])
-  freshclam_stdout = @freshclam_stdout || ""  # use "" if freshclam skipped
+  freshclam_stdout = @freshclam_stdout
   template = IO.read("views/clamav.html.erb")
   output = ERB.new(template).result(binding)
   File.open("clamav.html", "w") {|file| file.write(output)}
@@ -261,10 +256,10 @@ end
 
 
 # get list of infections that have been removed since the previous scan
-def removed_infections(scan)
-  return [] unless get_prev_scan(scan)
+def removed_infections
+  return [] unless prev_scan
   current_infections = scan.infections.collect{|infection| infection.file}
-  get_prev_scan(scan).infections.select{|infection| !current_infections.include?(infection.file)}
+  prev_scan.infections.select{|infection| !current_infections.include?(infection.file)}
 end
 
 
@@ -274,6 +269,7 @@ end
 def update_virus_definitions
   unless $config["clam_bin_dir"]
     $logger.info("freshclam: skipped (no clam_bin_dir specified)")
+    @freshclam_stdout = ""
     return Scan.find(:last)
   end
   $logger.info("freshclam: update virus definitions: start")
@@ -285,9 +281,9 @@ end
 
 
 # Execute clamscan and pass the data to Scan.create_from_log to store in db.
-# If no clam_bin_dir specified in config yml then simply gen report using
-# previous scan record and logs.
-def perform_scan
+# If no clam_bin_dir specified in config yml then simply return previous scan
+# record and logs.
+def scan
   unless $config["clam_bin_dir"]
     $logger.info("clamscan: skipped (no clam_bin_dir specified)")
     return Scan.find(:last)
@@ -305,7 +301,7 @@ end
 
 # ===== main program ==========================================================
 extend ActiveSupport::Memoizable
-memoize :get_prev_scan, :launch_agent_path
+memoize :scan, :prev_scan, :launch_agent_path
 
 options = parse_command_line_options
 if options[:install]
@@ -321,9 +317,8 @@ $logger.info("========== clamav.rb: start ==========")
 ActiveRecord::Base.establish_connection($config["database"])
 ensure_schema_exists
 update_virus_definitions
-scan = perform_scan
-generate_scan_report(scan)
+generate_scan_report
 `open "clamav.html"`
 $logger.info("========== clamav.rb: complete ==========")
 
-# TODO: extend ActiveSupport::Memoizable and memoize get_prev_scan (and possibly others)
+# TODO: add date that specifies when each infection was first found

@@ -30,9 +30,9 @@
 					}
 				], {
 				xaxis: {
-		            mode: "time",
+		            mode: "time"
 		            // minTickSize: [1, "day"],
-				},
+				}
 			});
 			$("#tabs").tabs();
 		});
@@ -56,7 +56,7 @@
 			<li><a href="#tabs-5">Charts</a></li>
 		</ul>
 		<div id="tabs-1">
-<% for infection in removed_infections(scan) %>
+<% for infection in removed_infections %>
 			<div class="infection_file">
 				<span class="removed"><span class="dirname"><%= File.dirname(infection.file) + File::SEPARATOR %></span><span class="basename"><%= File.basename(infection.file) %></span></span>
 			</div>
