@@ -181,3 +181,214 @@
 2009-11-20 00:18:35 DEBUG  Infection Load (1.9ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 140 ) 
 2009-11-20 00:18:35 DEBUG  Infection Load (1.5ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 139 ) 
 2009-11-20 00:18:38 INFO   ========== clamav.rb: complete ==========
+2009-11-20 22:50:12 INFO   ========== clamav.rb: start ==========
+2009-11-20 22:50:12 DEBUG  SQL (0.2ms)  SELECT count(*) AS count_all FROM "scans" 
+2009-11-20 22:50:12 INFO   Database contains 140 scans.
+2009-11-20 22:50:12 INFO   freshclam: update virus definitions: start
+2009-11-20 22:50:27 INFO   freshclam: update virus definitions: complete
+2009-11-20 22:50:27 DEBUG  Scan Load (0.5ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-20 22:50:27 DEBUG  Scan Load (5.0ms)  SELECT id FROM "scans" WHERE (dir = '/Users/danlynn') ORDER BY complete
+2009-11-20 22:50:27 DEBUG  Scan Load (0.4ms)  SELECT * FROM "scans" WHERE ("scans"."id" = 139) 
+2009-11-20 22:50:27 DEBUG  Scan Load (3.4ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-20 22:50:27 DEBUG  Scan Load (3.0ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-20 22:50:27 DEBUG  Scan Load (3.1ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-19 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-20 22:50:27 DEBUG  Infection Load (1.5ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 140 ) 
+2009-11-20 22:50:27 DEBUG  Infection Load (1.4ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 139 ) 
+2009-11-20 22:50:28 INFO   ========== clamav.rb: complete ==========
+2009-11-25 22:03:52 INFO   ========== clamav.rb: start ==========
+2009-11-25 22:03:53 DEBUG  SQL (2.2ms)  SELECT count(*) AS count_all FROM "scans" 
+2009-11-25 22:03:53 INFO   Database contains 140 scans.
+2009-11-25 22:03:53 INFO   freshclam: update virus definitions: start
+2009-11-25 22:04:08 INFO   freshclam: update virus definitions: complete
+2009-11-25 22:04:08 DEBUG  Scan Load (0.5ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-25 22:04:08 DEBUG  Scan Load (4.0ms)  SELECT id FROM "scans" WHERE (dir = '/Users/danlynn') ORDER BY complete
+2009-11-25 22:04:08 DEBUG  Scan Load (0.4ms)  SELECT * FROM "scans" WHERE ("scans"."id" = 139) 
+2009-11-25 22:04:08 DEBUG  Scan Load (3.1ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-25 22:04:08 DEBUG  Scan Load (3.0ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-25 22:04:08 DEBUG  Scan Load (3.3ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-19 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-25 22:04:08 DEBUG  Infection Load (21.4ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 140 ) 
+2009-11-25 22:04:08 DEBUG  Infection Load (1.4ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 139 ) 
+2009-11-25 22:08:49 INFO   ========== clamav.rb: start ==========
+2009-11-25 22:08:49 DEBUG  SQL (0.3ms)  SELECT count(*) AS count_all FROM "scans" 
+2009-11-25 22:08:49 INFO   Database contains 140 scans.
+2009-11-25 22:08:49 INFO   freshclam: update virus definitions: start
+2009-11-25 22:08:49 INFO   freshclam: update virus definitions: complete
+2009-11-25 22:08:49 DEBUG  Scan Load (0.7ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-25 22:08:49 DEBUG  Scan Load (4.3ms)  SELECT id FROM "scans" WHERE (dir = '/Users/danlynn') ORDER BY complete
+2009-11-25 22:08:50 DEBUG  Scan Load (0.4ms)  SELECT * FROM "scans" WHERE ("scans"."id" = 139) 
+2009-11-25 22:08:50 DEBUG  Scan Load (6.1ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-25 22:08:50 DEBUG  Scan Load (3.0ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-25 22:08:50 DEBUG  Scan Load (4.7ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-19 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-25 22:08:50 DEBUG  Infection Load (1.6ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 140 ) 
+2009-11-25 22:08:50 DEBUG  Infection Load (1.4ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 139 ) 
+2009-11-25 22:08:51 INFO   ========== clamav.rb: complete ==========
+2009-11-26 22:50:02 INFO   ========== clamav.rb: start ==========
+2009-11-26 22:50:03 DEBUG  SQL (2.1ms)  SELECT count(*) AS count_all FROM "scans" 
+2009-11-26 22:50:03 INFO   Database contains 140 scans.
+2009-11-26 22:50:03 INFO   freshclam: skipped (no clam_bin_dir specified)
+2009-11-26 22:50:03 DEBUG  Scan Load (0.3ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-26 22:50:03 INFO   clamscan: skipped (no clam_bin_dir specified)
+2009-11-26 22:50:03 DEBUG  Scan Load (0.2ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-26 22:50:03 DEBUG  Scan Load (4.2ms)  SELECT id FROM "scans" WHERE (dir = '/Users/danlynn') ORDER BY complete
+2009-11-26 22:50:03 DEBUG  Scan Load (0.4ms)  SELECT * FROM "scans" WHERE ("scans"."id" = 139) 
+2009-11-26 23:00:53 INFO   ========== clamav.rb: start ==========
+2009-11-26 23:00:54 DEBUG  SQL (89.6ms)  SELECT count(*) AS count_all FROM "scans" 
+2009-11-26 23:00:54 INFO   Database contains 140 scans.
+2009-11-26 23:00:54 INFO   freshclam: skipped (no clam_bin_dir specified)
+2009-11-26 23:00:54 DEBUG  Scan Load (0.3ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-26 23:00:54 INFO   clamscan: skipped (no clam_bin_dir specified)
+2009-11-26 23:00:54 DEBUG  Scan Load (0.2ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-26 23:00:54 DEBUG  Scan Load (4.0ms)  SELECT id FROM "scans" WHERE (dir = '/Users/danlynn') ORDER BY complete
+2009-11-26 23:00:54 DEBUG  Scan Load (0.4ms)  SELECT * FROM "scans" WHERE ("scans"."id" = 139) 
+2009-11-26 23:00:54 DEBUG  Scan Load (3.0ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-26 23:00:54 DEBUG  Scan Load (3.0ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-26 23:00:54 DEBUG  Scan Load (3.3ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-19 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-26 23:00:54 DEBUG  Infection Load (13.7ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 140 ) 
+2009-11-26 23:00:54 DEBUG  Infection Load (1.4ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 139 ) 
+2009-11-27 01:30:15 INFO   ========== clamav.rb: start ==========
+2009-11-27 01:30:15 DEBUG  SQL (2.1ms)  SELECT count(*) AS count_all FROM "scans" 
+2009-11-27 01:30:15 INFO   Database contains 140 scans.
+2009-11-27 01:30:15 INFO   freshclam: skipped (no clam_bin_dir specified)
+2009-11-27 01:30:15 DEBUG  Scan Load (0.3ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-27 01:30:15 INFO   clamscan: skipped (no clam_bin_dir specified)
+2009-11-27 01:30:15 DEBUG  Scan Load (0.2ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-27 01:30:15 DEBUG  Scan Load (4.0ms)  SELECT id FROM "scans" WHERE (dir = '/Users/danlynn') ORDER BY complete
+2009-11-27 01:30:15 DEBUG  Scan Load (0.5ms)  SELECT * FROM "scans" WHERE ("scans"."id" = 139) 
+2009-11-27 01:30:15 DEBUG  Scan Load (3.1ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-27 01:30:15 DEBUG  Scan Load (3.0ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-27 01:30:15 DEBUG  Scan Load (3.1ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-19 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-27 01:30:15 DEBUG  Infection Load (2.4ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 140 ) 
+2009-11-27 01:30:15 DEBUG  Infection Load (1.4ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 139 ) 
+2009-11-27 01:30:16 INFO   ========== clamav.rb: complete ==========
+2009-11-27 01:42:17 INFO   ========== clamav.rb: start ==========
+2009-11-27 01:42:17 DEBUG  SQL (22.4ms)  SELECT count(*) AS count_all FROM "scans" 
+2009-11-27 01:42:17 INFO   Database contains 140 scans.
+2009-11-27 01:42:17 INFO   freshclam: skipped (no clam_bin_dir specified)
+2009-11-27 01:42:17 DEBUG  Scan Load (0.3ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-27 01:42:17 INFO   clamscan: skipped (no clam_bin_dir specified)
+2009-11-27 01:42:17 DEBUG  Scan Load (0.4ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-27 01:42:17 DEBUG  Scan Load (4.2ms)  SELECT id FROM "scans" WHERE (dir = '/Users/danlynn') ORDER BY complete
+2009-11-27 01:42:17 DEBUG  Scan Load (0.4ms)  SELECT * FROM "scans" WHERE ("scans"."id" = 139) 
+2009-11-27 01:42:17 DEBUG  Scan Load (3.0ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-27 01:42:17 DEBUG  Scan Load (3.2ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-27 01:42:17 DEBUG  Scan Load (3.0ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-19 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-27 01:42:17 DEBUG  Infection Load (1.9ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 140 ) 
+2009-11-27 01:42:17 DEBUG  Infection Load (1.5ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 139 ) 
+2009-11-27 01:42:19 INFO   ========== clamav.rb: complete ==========
+2009-11-27 01:42:58 INFO   ========== clamav.rb: start ==========
+2009-11-27 01:42:58 DEBUG  SQL (22.1ms)  SELECT count(*) AS count_all FROM "scans" 
+2009-11-27 01:42:58 INFO   Database contains 140 scans.
+2009-11-27 01:42:58 INFO   freshclam: skipped (no clam_bin_dir specified)
+2009-11-27 01:42:58 DEBUG  Scan Load (0.3ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-27 01:42:58 INFO   clamscan: skipped (no clam_bin_dir specified)
+2009-11-27 01:42:58 DEBUG  Scan Load (0.3ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-27 01:42:58 DEBUG  Scan Load (3.9ms)  SELECT id FROM "scans" WHERE (dir = '/Users/danlynn') ORDER BY complete
+2009-11-27 01:42:58 DEBUG  Scan Load (0.5ms)  SELECT * FROM "scans" WHERE ("scans"."id" = 139) 
+2009-11-27 01:42:58 DEBUG  Scan Load (3.0ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-27 01:42:58 DEBUG  Scan Load (2.9ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-27 01:42:58 DEBUG  Scan Load (5.5ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-19 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-27 01:42:58 DEBUG  Infection Load (2.4ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 140 ) 
+2009-11-27 01:42:58 DEBUG  Infection Load (1.4ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 139 ) 
+2009-11-27 01:42:59 INFO   ========== clamav.rb: complete ==========
+2009-11-27 13:27:43 INFO   ========== clamav.rb: start ==========
+2009-11-27 13:27:44 DEBUG  SQL (19.4ms)  SELECT count(*) AS count_all FROM "scans" 
+2009-11-27 13:27:44 INFO   Database contains 140 scans.
+2009-11-27 13:27:44 INFO   freshclam: skipped (no clam_bin_dir specified)
+2009-11-27 13:27:44 DEBUG  Scan Load (0.3ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-27 13:27:44 INFO   clamscan: skipped (no clam_bin_dir specified)
+2009-11-27 13:27:44 DEBUG  Scan Load (0.2ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-27 13:27:44 DEBUG  Scan Load (4.0ms)  SELECT id FROM "scans" WHERE (dir = '/Users/danlynn') ORDER BY complete
+2009-11-27 13:27:44 DEBUG  Scan Load (0.4ms)  SELECT * FROM "scans" WHERE ("scans"."id" = 139) 
+2009-11-27 13:27:44 DEBUG  Scan Load (3.1ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-27 13:27:44 DEBUG  Scan Load (3.0ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-27 13:27:44 DEBUG  Scan Load (3.5ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-19 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-27 13:27:44 DEBUG  Infection Load (2.4ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 140 ) 
+2009-11-27 13:27:44 DEBUG  Infection Load (1.5ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 139 ) 
+2009-11-27 13:27:45 INFO   ========== clamav.rb: complete ==========
+2009-11-30 14:39:59 INFO   ========== clamav.rb: start ==========
+2009-11-30 14:39:59 DEBUG  SQL (2.1ms)  SELECT count(*) AS count_all FROM "scans" 
+2009-11-30 14:39:59 INFO   Database contains 140 scans.
+2009-11-30 14:39:59 INFO   freshclam: skipped (no clam_bin_dir specified)
+2009-11-30 14:39:59 DEBUG  Scan Load (0.3ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-30 14:39:59 INFO   clamscan: skipped (no clam_bin_dir specified)
+2009-11-30 14:39:59 DEBUG  Scan Load (0.2ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-30 14:39:59 DEBUG  Scan Load (4.1ms)  SELECT id FROM "scans" WHERE (dir = '/Users/danlynn') ORDER BY complete
+2009-11-30 14:39:59 DEBUG  Scan Load (0.4ms)  SELECT * FROM "scans" WHERE ("scans"."id" = 139) 
+2009-11-30 14:39:59 DEBUG  Scan Load (3.3ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-30 14:39:59 DEBUG  Scan Load (3.1ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-30 14:39:59 DEBUG  Scan Load (3.1ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-19 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-30 14:40:00 DEBUG  Infection Load (2.4ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 140 ) 
+2009-11-30 14:40:00 DEBUG  Infection Load (1.4ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 139 ) 
+2009-11-30 14:40:01 INFO   ========== clamav.rb: complete ==========
+2009-11-30 15:09:58 INFO   ========== clamav.rb: start ==========
+2009-11-30 15:09:58 DEBUG  SQL (22.3ms)  SELECT count(*) AS count_all FROM "scans" 
+2009-11-30 15:09:58 INFO   Database contains 140 scans.
+2009-11-30 15:09:58 INFO   freshclam: skipped (no clam_bin_dir specified)
+2009-11-30 15:09:58 DEBUG  Scan Load (0.3ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-30 15:09:58 INFO   clamscan: skipped (no clam_bin_dir specified)
+2009-11-30 15:09:58 DEBUG  Scan Load (0.2ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-30 15:09:58 DEBUG  Scan Load (71.1ms)  SELECT id FROM "scans" WHERE (dir = '/Users/danlynn') ORDER BY complete
+2009-11-30 15:09:58 DEBUG  Scan Load (0.4ms)  SELECT * FROM "scans" WHERE ("scans"."id" = 139) 
+2009-11-30 15:09:59 DEBUG  Scan Load (3.4ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-30 15:09:59 DEBUG  Scan Load (3.0ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-30 15:09:59 DEBUG  Scan Load (3.1ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-19 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-30 15:10:46 INFO   ========== clamav.rb: start ==========
+2009-11-30 15:10:46 DEBUG  SQL (0.2ms)  SELECT count(*) AS count_all FROM "scans" 
+2009-11-30 15:10:46 INFO   Database contains 140 scans.
+2009-11-30 15:10:46 INFO   freshclam: skipped (no clam_bin_dir specified)
+2009-11-30 15:10:46 DEBUG  Scan Load (0.3ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-30 15:10:46 INFO   clamscan: skipped (no clam_bin_dir specified)
+2009-11-30 15:10:46 DEBUG  Scan Load (0.3ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-30 15:10:46 DEBUG  Scan Load (49.8ms)  SELECT id FROM "scans" WHERE (dir = '/Users/danlynn') ORDER BY complete
+2009-11-30 15:10:46 DEBUG  Scan Load (0.4ms)  SELECT * FROM "scans" WHERE ("scans"."id" = 139) 
+2009-11-30 15:10:46 DEBUG  Scan Load (3.1ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-30 15:10:46 DEBUG  Scan Load (3.1ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-30 15:10:46 DEBUG  Scan Load (3.1ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-19 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-30 15:10:46 DEBUG  Infection Load (32.2ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 140 ) 
+2009-11-30 15:10:46 DEBUG  Infection Load (1.5ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 139 ) 
+2009-11-30 15:10:47 INFO   ========== clamav.rb: complete ==========
+2009-11-30 15:22:58 INFO   ========== clamav.rb: start ==========
+2009-11-30 15:22:59 DEBUG  SQL (0.2ms)  SELECT count(*) AS count_all FROM "scans" 
+2009-11-30 15:22:59 INFO   Database contains 140 scans.
+2009-11-30 15:22:59 INFO   freshclam: skipped (no clam_bin_dir specified)
+2009-11-30 15:22:59 DEBUG  Scan Load (0.3ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-30 15:22:59 INFO   clamscan: skipped (no clam_bin_dir specified)
+2009-11-30 15:22:59 DEBUG  Scan Load (0.4ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-30 15:22:59 DEBUG  Scan Load (3.2ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-30 15:22:59 DEBUG  Scan Load (3.1ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-30 15:22:59 DEBUG  Scan Load (4.3ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-19 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-30 15:22:59 DEBUG  Scan Load (4.0ms)  SELECT id FROM "scans" WHERE (dir = '/Users/danlynn') ORDER BY complete
+2009-11-30 15:22:59 DEBUG  Scan Load (0.5ms)  SELECT * FROM "scans" WHERE ("scans"."id" = 139) 
+2009-11-30 15:22:59 DEBUG  Infection Load (21.6ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 140 ) 
+2009-11-30 15:22:59 DEBUG  Infection Load (1.4ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 139 ) 
+2009-11-30 15:23:00 INFO   ========== clamav.rb: complete ==========
+2009-11-30 15:24:16 INFO   ========== clamav.rb: start ==========
+2009-11-30 15:24:16 DEBUG  SQL (0.2ms)  SELECT count(*) AS count_all FROM "scans" 
+2009-11-30 15:24:16 INFO   Database contains 140 scans.
+2009-11-30 15:24:16 INFO   freshclam: skipped (no clam_bin_dir specified)
+2009-11-30 15:24:16 DEBUG  Scan Load (0.3ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-30 15:24:16 INFO   clamscan: skipped (no clam_bin_dir specified)
+2009-11-30 15:24:16 DEBUG  Scan Load (0.4ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-30 15:24:16 DEBUG  Scan Load (3.1ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-30 15:24:16 DEBUG  Scan Load (3.0ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-30 15:24:16 DEBUG  Scan Load (3.1ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-19 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-30 15:24:17 DEBUG  Scan Load (3.8ms)  SELECT id FROM "scans" WHERE (dir = '/Users/danlynn') ORDER BY complete
+2009-11-30 15:24:17 DEBUG  Scan Load (0.3ms)  SELECT * FROM "scans" WHERE ("scans"."id" = 139) 
+2009-11-30 15:24:17 DEBUG  Infection Load (16.1ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 140 ) 
+2009-11-30 15:24:17 DEBUG  Infection Load (1.4ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 139 ) 
+2009-11-30 15:24:19 INFO   ========== clamav.rb: complete ==========
+2009-11-30 16:11:26 INFO   ========== clamav.rb: start ==========
+2009-11-30 16:11:26 DEBUG  SQL (0.3ms)  SELECT count(*) AS count_all FROM "scans" 
+2009-11-30 16:11:26 INFO   Database contains 140 scans.
+2009-11-30 16:11:26 INFO   freshclam: skipped (no clam_bin_dir specified)
+2009-11-30 16:11:26 DEBUG  Scan Load (0.3ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-30 16:11:26 INFO   clamscan: skipped (no clam_bin_dir specified)
+2009-11-30 16:11:26 DEBUG  Scan Load (0.4ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2009-11-30 16:11:26 DEBUG  Scan Load (5.5ms)  SELECT id FROM "scans" WHERE (dir = '/Users/danlynn') ORDER BY complete
+2009-11-30 16:11:26 DEBUG  Scan Load (0.5ms)  SELECT * FROM "scans" WHERE ("scans"."id" = 139) 
+2009-11-30 16:11:26 DEBUG  Scan Load (4.2ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-30 16:11:26 DEBUG  Scan Load (4.2ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-20 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-30 16:11:26 DEBUG  Scan Load (4.0ms)  SELECT * FROM "scans" WHERE (complete > '2009-10-19 03:53:30' and complete <= '2009-11-19 03:53:30') 
+2009-11-30 16:11:26 DEBUG  Infection Load (31.1ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 140 ) 
+2009-11-30 16:11:26 DEBUG  Infection Load (1.8ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 139 ) 
+2009-11-30 16:11:28 INFO   ========== clamav.rb: complete ==========
