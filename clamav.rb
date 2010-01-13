@@ -31,7 +31,7 @@ require 'models/infection'
 require 'db/migrate/create_tables'
 
 include ActionView::Helpers::DateHelper     # to use distance_of_time_in_words
-include ActionView::Helpers::NumberHelper   # to use number_with_delimiter
+include ActionView::Helpers::NumberHelper   # to use number_with_delimiter, number_to_human_size
 include ActionView::Helpers::SanitizeHelper # to use sanitize on logs
 include ActiveSupport::CoreExtensions::Numeric::Bytes # to use .megabytes
 
