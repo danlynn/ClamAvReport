@@ -29,6 +29,7 @@ FileUtils.cd(Pathname(__FILE__).parent.realpath)  # enable relative paths (even 
 require 'models/scan'
 require 'models/infection'
 require 'db/migrate/create_tables'
+require 'lib/growl'
 
 include ActionView::Helpers::DateHelper     # to use distance_of_time_in_words
 include ActionView::Helpers::NumberHelper   # to use number_with_delimiter, number_to_human_size
@@ -311,14 +312,21 @@ elsif options[:uninstall]
 end
 $config = YAML.load(ERB.new(IO.read(options[:config])).result(binding))
 setup_dir_structure
-$logger = ActiveRecord::Base.logger = CustomLogger.new($config["run_log"], 3, 100*1024)  # rotate > 10k keeping last 5
+growl = GrowlRubyApi::Growl.new(
+    :default_title => "ClamAV",
+    :default_image_type => :image_file,
+    :default_image => Pathname(__FILE__).parent.realpath + "views/images/ClamAV.png"
+)
+$logger = ActiveRecord::Base.logger = CustomLogger.new($config["run_log"], 3, 100*1024)  # rotate > 100k keeping last 5
 ActiveRecord::Base.colorize_logging = false # prevents weird strings like "[4;36;1m" in log
 $logger.info("========== clamav.rb: start ==========")
+growl.notify("Started scan")
 ActiveRecord::Base.establish_connection($config["database"])
 ensure_schema_exists
 update_virus_definitions
 generate_scan_report
 `open "clamav.html"`
 $logger.info("========== clamav.rb: complete ==========")
+growl.notify("Completed scan")
 
 # TODO: add date that specifies when each infection was first found
