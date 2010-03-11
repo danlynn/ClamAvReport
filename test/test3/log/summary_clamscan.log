@@ -1,0 +1,43 @@
+
+-------------------------------------------------------------------------------
+
+/Users/danlynn/Documents/Colloquy Transcripts/sighup/#sighup 3-19-09.colloquyTranscript: HTML.Phishing.Pay-180 FOUND
+/Users/danlynn/Documents/HTML/CrashIE.html: HTML.Crash FOUND
+/Users/danlynn/Documents/temp/delete/iTuner/1063 copy.emlx: HTML.Phishing.Bank-578 FOUND
+/Users/danlynn/Documents/temp/delete/iTuner/1063.emlx: HTML.Phishing.Bank-578 FOUND
+/Users/danlynn/Documents/temp/delete/iTuner/156.emlx: Phishing.Heuristics.Email.SpoofedDomain FOUND
+/Users/danlynn/Library/Mail/IMAP-dan@danlynn.org@mail.danlynn.org/INBOX.imapmbox/Attachments/49906/2/DHL_Delivery_Label_02bc6fb.zip: Suspect.Bredozip-zippwd-2 FOUND
+/Users/danlynn/Library/Mail/IMAP-dan@danlynn.org@mail.danlynn.org/INBOX.imapmbox/Messages/49906.emlx: Suspect.Bredozip-zippwd-2 FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Job Search/LinkedIn Groups.mbox/Messages/64257.emlx: Phishing.Heuristics.Email.SpoofedDomain FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/63974/2/DHL_label_Nr6824.zip: Suspect.Bredozip-zippwd-2 FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/64626/2/DHL_print_label_6811.zip: Suspect.Bredozip-zippwd-2 FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/64848/2/UPS_print_label_94432.zip: Trojan.EggDrop-121 FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/65201/2/Postal_package_NR453.zip: Trojan.Bredolab-915 FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/65354/2/Postal_label_Nr234.zip: Suspect.Bredozip-zippwd-6 FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/65988/2/Postal_label_Nr8956.zip: Suspect.Bredozip-zippwd-6 FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/67137/2/UPS_invoice_8452.zip: Suspect.Bredozip-zippwd-5 FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/63974.emlx: Suspect.Bredozip-zippwd-2 FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/64626.emlx: Suspect.Bredozip-zippwd-2 FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/64848.emlx: Email.Trojan.GZC FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/65201.emlx: Email.Trojan-149 FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/65354.emlx: Email.Trojan-149 FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/65988.emlx: Email.Trojan-149 FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/67137.emlx: Email.Trojan.GZC FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Registrations.mbox/Messages/1063.emlx: HTML.Phishing.Bank-578 FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Sent Messages (dan@danlynn.org)/Sent Messages (danlynn@mac.com).mbox/Messages/5840.emlx: Suspect.Downloader-zippwd FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Sent Messages (dan@danlynn.org)/Sent Messages (danlynn@mac.com).mbox/Messages/5843.emlx: Suspect.Downloader-zippwd FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Sent Messages (danlynn.org).mbox/Messages/5293.emlx: HTML.Crash FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Sent Messages (danlynn.org).mbox/Messages/5294.emlx: HTML.Crash FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Shopping/eBay.mbox/Messages/156.emlx: Phishing.Heuristics.Email.SpoofedDomain FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Shopping/eBay.mbox/Messages/164.emlx: Phishing.Heuristics.Email.SpoofedDomain FOUND
+/Users/danlynn/Library/Mail/Mailboxes/Shopping/eBay.mbox/Messages/188.emlx: Phishing.Heuristics.Email.SpoofedDomain FOUND
+
+----------- SCAN SUMMARY -----------
+Known viruses: 727270
+Engine version: 0.95.3
+Scanned directories: 94976
+Scanned files: 431405
+Infected files: 30
+Data scanned: 44600.10 MB
+Data read: 50905.34 MB (ratio 0.88:1)
+Time: 9890.944 sec (164 m 50 s)

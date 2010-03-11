@@ -1,0 +1,6 @@
+-- create_table(:scans, {:force=>true})
+   -> 0.0075s
+-- create_table(:infections, {:force=>true})
+   -> 0.0032s
+-- create_table(:infections_scans, {:force=>true, :id=>false})
+   -> 0.0027s

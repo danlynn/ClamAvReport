@@ -1,0 +1,4 @@
+ERROR: chdir_tmp: Can't create directory ./clamav-8d4ce89776ac2db64204e15dedba858c
+WARNING: Incremental update failed, trying to download daily.cvd
+WARNING: Clamd was NOT notified: Can't connect to clamd through /tmp/clamd.socket
+connect(): No such file or directory

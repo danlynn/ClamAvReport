@@ -1,0 +1,387 @@
+# Logfile created on Sun Mar 07 04:39:34 -0500 2010 by /
+2010-03-07 04:39:34 DEBUG  Scan Create (34.7ms)  INSERT INTO "scans" ("dirs_scanned", "dir", "data_read", "infections_count", "engine_version", "start", "complete", "data_scanned", "files_scanned", "known_viruses") VALUES(95340, '/Users/danlynn', 53363353845.76, 30, '0.95.3', '2010-03-07 02:00:14', '2010-03-07 04:39:32', 46756003840.0, 431547, 726053)
+2010-03-07 04:39:34 DEBUG  SQL (31.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (1, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (2, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (3, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (4, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (5, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (20, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (57, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (21, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (58, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (39, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (37, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (40, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (47, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (48, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (55, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (56, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (38, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (41, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (43, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (49, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (50, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (54, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (9, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (51, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (52, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (10, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (11, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (12, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (13, 246)
+2010-03-07 04:39:34 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (14, 246)
+2010-03-07 04:39:34 DEBUG  Scan Load (4.8ms)  SELECT * FROM "scans" WHERE (complete > '2010-02-05 04:39:32' and complete <= '2010-03-07 04:39:32') 
+2010-03-07 04:39:34 DEBUG  Scan Load (3.3ms)  SELECT * FROM "scans" WHERE (complete > '2010-02-05 04:39:32' and complete <= '2010-03-07 04:39:32') 
+2010-03-07 04:39:34 DEBUG  Scan Load (2.9ms)  SELECT * FROM "scans" WHERE (complete > '2010-02-07 04:39:32' and complete <= '2010-03-07 04:39:32') 
+2010-03-07 04:39:34 DEBUG  Scan Load (7.0ms)  SELECT id FROM "scans" WHERE (dir = '/Users/danlynn') ORDER BY complete
+2010-03-07 04:39:34 DEBUG  Scan Load (0.3ms)  SELECT * FROM "scans" WHERE ("scans"."id" = 245) 
+2010-03-07 04:39:34 DEBUG  Infection Load (262.4ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 245 ) 
+2010-03-07 04:39:39 INFO   ========== clamav.rb: complete ==========
+2010-03-08 02:00:10 INFO   ========== clamav.rb: start ==========
+2010-03-08 02:00:11 DEBUG  SQL (317.5ms)  SELECT count(*) AS count_all FROM "scans" 
+2010-03-08 02:00:11 INFO   Database contains 246 scans.
+2010-03-08 02:00:11 INFO   freshclam: update virus definitions: start
+2010-03-08 02:00:16 INFO   freshclam: update virus definitions: complete
+2010-03-08 02:00:16 INFO   clamscan: start
+2010-03-08 04:48:38 INFO   clamscan: complete
+2010-03-08 04:48:55 DEBUG  Infection Load (173.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Documents/Colloquy Transcripts/sighup/#sighup 3-19-09.colloquyTranscript' AND "infections"."infection" = 'HTML.Phishing.Pay-180') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.3ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Documents/HTML/CrashIE.html' AND "infections"."infection" = 'HTML.Crash') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Documents/temp/delete/iTuner/1063 copy.emlx' AND "infections"."infection" = 'HTML.Phishing.Bank-578') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Documents/temp/delete/iTuner/1063.emlx' AND "infections"."infection" = 'HTML.Phishing.Bank-578') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Documents/temp/delete/iTuner/156.emlx' AND "infections"."infection" = 'Phishing.Heuristics.Email.SpoofedDomain') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (32.7ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/IMAP-dan@danlynn.org@mail.danlynn.org/INBOX.imapmbox/Attachments/49906/2/DHL_Delivery_Label_02bc6fb.zip' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-2') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (118.5ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/IMAP-dan@danlynn.org@mail.danlynn.org/INBOX.imapmbox/Attachments/66752/2/UPS_invoice_8452.zip' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-5') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/IMAP-dan@danlynn.org@mail.danlynn.org/INBOX.imapmbox/Messages/49906.emlx' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-2') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/IMAP-dan@danlynn.org@mail.danlynn.org/INBOX.imapmbox/Messages/66752.emlx' AND "infections"."infection" = 'Email.Trojan.GZC') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Job Search/LinkedIn Groups.mbox/Messages/64257.emlx' AND "infections"."infection" = 'Phishing.Heuristics.Email.SpoofedDomain') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/63974/2/DHL_label_Nr6824.zip' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-2') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/64626/2/DHL_print_label_6811.zip' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-2') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/64848/2/UPS_print_label_94432.zip' AND "infections"."infection" = 'Trojan.EggDrop-121') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.3ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/65201/2/Postal_package_NR453.zip' AND "infections"."infection" = 'Trojan.Bredolab-915') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/65354/2/Postal_label_Nr234.zip' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-6') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/65988/2/Postal_label_Nr8956.zip' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-6') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.4ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/63974.emlx' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-2') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/64626.emlx' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-2') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/64848.emlx' AND "infections"."infection" = 'Email.Trojan.GZC') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.3ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/65201.emlx' AND "infections"."infection" = 'Email.Trojan-149') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/65354.emlx' AND "infections"."infection" = 'Email.Trojan-149') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/65988.emlx' AND "infections"."infection" = 'Email.Trojan-149') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Registrations.mbox/Messages/1063.emlx' AND "infections"."infection" = 'HTML.Phishing.Bank-578') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Sent Messages (dan@danlynn.org)/Sent Messages (danlynn@mac.com).mbox/Messages/5840.emlx' AND "infections"."infection" = 'Suspect.Downloader-zippwd') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Sent Messages (dan@danlynn.org)/Sent Messages (danlynn@mac.com).mbox/Messages/5843.emlx' AND "infections"."infection" = 'Suspect.Downloader-zippwd') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Sent Messages (danlynn.org).mbox/Messages/5293.emlx' AND "infections"."infection" = 'HTML.Crash') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Sent Messages (danlynn.org).mbox/Messages/5294.emlx' AND "infections"."infection" = 'HTML.Crash') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.3ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Shopping/eBay.mbox/Messages/156.emlx' AND "infections"."infection" = 'Phishing.Heuristics.Email.SpoofedDomain') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Shopping/eBay.mbox/Messages/164.emlx' AND "infections"."infection" = 'Phishing.Heuristics.Email.SpoofedDomain') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Shopping/eBay.mbox/Messages/188.emlx' AND "infections"."infection" = 'Phishing.Heuristics.Email.SpoofedDomain') LIMIT 1
+2010-03-08 04:48:55 DEBUG  Scan Create (34.5ms)  INSERT INTO "scans" ("dirs_scanned", "dir", "data_read", "infections_count", "engine_version", "start", "complete", "data_scanned", "files_scanned", "known_viruses") VALUES(95351, '/Users/danlynn', 53496470568.96, 30, '0.95.3', '2010-03-08 02:00:16', '2010-03-08 04:48:38', 46781201121.28, 431604, 726063)
+2010-03-08 04:48:55 DEBUG  SQL (19.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (1, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (2, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (3, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (4, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (5, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (20, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (57, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (21, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (58, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (39, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (37, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (40, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (47, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (48, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (55, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (56, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (38, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (41, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (43, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (49, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (50, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (54, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (9, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (51, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (52, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (10, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (11, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (12, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (13, 247)
+2010-03-08 04:48:55 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (14, 247)
+2010-03-08 04:48:55 DEBUG  Scan Load (3.5ms)  SELECT * FROM "scans" WHERE (complete > '2010-02-06 04:48:38' and complete <= '2010-03-08 04:48:38') 
+2010-03-08 04:48:55 DEBUG  Scan Load (3.1ms)  SELECT * FROM "scans" WHERE (complete > '2010-02-06 04:48:38' and complete <= '2010-03-08 04:48:38') 
+2010-03-08 04:48:55 DEBUG  Scan Load (2.8ms)  SELECT * FROM "scans" WHERE (complete > '2010-02-08 04:48:38' and complete <= '2010-03-08 04:48:38') 
+2010-03-08 04:48:55 DEBUG  Scan Load (6.5ms)  SELECT id FROM "scans" WHERE (dir = '/Users/danlynn') ORDER BY complete
+2010-03-08 04:48:55 DEBUG  Scan Load (0.3ms)  SELECT * FROM "scans" WHERE ("scans"."id" = 246) 
+2010-03-08 04:48:56 DEBUG  Infection Load (218.2ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 246 ) 
+2010-03-08 04:48:57 INFO   ========== clamav.rb: complete ==========
+2010-03-09 02:00:08 INFO   ========== clamav.rb: start ==========
+2010-03-09 02:00:09 DEBUG  SQL (128.5ms)  SELECT count(*) AS count_all FROM "scans" 
+2010-03-09 02:00:09 INFO   Database contains 247 scans.
+2010-03-09 02:00:09 INFO   freshclam: update virus definitions: start
+2010-03-09 02:00:17 INFO   freshclam: update virus definitions: complete
+2010-03-09 02:00:17 INFO   clamscan: start
+2010-03-09 04:38:14 INFO   clamscan: complete
+2010-03-09 04:38:14 DEBUG  Infection Load (48.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Documents/Colloquy Transcripts/sighup/#sighup 3-19-09.colloquyTranscript' AND "infections"."infection" = 'HTML.Phishing.Pay-180') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.3ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Documents/HTML/CrashIE.html' AND "infections"."infection" = 'HTML.Crash') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Documents/temp/delete/iTuner/1063 copy.emlx' AND "infections"."infection" = 'HTML.Phishing.Bank-578') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Documents/temp/delete/iTuner/1063.emlx' AND "infections"."infection" = 'HTML.Phishing.Bank-578') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Documents/temp/delete/iTuner/156.emlx' AND "infections"."infection" = 'Phishing.Heuristics.Email.SpoofedDomain') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (27.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/IMAP-dan@danlynn.org@mail.danlynn.org/INBOX.imapmbox/Attachments/49906/2/DHL_Delivery_Label_02bc6fb.zip' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-2') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (84.8ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/IMAP-dan@danlynn.org@mail.danlynn.org/INBOX.imapmbox/Attachments/66752/2/UPS_invoice_8452.zip' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-5') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.3ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/IMAP-dan@danlynn.org@mail.danlynn.org/INBOX.imapmbox/Messages/49906.emlx' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-2') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.3ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/IMAP-dan@danlynn.org@mail.danlynn.org/INBOX.imapmbox/Messages/66752.emlx' AND "infections"."infection" = 'Email.Trojan.GZC') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.3ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Job Search/LinkedIn Groups.mbox/Messages/64257.emlx' AND "infections"."infection" = 'Phishing.Heuristics.Email.SpoofedDomain') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.3ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/63974/2/DHL_label_Nr6824.zip' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-2') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.3ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/64626/2/DHL_print_label_6811.zip' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-2') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.3ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/64848/2/UPS_print_label_94432.zip' AND "infections"."infection" = 'Trojan.EggDrop-121') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/65201/2/Postal_package_NR453.zip' AND "infections"."infection" = 'Trojan.Bredolab-915') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.3ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/65354/2/Postal_label_Nr234.zip' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-6') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.3ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/65988/2/Postal_label_Nr8956.zip' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-6') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/63974.emlx' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-2') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/64626.emlx' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-2') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/64848.emlx' AND "infections"."infection" = 'Email.Trojan.GZC') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/65201.emlx' AND "infections"."infection" = 'Email.Trojan-149') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/65354.emlx' AND "infections"."infection" = 'Email.Trojan-149') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/65988.emlx' AND "infections"."infection" = 'Email.Trojan-149') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Registrations.mbox/Messages/1063.emlx' AND "infections"."infection" = 'HTML.Phishing.Bank-578') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Sent Messages (dan@danlynn.org)/Sent Messages (danlynn@mac.com).mbox/Messages/5840.emlx' AND "infections"."infection" = 'Suspect.Downloader-zippwd') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Sent Messages (dan@danlynn.org)/Sent Messages (danlynn@mac.com).mbox/Messages/5843.emlx' AND "infections"."infection" = 'Suspect.Downloader-zippwd') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Sent Messages (danlynn.org).mbox/Messages/5293.emlx' AND "infections"."infection" = 'HTML.Crash') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Sent Messages (danlynn.org).mbox/Messages/5294.emlx' AND "infections"."infection" = 'HTML.Crash') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Shopping/eBay.mbox/Messages/156.emlx' AND "infections"."infection" = 'Phishing.Heuristics.Email.SpoofedDomain') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Shopping/eBay.mbox/Messages/164.emlx' AND "infections"."infection" = 'Phishing.Heuristics.Email.SpoofedDomain') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Shopping/eBay.mbox/Messages/188.emlx' AND "infections"."infection" = 'Phishing.Heuristics.Email.SpoofedDomain') LIMIT 1
+2010-03-09 04:38:14 DEBUG  Scan Create (36.4ms)  INSERT INTO "scans" ("dirs_scanned", "dir", "data_read", "infections_count", "engine_version", "start", "complete", "data_scanned", "files_scanned", "known_viruses") VALUES(94914, '/Users/danlynn', 53263823011.84, 30, '0.95.3', '2010-03-09 02:00:17', '2010-03-09 04:38:14', 46708838891.52, 430697, 726354)
+2010-03-09 04:38:14 DEBUG  SQL (0.5ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (1, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (2, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (3, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (4, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (5, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (20, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (57, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (21, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (58, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (39, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (37, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (40, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (47, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (48, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (55, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (56, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (38, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (41, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (43, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (49, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (50, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (54, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (9, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (51, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (52, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (10, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (11, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (12, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (13, 248)
+2010-03-09 04:38:14 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (14, 248)
+2010-03-09 04:38:14 DEBUG  Scan Load (3.2ms)  SELECT * FROM "scans" WHERE (complete > '2010-02-07 04:38:14' and complete <= '2010-03-09 04:38:14') 
+2010-03-09 04:38:14 DEBUG  Scan Load (3.3ms)  SELECT * FROM "scans" WHERE (complete > '2010-02-07 04:38:14' and complete <= '2010-03-09 04:38:14') 
+2010-03-09 04:38:14 DEBUG  Scan Load (3.2ms)  SELECT * FROM "scans" WHERE (complete > '2010-02-09 04:38:14' and complete <= '2010-03-09 04:38:14') 
+2010-03-09 04:38:14 DEBUG  Scan Load (7.9ms)  SELECT id FROM "scans" WHERE (dir = '/Users/danlynn') ORDER BY complete
+2010-03-09 04:38:14 DEBUG  Scan Load (0.4ms)  SELECT * FROM "scans" WHERE ("scans"."id" = 247) 
+2010-03-09 04:38:15 DEBUG  Infection Load (96.1ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 247 ) 
+2010-03-09 04:38:16 INFO   ========== clamav.rb: complete ==========
+2010-03-10 02:00:06 INFO   ========== clamav.rb: start ==========
+2010-03-10 02:00:07 DEBUG  SQL (117.5ms)  SELECT count(*) AS count_all FROM "scans" 
+2010-03-10 02:00:07 INFO   Database contains 248 scans.
+2010-03-10 02:00:07 INFO   freshclam: update virus definitions: start
+2010-03-10 02:00:11 INFO   freshclam: update virus definitions: complete
+2010-03-10 02:00:11 INFO   clamscan: start
+2010-03-10 04:39:49 INFO   clamscan: complete
+2010-03-10 04:39:59 DEBUG  Infection Load (40.6ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Documents/Colloquy Transcripts/sighup/#sighup 3-19-09.colloquyTranscript' AND "infections"."infection" = 'HTML.Phishing.Pay-180') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Documents/HTML/CrashIE.html' AND "infections"."infection" = 'HTML.Crash') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Documents/temp/delete/iTuner/1063 copy.emlx' AND "infections"."infection" = 'HTML.Phishing.Bank-578') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Documents/temp/delete/iTuner/1063.emlx' AND "infections"."infection" = 'HTML.Phishing.Bank-578') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Documents/temp/delete/iTuner/156.emlx' AND "infections"."infection" = 'Phishing.Heuristics.Email.SpoofedDomain') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (16.9ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/IMAP-dan@danlynn.org@mail.danlynn.org/INBOX.imapmbox/Attachments/49906/2/DHL_Delivery_Label_02bc6fb.zip' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-2') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (118.5ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/IMAP-dan@danlynn.org@mail.danlynn.org/INBOX.imapmbox/Attachments/66752/2/UPS_invoice_8452.zip' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-5') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.4ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/IMAP-dan@danlynn.org@mail.danlynn.org/INBOX.imapmbox/Messages/49906.emlx' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-2') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.3ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/IMAP-dan@danlynn.org@mail.danlynn.org/INBOX.imapmbox/Messages/66752.emlx' AND "infections"."infection" = 'Email.Trojan.GZC') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Job Search/LinkedIn Groups.mbox/Messages/64257.emlx' AND "infections"."infection" = 'Phishing.Heuristics.Email.SpoofedDomain') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.3ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/63974/2/DHL_label_Nr6824.zip' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-2') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/64626/2/DHL_print_label_6811.zip' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-2') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/64848/2/UPS_print_label_94432.zip' AND "infections"."infection" = 'Trojan.EggDrop-121') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/65201/2/Postal_package_NR453.zip' AND "infections"."infection" = 'Trojan.Bredolab-915') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/65354/2/Postal_label_Nr234.zip' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-6') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/65988/2/Postal_label_Nr8956.zip' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-6') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/63974.emlx' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-2') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/64626.emlx' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-2') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/64848.emlx' AND "infections"."infection" = 'Email.Trojan.GZC') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/65201.emlx' AND "infections"."infection" = 'Email.Trojan-149') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/65354.emlx' AND "infections"."infection" = 'Email.Trojan-149') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/65988.emlx' AND "infections"."infection" = 'Email.Trojan-149') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Registrations.mbox/Messages/1063.emlx' AND "infections"."infection" = 'HTML.Phishing.Bank-578') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Sent Messages (dan@danlynn.org)/Sent Messages (danlynn@mac.com).mbox/Messages/5840.emlx' AND "infections"."infection" = 'Suspect.Downloader-zippwd') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Sent Messages (dan@danlynn.org)/Sent Messages (danlynn@mac.com).mbox/Messages/5843.emlx' AND "infections"."infection" = 'Suspect.Downloader-zippwd') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Sent Messages (danlynn.org).mbox/Messages/5293.emlx' AND "infections"."infection" = 'HTML.Crash') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Sent Messages (danlynn.org).mbox/Messages/5294.emlx' AND "infections"."infection" = 'HTML.Crash') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Shopping/eBay.mbox/Messages/156.emlx' AND "infections"."infection" = 'Phishing.Heuristics.Email.SpoofedDomain') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Shopping/eBay.mbox/Messages/164.emlx' AND "infections"."infection" = 'Phishing.Heuristics.Email.SpoofedDomain') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Shopping/eBay.mbox/Messages/188.emlx' AND "infections"."infection" = 'Phishing.Heuristics.Email.SpoofedDomain') LIMIT 1
+2010-03-10 04:39:59 DEBUG  Scan Create (26.4ms)  INSERT INTO "scans" ("dirs_scanned", "dir", "data_read", "infections_count", "engine_version", "start", "complete", "data_scanned", "files_scanned", "known_viruses") VALUES(94986, '/Users/danlynn', 53275032289.28, 30, '0.95.3', '2010-03-10 02:00:11', '2010-03-10 04:39:49', 46747646689.28, 430902, 726569)
+2010-03-10 04:39:59 DEBUG  SQL (0.4ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (1, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (2, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (3, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (4, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (5, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (20, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (57, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (21, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (58, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (39, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (37, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (40, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (47, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (48, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (55, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (56, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (38, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (41, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (43, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (49, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (50, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (54, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (9, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (51, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (52, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (10, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (11, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (12, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (13, 249)
+2010-03-10 04:39:59 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (14, 249)
+2010-03-10 04:39:59 DEBUG  Scan Load (3.7ms)  SELECT * FROM "scans" WHERE (complete > '2010-02-08 04:39:49' and complete <= '2010-03-10 04:39:49') 
+2010-03-10 04:39:59 DEBUG  Scan Load (3.3ms)  SELECT * FROM "scans" WHERE (complete > '2010-02-08 04:39:49' and complete <= '2010-03-10 04:39:49') 
+2010-03-10 04:39:59 DEBUG  Scan Load (2.8ms)  SELECT * FROM "scans" WHERE (complete > '2010-02-10 04:39:49' and complete <= '2010-03-10 04:39:49') 
+2010-03-10 04:39:59 DEBUG  Scan Load (6.9ms)  SELECT id FROM "scans" WHERE (dir = '/Users/danlynn') ORDER BY complete
+2010-03-10 04:39:59 DEBUG  Scan Load (0.3ms)  SELECT * FROM "scans" WHERE ("scans"."id" = 248) 
+2010-03-10 04:39:59 DEBUG  Infection Load (84.9ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 248 ) 
+2010-03-10 04:40:01 INFO   ========== clamav.rb: complete ==========
+2010-03-11 02:00:07 INFO   ========== clamav.rb: start ==========
+2010-03-11 02:00:07 DEBUG  SQL (138.1ms)  SELECT count(*) AS count_all FROM "scans" 
+2010-03-11 02:00:07 INFO   Database contains 249 scans.
+2010-03-11 02:00:07 INFO   freshclam: update virus definitions: start
+2010-03-11 02:00:11 INFO   freshclam: update virus definitions: complete
+2010-03-11 02:00:11 INFO   clamscan: start
+2010-03-11 04:45:03 INFO   clamscan: complete
+2010-03-11 04:45:09 DEBUG  Infection Load (48.0ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Documents/Colloquy Transcripts/sighup/#sighup 3-19-09.colloquyTranscript' AND "infections"."infection" = 'HTML.Phishing.Pay-180') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Documents/HTML/CrashIE.html' AND "infections"."infection" = 'HTML.Crash') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Documents/temp/delete/iTuner/1063 copy.emlx' AND "infections"."infection" = 'HTML.Phishing.Bank-578') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Documents/temp/delete/iTuner/1063.emlx' AND "infections"."infection" = 'HTML.Phishing.Bank-578') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Documents/temp/delete/iTuner/156.emlx' AND "infections"."infection" = 'Phishing.Heuristics.Email.SpoofedDomain') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (16.7ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/IMAP-dan@danlynn.org@mail.danlynn.org/INBOX.imapmbox/Attachments/49906/2/DHL_Delivery_Label_02bc6fb.zip' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-2') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/IMAP-dan@danlynn.org@mail.danlynn.org/INBOX.imapmbox/Messages/49906.emlx' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-2') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (25.8ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Job Search/LinkedIn Groups.mbox/Messages/64257.emlx' AND "infections"."infection" = 'Phishing.Heuristics.Email.SpoofedDomain') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/63974/2/DHL_label_Nr6824.zip' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-2') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (5.3ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/64626/2/DHL_print_label_6811.zip' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-2') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (46.9ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/64848/2/UPS_print_label_94432.zip' AND "infections"."infection" = 'Trojan.EggDrop-121') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/65201/2/Postal_package_NR453.zip' AND "infections"."infection" = 'Trojan.Bredolab-915') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (14.0ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/65354/2/Postal_label_Nr234.zip' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-6') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (0.3ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/65988/2/Postal_label_Nr8956.zip' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-6') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (0.1ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/67137/2/UPS_invoice_8452.zip' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-5') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (0.3ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/63974.emlx' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-2') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/64626.emlx' AND "infections"."infection" = 'Suspect.Bredozip-zippwd-2') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/64848.emlx' AND "infections"."infection" = 'Email.Trojan.GZC') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/65201.emlx' AND "infections"."infection" = 'Email.Trojan-149') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/65354.emlx' AND "infections"."infection" = 'Email.Trojan-149') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/65988.emlx' AND "infections"."infection" = 'Email.Trojan-149') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (0.1ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/67137.emlx' AND "infections"."infection" = 'Email.Trojan.GZC') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Registrations.mbox/Messages/1063.emlx' AND "infections"."infection" = 'HTML.Phishing.Bank-578') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Sent Messages (dan@danlynn.org)/Sent Messages (danlynn@mac.com).mbox/Messages/5840.emlx' AND "infections"."infection" = 'Suspect.Downloader-zippwd') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Sent Messages (dan@danlynn.org)/Sent Messages (danlynn@mac.com).mbox/Messages/5843.emlx' AND "infections"."infection" = 'Suspect.Downloader-zippwd') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Sent Messages (danlynn.org).mbox/Messages/5293.emlx' AND "infections"."infection" = 'HTML.Crash') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Sent Messages (danlynn.org).mbox/Messages/5294.emlx' AND "infections"."infection" = 'HTML.Crash') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Shopping/eBay.mbox/Messages/156.emlx' AND "infections"."infection" = 'Phishing.Heuristics.Email.SpoofedDomain') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Shopping/eBay.mbox/Messages/164.emlx' AND "infections"."infection" = 'Phishing.Heuristics.Email.SpoofedDomain') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Infection Load (0.2ms)  SELECT * FROM "infections" WHERE ("infections"."file" = '/Users/danlynn/Library/Mail/Mailboxes/Shopping/eBay.mbox/Messages/188.emlx' AND "infections"."infection" = 'Phishing.Heuristics.Email.SpoofedDomain') LIMIT 1
+2010-03-11 04:45:09 DEBUG  Scan Create (19.6ms)  INSERT INTO "scans" ("dirs_scanned", "dir", "data_read", "infections_count", "engine_version", "start", "complete", "data_scanned", "files_scanned", "known_viruses") VALUES(94976, '/Users/danlynn', 53378117795.84, 30, '0.95.3', '2010-03-11 02:00:11', '2010-03-11 04:45:02', 46766594457.6, 431405, 727270)
+2010-03-11 04:45:09 DEBUG  SQL (0.3ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (1, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (2, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (3, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (4, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (5, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (20, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (21, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (39, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (37, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (40, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (47, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (48, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (55, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (56, 250)
+2010-03-11 04:45:09 DEBUG  Infection Create (0.2ms)  INSERT INTO "infections" ("file", "infection") VALUES('/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Attachments/67137/2/UPS_invoice_8452.zip', 'Suspect.Bredozip-zippwd-5')
+2010-03-11 04:45:09 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (59, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (38, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (41, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (43, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (49, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (50, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (54, 250)
+2010-03-11 04:45:09 DEBUG  Infection Create (0.1ms)  INSERT INTO "infections" ("file", "infection") VALUES('/Users/danlynn/Library/Mail/Mailboxes/Junk (danlynn.org).mbox/Messages/67137.emlx', 'Email.Trojan.GZC')
+2010-03-11 04:45:09 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (60, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (9, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (51, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (52, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (10, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (11, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.0ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (12, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (13, 250)
+2010-03-11 04:45:09 DEBUG  SQL (0.1ms)  INSERT INTO "infections_scans" ("infection_id", "scan_id") VALUES (14, 250)
+2010-03-11 04:45:09 DEBUG  Scan Load (3.6ms)  SELECT * FROM "scans" WHERE (complete > '2010-02-09 04:45:02' and complete <= '2010-03-11 04:45:02') 
+2010-03-11 04:45:09 DEBUG  Scan Load (3.4ms)  SELECT * FROM "scans" WHERE (complete > '2010-02-09 04:45:02' and complete <= '2010-03-11 04:45:02') 
+2010-03-11 04:45:09 DEBUG  Scan Load (2.9ms)  SELECT * FROM "scans" WHERE (complete > '2010-02-11 04:45:02' and complete <= '2010-03-11 04:45:02') 
+2010-03-11 04:45:09 DEBUG  Scan Load (7.2ms)  SELECT id FROM "scans" WHERE (dir = '/Users/danlynn') ORDER BY complete
+2010-03-11 04:45:09 DEBUG  Scan Load (0.4ms)  SELECT * FROM "scans" WHERE ("scans"."id" = 249) 
+2010-03-11 04:45:10 DEBUG  Infection Load (51.2ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 249 ) 
+2010-03-11 04:45:11 INFO   ========== clamav.rb: complete ==========
+2010-03-11 10:41:51 INFO   ========== clamav.rb: start ==========
+2010-03-11 10:43:41 INFO   ========== clamav.rb: start ==========
+2010-03-11 10:43:44 DEBUG  SQL (4.4ms)  SELECT count(*) AS count_all FROM "scans" 
+2010-03-11 10:43:44 INFO   Database contains 250 scans.
+2010-03-11 10:43:44 INFO   freshclam: skipped (no clam_bin_dir specified)
+2010-03-11 10:43:44 DEBUG  Scan Load (0.4ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2010-03-11 10:43:44 INFO   clamscan: skipped (no clam_bin_dir specified)
+2010-03-11 10:43:44 DEBUG  Scan Load (0.4ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2010-03-11 10:43:44 DEBUG  Scan Load (3.2ms)  SELECT * FROM "scans" WHERE (complete > '2010-02-09 04:45:02' and complete <= '2010-03-11 04:45:02') 
+2010-03-11 10:43:44 DEBUG  Scan Load (3.1ms)  SELECT * FROM "scans" WHERE (complete > '2010-02-09 04:45:02' and complete <= '2010-03-11 04:45:02') 
+2010-03-11 10:43:44 DEBUG  Scan Load (2.9ms)  SELECT * FROM "scans" WHERE (complete > '2010-02-11 04:45:02' and complete <= '2010-03-11 04:45:02') 
+2010-03-11 10:43:44 DEBUG  Scan Load (6.7ms)  SELECT id FROM "scans" WHERE (dir = '/Users/danlynn') ORDER BY complete
+2010-03-11 10:43:44 DEBUG  Scan Load (0.3ms)  SELECT * FROM "scans" WHERE ("scans"."id" = 249) 
+2010-03-11 10:43:44 DEBUG  Infection Load (3.7ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 250 ) 
+2010-03-11 10:43:44 DEBUG  Infection Load (2.5ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 249 ) 
+2010-03-11 10:43:46 INFO   ========== clamav.rb: complete ==========
+2010-03-11 10:51:25 INFO   ========== clamav.rb: start ==========
+2010-03-11 10:51:26 DEBUG  SQL (18.8ms)  SELECT count(*) AS count_all FROM "scans" 
+2010-03-11 10:51:26 INFO   Database contains 250 scans.
+2010-03-11 10:51:26 INFO   freshclam: skipped (no clam_bin_dir specified)
+2010-03-11 10:51:26 DEBUG  Scan Load (0.3ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2010-03-11 10:51:26 INFO   clamscan: skipped (no clam_bin_dir specified)
+2010-03-11 10:51:26 DEBUG  Scan Load (0.4ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2010-03-11 10:51:26 DEBUG  Scan Load (3.1ms)  SELECT * FROM "scans" WHERE (complete > '2010-02-09 04:45:02' and complete <= '2010-03-11 04:45:02') 
+2010-03-11 10:51:26 DEBUG  Scan Load (3.1ms)  SELECT * FROM "scans" WHERE (complete > '2010-02-09 04:45:02' and complete <= '2010-03-11 04:45:02') 
+2010-03-11 10:51:26 DEBUG  Scan Load (3.1ms)  SELECT * FROM "scans" WHERE (complete > '2010-02-11 04:45:02' and complete <= '2010-03-11 04:45:02') 
+2010-03-11 10:51:26 DEBUG  Scan Load (6.7ms)  SELECT id FROM "scans" WHERE (dir = '/Users/danlynn') ORDER BY complete
+2010-03-11 10:51:26 DEBUG  Scan Load (0.7ms)  SELECT * FROM "scans" WHERE ("scans"."id" = 249) 
+2010-03-11 10:51:26 DEBUG  Infection Load (18.4ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 250 ) 
+2010-03-11 10:51:26 DEBUG  Infection Load (2.6ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 249 ) 
+2010-03-11 10:51:28 INFO   ========== clamav.rb: complete ==========
+2010-03-11 10:52:40 INFO   ========== clamav.rb: start ==========
+2010-03-11 10:52:40 DEBUG  SQL (18.9ms)  SELECT count(*) AS count_all FROM "scans" 
+2010-03-11 10:52:40 INFO   Database contains 250 scans.
+2010-03-11 10:52:40 INFO   freshclam: skipped (no clam_bin_dir specified)
+2010-03-11 10:52:40 DEBUG  Scan Load (0.4ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2010-03-11 10:52:40 INFO   clamscan: skipped (no clam_bin_dir specified)
+2010-03-11 10:52:40 DEBUG  Scan Load (0.4ms)  SELECT * FROM "scans" ORDER BY scans.id DESC LIMIT 1
+2010-03-11 10:52:40 DEBUG  Scan Load (3.3ms)  SELECT * FROM "scans" WHERE (complete > '2010-02-09 04:45:02' and complete <= '2010-03-11 04:45:02') 
+2010-03-11 10:52:40 DEBUG  Scan Load (3.0ms)  SELECT * FROM "scans" WHERE (complete > '2010-02-09 04:45:02' and complete <= '2010-03-11 04:45:02') 
+2010-03-11 10:52:40 DEBUG  Scan Load (2.9ms)  SELECT * FROM "scans" WHERE (complete > '2010-02-11 04:45:02' and complete <= '2010-03-11 04:45:02') 
+2010-03-11 10:52:40 DEBUG  Scan Load (6.9ms)  SELECT id FROM "scans" WHERE (dir = '/Users/danlynn') ORDER BY complete
+2010-03-11 10:52:40 DEBUG  Scan Load (0.6ms)  SELECT * FROM "scans" WHERE ("scans"."id" = 249) 
+2010-03-11 10:52:41 DEBUG  Infection Load (3.9ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 250 ) 
+2010-03-11 10:52:41 DEBUG  Infection Load (2.5ms)  SELECT * FROM "infections" INNER JOIN "infections_scans" ON "infections".id = "infections_scans".infection_id WHERE ("infections_scans".scan_id = 249 ) 
+2010-03-11 10:52:44 INFO   ========== clamav.rb: complete ==========
