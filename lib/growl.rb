@@ -251,7 +251,7 @@ module GrowlRubyApi
         end tell
         ARG
       else
-        puts("#{options[:notification]}: #{title}: #{message}")
+        puts("#{options[:notification]}: #{options[:title]}: #{message}")
       end
     end
 
