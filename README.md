@@ -16,7 +16,7 @@ In the image above, you can see that the first file in the list of infections is
 
 The Scan Info tab displays some summary info regarding the files scanned. It also lists the file extensions which were excluded from the scan (as configured in config/clamav.yml).
 
-->![](/danlynn/ClamAvReport/blob/master/docs/images/ClamAVScanReport-VirusDefs.png?raw=true)<-
+![](/danlynn/ClamAvReport/blob/master/docs/images/ClamAVScanReport-VirusDefs.png?raw=true "Virus Definitions Tab")
 ->Virus Definitions Tab<-
 
 The Virus Definitions tab lists the total number of known viruses in the ClamAV database as well as the ClamAV engine version. If any error or info messages were generated during the virus definitions update then they will be displayed in a log at the bottom. In this instance, the definitions were already up to date (last 2 lines). However, the engine version is out of date (warnings in red). The engine can’t be updated by the clamav.rb script – so you will have to update the ClamAV engine manually when you get a chance.
