@@ -3,6 +3,13 @@
 <img src="/danlynn/ClamAvReport/blob/master/docs/images/ClamAVScanReport-Big.png?raw=true">
 [(click here to view an actual generated report)](http://danlynn.org)
 
+* [Sample Virus Report 1](http://danlynn.github.com/ClamAvReport/sample/clamav-2new.html)
+  Shows a report where 2 new Microsoft Office related exploits were detected.
+* [Sample Virus Report 2](http://danlynn.github.com/ClamAvReport/sample/clamav-2rem.html)
+  Shows a report highlighting 2 infected files which were removed from the previous day's list of infections.
+* [Sample Virus Report 3](http://danlynn.github.com/ClamAvReport/sample/clamav-2new2rem.html)
+  Shows a report highlighting 2 removed infections and 2 new infections.
+
 Like many unix geeks, I’ve tooled up my desktop with lots of interesting custom shell scripts to enhance my user experience. One such enhancement that I’ve been using for a long time was a bash shell script that wrapped the execution of the ClamAV clamscan so that it could parse the log when the scan was completed and display a growl notification showing the summary info that appears at the end of the scan log.
 
 This was fine, but it didn’t really give me the functionality that I needed or the information that I wanted. First of all, I wanted the ClamAV virus definitions database to be updated every night before the scan. There are solutions for setting up automatic updates. However, these occur on an independent schedule. I wanted to make sure that I had the very latest definitions before running the scan.
