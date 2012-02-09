@@ -1,6 +1,6 @@
 ###What does it do?
 
-![image](views/images/ClamAV.png)
+![](/danlynn/ClamAvReport/blob/master/views/images/ClamAV.png?raw=true)
 ->(click here to view an actual generated report)<-
 
 Like many unix geeks, I’ve tooled up my desktop with lots of interesting custom shell scripts to enhance my user experience. One such enhancement that I’ve been using for a long time was a bash shell script that wrapped the execution of the ClamAV clamscan so that it could parse the log when the scan was completed and display a growl notification showing the summary info that appears at the end of the scan log.
