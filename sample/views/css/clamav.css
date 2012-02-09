@@ -1,0 +1,175 @@
+html {
+	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+	background: url(../images/banner.gif) no-repeat;
+}
+
+body {
+	margin: 7px;
+}
+
+a {
+	text-decoration: none;
+}
+
+h1 {
+	text-align: center;
+	margin-bottom: 7px;
+	color: #fff;
+	font-size: 36px;
+	margin-top: 0;
+}
+
+img#logo {
+	float: right;
+}
+
+div.heading_date {
+	text-align: center;
+	margin-bottom: 38px;
+	font-size: 18px;
+	color: #d1ffd1;
+}
+
+div#tabs {
+	margin-top: 30px;
+}
+
+table.line {
+	margin-top: 10px;
+}
+
+table.line tr {
+	vertical-align: top;
+}
+
+div.label {
+	color: #666;
+	display: inline-block;
+	font-size: 16px;
+	text-align: right;
+	width: 165px;
+	margin-top: 2px;
+}
+
+div.field {
+	display: inline;
+	font-size: 18px;
+	margin-right: 2px;
+	margin-left: 2px;
+}
+
+div.infection_file .removed {
+	background-color: #c8fcbc;
+}
+
+div.infection_file a.changed {
+	background-color: #fed5d6
+}
+
+.removed_comment {
+	font-size: 10px;
+	color: #aff9af;
+	float: right;
+	position: relative;
+	top: 4px;
+}
+
+.changed {
+	background-color: #c8fcbc;
+}
+
+.changed div.comment {
+	color: #66a160;
+}
+
+div.comment {
+	display: inline;
+	font-size: 10px;
+	color: gray;
+}
+
+div.field_log {
+	padding: 4px;
+	border: 1px dotted gray;
+	font: 12px "Courier New", Courier, mono;
+	overflow-x: auto;
+	margin: 5px 30px 15px 110px;
+}
+
+div.stdout {
+	white-space: pre;
+}
+
+div.stderr {
+	color: #f00;
+	white-space: pre;
+}
+
+div.infection_file {
+	margin-top: 2px;
+}
+
+div.infection_file a:hover {
+	border: 1px none #00cb00;
+	border-bottom-style: dotted;
+}
+
+div.infection_file .dirname {
+	font-size: 14px;
+	display: inline;
+	color: #333;
+}
+
+div.infection_file .basename {
+	font-size: 16px;
+	display: inline;
+	font-weight: bold;
+}
+
+div.infection_desc {
+	font-size: 16px;
+	font-weight: bold;
+	padding-left: 100px;
+	color: #b3b3b3;
+	border-bottom: 1px dotted gray;
+}
+
+pre.log {
+    overflow-x: auto;
+}
+
+.log {
+	font: 12px "Courier New", Courier, mono;
+}
+
+.log_ignore {
+	color: silver;
+}
+
+.log_red {
+	color: red;
+}
+
+div#credit {
+	font-size: 10px;
+	margin: 5px;
+	color: #66a160;
+	display: inline;
+}
+
+div#credit a {
+	color: #66a160;
+}
+
+div#credit a:hover {
+	border: 1px none #00cb00;
+	border-bottom-style: dotted;
+}
+
+div#prev_date {
+	font-size: 10px;
+	margin: 5px;
+	color: #66a160;
+	display: inline;
+	float: right;
+}
