@@ -2,7 +2,7 @@
 
 <img src="/danlynn/ClamAvReport/blob/master/docs/images/ClamAVScanReport-Big.png?raw=true">
 
-Samples:
+Samples of Actual Reports:
 
 * [Virus Report 1](http://danlynn.github.com/ClamAvReport/sample/clamav-2new.html)  
   Shows a report where 2 new Microsoft Office related exploits were detected.
