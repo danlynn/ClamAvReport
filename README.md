@@ -47,3 +47,36 @@ The charts tab graphs the changes in the number infections against the changes i
 Even though the scan report is generated dynamically by rails components, it is stored statically on disk as a regular HTML file so that it can be easily opened in your default browser each morning. A nice side benefit of this is that you can just bookmark this file location in your browser or drag it to your Dock for convenient access to the latest scan report.
 
 As an added bonus, a simple command-line option has been provided for setting up ClamAV Scan Report to run on a daily schedule via an OSX LaunchAgent. See the following Installation and Configuration section to learn how to do this. In addition to this generated LaunchAgent, you may create additional ones to monitor certain directories and then report on any changes (eg: downloads, public, email).
+
+###Installation
+1. Download and install [ClamAV](http://www.clamav.net/lang/en/) (or [ClamXav](http://www.clamxav.com/) if on OSX).
+2. Download this script into a directory from which you want it to run by either:
+	* Download/unzip binary: 
+	* Clone repository: git clone http://
+3. Make sure that the following gems are installed:
+	* Rails (v2 or v3)
+4. Configure the properties in the config/clamav.yml file to fit your computer.  The default properties should work fine if you are runing OSX, have ClamXav installed, and simply want to virus check your entire home directory.  The most common config properties to change are the `scan_dir` and `clam_bin_dir`. To learn more about how to customize the configuration, see the Configuration section below.
+5. Install a LaunchAgent (OSX only) to run the script daily at a specific time.  This is done by running the clamav.rb script as follows:
+```terminal
+   $ ./clamav.rb --install 2:30am
+```
+
+ ###Testing
+ The script can be ran manually from the command line using the following options.
+ ```terminal
+ $ ./clamav.rb -h
+Usage: clamav.rb [-u] [-i time]
+    -c, --config FILE                Specify config file other than default 
+                                     'config/clamav.yml' - use relative path
+    -i, --install TIME               Install LaunchAgent to run clamav.rb every
+                                     day at specified time {eg: 2:30pm}
+                                     Try using with --config FILE
+                                     Requires RELOGIN
+    -u, --uninstall                  Uninstall LaunchAgent - requires RELOGIN
+    -h, --help                       Show this message
+    -v, --version                    Show version
+ ```
+To verify that the script is setup correctly and can generate reports, run the report using the 3 test configurations.  These will each generate a report using the existing clamav scan logs provided in the 3 test dirs.  Thus, you do not even need to have the clamav software installed on your system to run these tests.  We will be using the -c FILE option to specify an alternate clamav.yml file to be used for each run (instead of the default config/clamav.yml).
+```terminal
+
+```
