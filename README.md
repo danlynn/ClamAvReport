@@ -64,6 +64,7 @@ As an added bonus, a simple command-line option has been provided for setting up
 
 ###Testing
 The script can be ran manually from the command line using the following options.
+
 ```console
 $ ruby clamav.rb -h
 Usage: clamav.rb [-c file] [-u] [-i time]
