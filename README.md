@@ -82,7 +82,7 @@ Usage: clamav.rb [-c file] [-u] [-i time]
 To verify that the script is setup correctly and can generate reports, run the report using the 3 test configurations.  These will each generate a report using the existing clamav scan logs provided in the 3 test dirs.  Thus, you do not even need to have the clamav software installed on your system to run these tests.  We will be using the -c FILE option to specify an alternate clamav.yml file to be used for each run (instead of the default config/clamav.yml).
 
 ```console
-ruby clamav.rb --config test/test1/config/clamav.yml
-ruby clamav.rb --config test/test2/config/clamav.yml
-ruby clamav.rb --config test/test3/config/clamav.yml
+$ ruby clamav.rb --config test/test1/config/clamav.yml
+$ ruby clamav.rb --config test/test2/config/clamav.yml
+$ ruby clamav.rb --config test/test3/config/clamav.yml
 ```
