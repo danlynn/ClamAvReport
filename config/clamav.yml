@@ -17,6 +17,14 @@ scan_dir: <%= Etc.getpwuid.dir %>
 # Apple AppStore ClamXav bin dir
 clam_bin_dir: /Applications/ClamXav.app/Contents/Resources/ScanningEngine/bin
 
+# freshclam options other than log, stderr, excludes, ignores
+freshclam_options: --datadir=$HOME/Library/ClamXav/db --verbose
+#freshclam_options: --verbose --debug --list-mirrors
+
+# clamscan options other than log, stderr, excludes, ignores
+#clamscan_options: -r --quiet --verbose --debug
+clamscan_options: -r --quiet --database=$HOME/Library/ClamXav/db
+
 # location to write log from scan (may be relative to clamav.rb dir)
 clamscan_log: log/clamscan.log
 

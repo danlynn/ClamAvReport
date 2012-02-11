@@ -276,7 +276,8 @@ def update_virus_definitions
   end
   $logger.info("freshclam: update virus definitions: start")
   FileUtils.rm($config["freshclam_stderr"], :force => true)
-  @freshclam_stdout = `#{Pathname($config["clam_bin_dir"]) + "freshclam"} 2>#{$config["freshclam_stderr"]}`
+  #@freshclam_stdout = `#{Pathname($config["clam_bin_dir"]) + "freshclam"} 2>#{$config["freshclam_stderr"]}`
+  @freshclam_stdout = `#{Pathname($config["clam_bin_dir"]) + "freshclam"} #{$config["freshclam_options"]} 2>#{$config["freshclam_stderr"]}`
   @freshclam_stdout = @freshclam_stdout.gsub(/Downloading .*\[\d{1,3}%\] ?/, "\n").gsub(/(DON'T PANIC!.*?faq {0,1})/, "").gsub("\n\n", "\n")
   $logger.info("freshclam: update virus definitions: complete")
 end
@@ -294,7 +295,8 @@ def scan
   start = Time.now
   FileUtils.rm($config["clamscan_log"], :force => true)	# only clean previous logs if about to scan
   FileUtils.rm($config["clamscan_stderr"], :force => true)
-  `#{Pathname($config["clam_bin_dir"]) + "clamscan"} -r --quiet --log="#{$config["clamscan_log"]}" --exclude="\.(#{$config["excludes"].join('|')})$" "#{$config["scan_dir"]}" 2>#{$config["clamscan_stderr"]}`
+  #`#{Pathname($config["clam_bin_dir"]) + "clamscan"} -r --quiet --log="#{$config["clamscan_log"]}" --exclude="\.(#{$config["excludes"].join('|')})$" "#{$config["scan_dir"]}" 2>#{$config["clamscan_stderr"]}`
+  `#{Pathname($config["clam_bin_dir"]) + "clamscan"} #{$config["clamscan_options"]} --log="#{$config["clamscan_log"]}" --exclude="\.(#{$config["excludes"].join('|')})$" "#{$config["scan_dir"]}" 2>#{$config["clamscan_stderr"]}`
   complete = Time.now
   $logger.info("clamscan: complete")
   Scan.create_from_log(start, complete, $config["scan_dir"], $config["clamscan_log"])
