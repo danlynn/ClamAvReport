@@ -59,7 +59,7 @@ As an added bonus, a simple command-line option has been provided for setting up
 5. Install a LaunchAgent (OSX only) to run the script daily at a specific time.  This is done by running the clamav.rb script as follows:
 
 ```console
-   $ ./clamav.rb --install 2:30am
+$ ./clamav.rb --install 2:30am
 ```
 
 ###Testing
