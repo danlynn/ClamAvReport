@@ -57,13 +57,13 @@ As an added bonus, a simple command-line option has been provided for setting up
 	* Rails (v2 or v3)
 4. Configure the properties in the config/clamav.yml file to fit your computer.  The default properties should work fine if you are runing OSX, have ClamXav installed, and simply want to virus check your entire home directory.  The most common config properties to change are the `scan_dir` and `clam_bin_dir`. To learn more about how to customize the configuration, see the Configuration section below.
 5. Install a LaunchAgent (OSX only) to run the script daily at a specific time.  This is done by running the clamav.rb script as follows:
-```terminal
+```console
    $ ./clamav.rb --install 2:30am
 ```
 
  ###Testing
  The script can be ran manually from the command line using the following options.
- ```terminal
+ ```console
  $ ./clamav.rb -h
 Usage: clamav.rb [-u] [-i time]
     -c, --config FILE                Specify config file other than default 
@@ -77,6 +77,8 @@ Usage: clamav.rb [-u] [-i time]
     -v, --version                    Show version
  ```
 To verify that the script is setup correctly and can generate reports, run the report using the 3 test configurations.  These will each generate a report using the existing clamav scan logs provided in the 3 test dirs.  Thus, you do not even need to have the clamav software installed on your system to run these tests.  We will be using the -c FILE option to specify an alternate clamav.yml file to be used for each run (instead of the default config/clamav.yml).
-```terminal
-
+```console
+ruby clamav.rb --config test/test1/config/clamav.yml
+ruby clamav.rb --config test/test2/config/clamav.yml
+ruby clamav.rb --config test/test3/config/clamav.yml
 ```
