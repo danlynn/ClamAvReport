@@ -22,9 +22,10 @@ require 'optparse'  	  # for parsing command line options
 require 'optparse/time'
 require 'active_record'	# for database access
 require 'action_view'		# for DateHelper, NumberHelper, SanitizeHelper, Bytes
-require 'active_support'
+require 'active_support/core_ext'
 
 FileUtils.cd(Pathname(__FILE__).parent.realpath)  # enable relative paths (even in require)
+$LOAD_PATH << '.'  #allow 1.9.x to use relative requires (since . was removed from $LOAD_PATH)
 
 require 'models/scan'
 require 'models/infection'
@@ -34,7 +35,7 @@ require 'lib/growl'
 include ActionView::Helpers::DateHelper     # to use distance_of_time_in_words
 include ActionView::Helpers::NumberHelper   # to use number_with_delimiter, number_to_human_size
 include ActionView::Helpers::SanitizeHelper # to use sanitize on logs
-include ActiveSupport::CoreExtensions::Numeric::Bytes # to use .megabytes
+include ActiveSupport::CoreExtensions::Numeric::Bytes rescue # to use .megabytes #avoid error in rails 3 - ignored because autoloads
 
 
 # ===== custom logger =========================================================
@@ -275,7 +276,8 @@ def update_virus_definitions
   end
   $logger.info("freshclam: update virus definitions: start")
   FileUtils.rm($config["freshclam_stderr"], :force => true)
-  @freshclam_stdout = `#{Pathname($config["clam_bin_dir"]) + "freshclam"} 2>#{$config["freshclam_stderr"]}`
+  #@freshclam_stdout = `#{Pathname($config["clam_bin_dir"]) + "freshclam"} 2>#{$config["freshclam_stderr"]}`
+  @freshclam_stdout = `#{Pathname($config["clam_bin_dir"]) + "freshclam"} #{$config["freshclam_options"]} 2>#{$config["freshclam_stderr"]}`
   @freshclam_stdout = @freshclam_stdout.gsub(/Downloading .*\[\d{1,3}%\] ?/, "\n").gsub(/(DON'T PANIC!.*?faq {0,1})/, "").gsub("\n\n", "\n")
   $logger.info("freshclam: update virus definitions: complete")
 end
@@ -293,7 +295,8 @@ def scan
   start = Time.now
   FileUtils.rm($config["clamscan_log"], :force => true)	# only clean previous logs if about to scan
   FileUtils.rm($config["clamscan_stderr"], :force => true)
-  `#{Pathname($config["clam_bin_dir"]) + "clamscan"} -r --quiet --log="#{$config["clamscan_log"]}" --exclude="\.(#{$config["excludes"].join('|')})$" "#{$config["scan_dir"]}" 2>#{$config["clamscan_stderr"]}`
+  #`#{Pathname($config["clam_bin_dir"]) + "clamscan"} -r --quiet --log="#{$config["clamscan_log"]}" --exclude="\.(#{$config["excludes"].join('|')})$" "#{$config["scan_dir"]}" 2>#{$config["clamscan_stderr"]}`
+  `#{Pathname($config["clam_bin_dir"]) + "clamscan"} #{$config["clamscan_options"]} --log="#{$config["clamscan_log"]}" --exclude="\.(#{$config["excludes"].join('|')})$" "#{$config["scan_dir"]}" 2>#{$config["clamscan_stderr"]}`
   complete = Time.now
   $logger.info("clamscan: complete")
   Scan.create_from_log(start, complete, $config["scan_dir"], $config["clamscan_log"])
@@ -318,7 +321,12 @@ growl = GrowlRubyApi::Growl.new(
     :default_image => Pathname(__FILE__).parent.realpath + "views/images/ClamAV.png"
 )
 $logger = ActiveRecord::Base.logger = CustomLogger.new($config["run_log"], 3, 100*1024)  # rotate > 100k keeping last 5
-ActiveRecord::Base.colorize_logging = false # prevents weird strings like "[4;36;1m" in log
+begin 
+  ActiveRecord::Base.colorize_logging = false  # prevents weird strings like "[4;36;1m" in log
+rescue #support rails 3
+  require 'active_support/log_subscriber'
+  ActiveSupport::LogSubscriber.colorize_logging = false
+end
 $logger.info("========== clamav.rb: start ==========")
 growl.notify("Started scan")
 ActiveRecord::Base.establish_connection($config["database"])
