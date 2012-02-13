@@ -35,7 +35,7 @@ require 'lib/growl'
 include ActionView::Helpers::DateHelper     # to use distance_of_time_in_words
 include ActionView::Helpers::NumberHelper   # to use number_with_delimiter, number_to_human_size
 include ActionView::Helpers::SanitizeHelper # to use sanitize on logs
-include ActiveSupport::CoreExtensions::Numeric::Bytes rescue # to use .megabytes #avoid error in rails 3 - ignored because autoloads
+include ActiveSupport::CoreExtensions::Numeric::Bytes rescue nil # to use .megabytes #avoid error in rails 3 - ignored because autoloads
 
 
 # ===== custom logger =========================================================
@@ -173,7 +173,7 @@ def parse_command_line_options
   options[:config] = "config/clamav.yml"  # default
   opts = OptionParser.new
   # define options
-  opts.banner = "Usage: clamav.rb [-u] [-i time]"
+  opts.banner = "Usage: clamav.rb [-c file] [-u] [-i time]"
   opts.on('-c', '--config FILE',
           "Specify config file other than default ",
           "'config/clamav.yml' - use relative path") do |file|
@@ -190,7 +190,7 @@ def parse_command_line_options
     options[:uninstall] = true
   end
   opts.on_tail("-h", "--help", "Show this message") {puts opts; exit 0}
-  opts.on_tail("-v", "--version", "Show version") {puts "clamav.rb 1.0.0"; exit 0}
+  opts.on_tail("-v", "--version", "Show version") {puts "clamav.rb 1.1.0"; exit 0}
   # parse options
   opts.parse!(ARGV)
   options
@@ -320,6 +320,7 @@ growl = GrowlRubyApi::Growl.new(
     :default_image_type => :image_file,
     :default_image => Pathname(__FILE__).parent.realpath + "views/images/ClamAV.png"
 )
+
 $logger = ActiveRecord::Base.logger = CustomLogger.new($config["run_log"], 3, 100*1024)  # rotate > 100k keeping last 5
 begin 
   ActiveRecord::Base.colorize_logging = false  # prevents weird strings like "[4;36;1m" in log
@@ -327,6 +328,7 @@ rescue #support rails 3
   require 'active_support/log_subscriber'
   ActiveSupport::LogSubscriber.colorize_logging = false
 end
+
 $logger.info("========== clamav.rb: start ==========")
 growl.notify("Started scan")
 ActiveRecord::Base.establish_connection($config["database"])

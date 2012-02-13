@@ -1,7 +1,7 @@
 # To clean current project run: 
 # 		rake clean
 #
-# To generate a pkg/clamav_report-1.0.0.zip:
+# To generate a pkg/clamav_report-1.1.0.zip:
 # 		rake package
 #
 # To list all rake tasks:
@@ -34,7 +34,7 @@ end
 
 
 # Creates a zip of project suitable for execution - but not development
-Rake::PackageTask.new("ClamAV-Scan_Report", "1.0.0") do |p|
+Rake::PackageTask.new("ClamAV-Scan_Report", "1.1.0") do |p|
 	p.need_zip = true
 	p.package_files.include("config/clamav.yml")
 	p.package_files.include("config/org.danlynn.clamav.plist.erb")
@@ -42,4 +42,5 @@ Rake::PackageTask.new("ClamAV-Scan_Report", "1.0.0") do |p|
 	p.package_files.include("models/*.rb")
 	p.package_files.include("views/**/*")
 	p.package_files.include("clamav.rb")
+	p.package_files.include("docs/**/*")
 end
