@@ -9,7 +9,7 @@
 
 require 'rake'
 require 'rake/packagetask'
-# require 'rake/testtask'
+require 'rake/testtask'
 # require 'rake/rdoctask'
 require 'pathname'
 
@@ -43,4 +43,11 @@ Rake::PackageTask.new("ClamAV-Scan_Report", "1.1.0") do |p|
 	p.package_files.include("views/**/*")
 	p.package_files.include("clamav.rb")
 	p.package_files.include("docs/**/*")
+end
+
+
+Rake::TestTask.new do |t|
+  t.libs << "test"
+  t.test_files = FileList['test/*test.rb']
+  t.verbose = true
 end
