@@ -43,6 +43,7 @@ Rake::PackageTask.new("ClamAV-Scan_Report", "1.1.0") do |p|
 	p.package_files.include("views/**/*")
 	p.package_files.include("clamav.rb")
 	p.package_files.include("docs/**/*")
+	p.package_files.include("lib/*")
 end
 
 
