@@ -1,6 +1,6 @@
 ###What does it look like?
 
-<img src="/danlynn/ClamAvReport/blob/master/docs/images/ClamAVScanReport-Big.png?raw=true">
+<img src="/master/docs/images/ClamAVScanReport-Big.png?raw=true">
 
 Samples of Actual Reports:
 
